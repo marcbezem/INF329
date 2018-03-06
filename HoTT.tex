@@ -1100,7 +1100,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     \item Proof: postponed (interaction between $=$ and $\times,\Sigma$)
     \item DEF: $(A\simeq B) \equiv \sigm{f}{A\to B}{isequiv(f)}$
     \item LEM: For all $A,B:\UU$ there is $idtoeqv: (A=_\UU B) \to (A\simeq B)$
-    \item Proof: by induction, using $isequiv(id_A)$
+    \item Proof: by transport, using $isequiv(p_*)$
     \item Univalence Axiom: for all $A,B:\UU$, $isequiv(idtoeqv)$; hence:
           $$(A=_\UU B) \simeq (A\simeq B)$$
     \end{itemize}
@@ -1199,6 +1199,25 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     \end{itemize}
   }
 
+\frame
+  {
+
+    \frametitle{Products of type families}
+
+    \begin{itemize}[<+->]
+    \item For $A,B:Z\to\UU$,  $(A\times^{fam}B)  := \lamt{z}{Z}{((A z)\times(B z))}$
+               can be seen as the product of the type families $A$ and $B$
+    \item What about the dependent case?
+    \item For $A: Z\to\UU$, $B: \depi{z}{Z}{Az \to\UU}$,  define
+                \[(A\times^{fam}B)  := \lamt{z}{Z}{\sigm{u}{(A\,z)}{(B\,z\,u)}}\]
+    \item Since $(\depi{z}{Z}{Az \to\UU}) \simeq ((\sigm{z}{Z}{Az}) \to\UU)$,
+               we can also take $B: (\sigm{z}{Z}{Az}) \to\UU$ and use $B(z,u)$,
+              like in the book
+    \item And so we do, on the next slide, with $A,P,Q$ for $Z,A,B$
+ 
+    \end{itemize}
+  }
+
  \frame
   {
 
@@ -1244,9 +1263,9 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     $$funext: (\depi{x}{A}{fx = _{Bx} gx}) \to (f=g)$$
     \item Propositional equalities (use functional extensionality):
       \begin{itemize}[<+->]
-      \item $happly\,(funext\,h) = h$
-      \item $\alpha = funext\,(happly\,\alpha)$
-      \item $refl_f = funext\,(\lamt{x}{A}{refl_{fx}})$
+      \item $happly\,(funext\,h) = h$ (one homotopy)
+      \item $\alpha = funext\,(happly\,\alpha)$ (the other homotopty)
+      \item $refl_f = funext\,(happly\,refl_f ) = funext\,(\lamt{x}{A}{refl_{fx}})$
       \item $\opp \alpha = funext\,(\lamt{x}{A}{\opp{(happly\,\alpha\,x)}})$
       \item $\alpha\ct\beta = funext\,(\lamt{x}{A}{(happly\,\alpha\,x)\ct(happly\,\beta\,x)})$
       \end{itemize}
@@ -1281,7 +1300,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     \frametitle{Univalence}
 
     \begin{itemize}[<+->]
-    \item $idtoeqv: (A=_\UU B) \to (A\simeq B)$ defined by path induction
+    \item $idtoeqv: (A=_\UU B) \to (A\simeq B)$ defined by transport
     \item Univalence Axiom: for all $A,B:\UU$, $isequiv(idtoeqv)$; hence:
           $$(A=_\UU B) \simeq (A\simeq B)$$
     \item Abuse of notation: $(f,p):A\simeq B$ identified with $f:A\to B$
