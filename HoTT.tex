@@ -1,0 +1,2488 @@
+\documentclass[handout]{beamer}
+% Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!20!black}
+%\beamertemplateshadingbackground{yellow!20}{white}
+%\usepackage{beamerthemeshadow}
+%\usepackage[utf8x]{inputenc} CONFLICT!
+%\usepackage[english,norsk,nynorsk]{babel}
+
+%Marc's macros
+\newcommand{\depi}[3]{\Pi{#1{:}#2.\,#3}}
+\newcommand{\sigm}[3]{\Sigma{#1{:}#2.\,#3}}
+\newcommand{\subs}[3]{\{#1{:}#2\mid#3\}}
+\newcommand{\lam}[2]{\lambda{#1.\,#2}}
+\newcommand{\lamt}[3]{\lambda{#1{:}#2.\,#3}}
+%\newcommand{\allLF}{{{\forall}}}
+%\newcommand{\omgLF}{{{\Omega}}}
+\newcommand{\sbr}[1]{[\![#1]\!]}
+\newcommand{\pbr}[1]{(\!(#1)\!)}
+\newcommand{\semr}[1]{[\![#1]\!]_{\rho}}
+\newcommand{\semrO}[1]{[\![#1]\!]^{\Omega}_{\rho}}
+\newcommand{\sems}[1]{[\![#1]\!]_{\sigma}}
+\newcommand{\vsbr}[1]{{[\![#1]\!]}_0}
+\newcommand{\psbr}[1]{{[\![#1]\!]}_1}
+\newcommand{\red}{~~{\to}~~}
+\newcommand{\unphsi}{{\univ_{\varphi\psi}}}
+\newcommand{\unphis}{{\univ_{\varphi_0\varphi_1}}}
+\newcommand{\unpsis}{{\univ_{\psi_0\psi_1}}}
+\newcommand{\extfs}{{\ext_{f_0 f_1}}}
+\newcommand{\extas}{{\ext_{a_0 a_1}}}
+\newcommand{\apO}{{ap_\Omega}}
+\newcommand{\eqA}{{eq_A}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\rtr}{\stackrel{*}{\to}}
+\newcommand{\ltr}{\stackrel{*}{\leftarrow}}
+\newcommand{\semO}[1]{[\![#1]\!]^{\Omega}}
+\newcommand{\foo}{\mathit{foo}}
+\newcommand{\SN}{\mathit{SN}}
+\newcommand{\GamU}{\Gamma_{\!U}}
+\newcommand{\Ex}{\mathsf{Ex}}
+\newcommand{\Tr}{\mathrm{T}}
+\newcommand{\Fa}{\mathrm{F}}
+\newcommand{\TEXT}{{\mathrm{TEXT}}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Rat}{\mathbb{Q}}
+\newcommand{\Rea}{\mathbb{R}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cnum}[1]{\underline{#1}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\seg}[2]{[#1.\,.#2]}
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\dom}{\mathit{dom}}
+\newcommand{\range}{\mathit{range}}
+\newcommand{\tru}{\mathsf{true}}
+\newcommand{\fal}{\mathsf{false}}
+\newcommand{\Id}{\mathsf{I}}
+\newcommand{\UU}{{\cal U}}
+\newcommand{\VV}{{\cal V}}
+\newcommand{\Uo}{\UU_0}
+\newcommand{\Uu}{\UU_1}
+\newcommand{\bfnull}{\mathbf{0}}
+\newcommand{\bfone}{\mathbf{1}}
+\newcommand{\elone}{\star}
+\newcommand{\bftwo}{\mathbf{2}}
+
+%end Marc's macros
+
+%%% Path concatenation (used infix, in diagrammatic order) %%%
+\newcommand{\ct}{%
+  \mathchoice{\mathbin{\raisebox{0.5ex}{$\displaystyle\centerdot$}}}%
+             {\mathbin{\raisebox{0.5ex}{$\centerdot$}}}%
+             {\mathbin{\raisebox{0.25ex}{$\scriptstyle\,\centerdot\,$}}}%
+             {\mathbin{\raisebox{0.1ex}{$\scriptscriptstyle\,\centerdot\,$}}}
+}
+
+%%% Path reversal %%%
+\newcommand{\opp}[1]{\mathord{{#1}^{-1}}}
+
+\newcommand{\leaveout}[1]{}
+
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Montpellier}
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{latexsym}
+\usepackage{proof}
+\usepackage{diagrams}
+
+\title[HoTT]%
+{Homotopy Type Theory}
+\author[Marc Bezem]{%
+  Marc~Bezem\inst{1} %\and
+  }
+\institute[University of Bergen]{
+  \inst{1}%
+  Department of Informatics\\
+  Bergen University
+  %\and
+  }
+\date[INF329]{Spring 2016}
+\subject{HoTT}
+
+%\pgfdeclaremask{fsu}{fsu_logo_ybkgrd}
+%\pgfdeclareimage[mask=fsu,width=1cm]{fsu-logo}{fsu_logo_ybkgrd}
+
+%\logo{\vbox{\vskip0.1cm\hbox{\pgfuseimage{fsu-logo}}}}
+
+\begin{document}
+
+  \frame
+  {
+    \titlepage
+  }
+
+%  \section*{Outline}
+
+%  \frame
+%  {
+%    \frametitle{Chapters}
+
+%    \tableofcontents
+%  }
+
+  \section{Introduction}
+
+  \frame
+  {
+    
+    \frametitle{Practical Matters}
+
+\begin{itemize}
+\item<1-> Lecturer: Marc Bezem (Baker Hall 152)
+\item<2-> Occasionally: guest lecturers?
+\item<3-> Place and time: 
+ \begin{itemize}
+\item Baker Hall 150
+ \item Monday 13h30 -- 16h30, exercises/lectures
+ \item Wednesday 13h30 -- 16h30, exercises/lectures
+ \end{itemize} 
+\item<4-> Textbook (link): \href{ www.homotopytypetheory.org/book}{\color{red}Homotopy Type Theory}
+\item<5-> Lecture Notes: these slides HoTT.pdf + DTUA.pdf
+\end{itemize}
+  }
+
+\leaveout{
+  \frame
+  {
+    
+    \frametitle{Exam requirements}
+
+\begin{itemize}
+\item<1-> 80\% presence
+%\item<2-> A presentation (f.e., of some material from the HoTT book)
+\item<3-> A short paper, or a relevant verification in Coq 
+(f.e., of some material from the textbook).
+\item<4-> Fail/pass
+\end{itemize}
+  }
+
+
+
+\frame
+  {
+    
+    \frametitle{Overview}
+
+    \begin{itemize}[<+->]
+%    \item 27.08: The Big Picture 
+    \item 11.09: Untyped Lambda Calculus
+    \item 18.09: Simple Type Theory
+    \item 25.09: No seminar 
+        \item 02.10 -- $\infty$: The Book
+    \end{itemize}
+  }
+}
+
+\frame
+  {
+  
+    \frametitle{Untyped Lambda Calculus}
+
+    \begin{itemize}[<+->]
+    \item A formalism for binding variables and substitution
+    \item Binder Zoo: quantification, integrals, generalized products, {\color{red}functions}, $\ldots$
+    \item Terms: $M,N ::= x \mid MN \mid \lam{x}{M}$
+    \item Examples of terms: $y, \lam{x}{x}, \lam{x}{(\lam{y}{x})},\lam{x}{(\lam{y}{y(yx)})}$
+    \item Binding $x$ in $M$ (\emph{lambda abstraction}): $\lam{x}{M}$
+    \item Intention to unbind (\emph{application}): $MN$
+    \item Actual unbinding (\emph{$\beta$-contraction}): $(\lam{x}{M})N \to M[x:=N]$
+    \item Substitution:
+          \begin{itemize}
+          \item $x[x:=N] \equiv N$
+          \item $y[x:=N] \equiv y$ ($y\not\equiv x$)
+          \item $(MM')[x:=N] \equiv (M[x:=N])(M'[x:=N])$
+          \item $(\lam{y}{M})[x:=N] \equiv \lam{y}({M}[x:=N])$ ($y\not\equiv x$, avoiding \emph{capture})
+          \end{itemize}
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Terminology and Notation}
+
+    \begin{itemize}[<+->]
+    \item Avoid  by renaming bound variables
+    \item Technically better, but hard to read (De Bruijn): f.e. $\lambda\lambda1$
+    \item Application left-associative : $M_1 M_2 \ldots M_n \equiv (\ldots(M_1 M_2) \ldots M_n)$
+    \item Abstraction right-associative : $\lam{x_1 x_2 \ldots x_n}{M} \equiv \lam{x_1}{(\lam{x_2}{\ldots(\lam{x_n}{M})})}$
+    \item Convenient combination: $(\lam{x_1 x_2 \ldots x_n}{M})M_1 M_2 \ldots M_n$
+    \item A \emph{free} variable in a term is a variable that is not \emph{bound} by a $\lambda$
+    \item Reducible expression (\emph{redex}): $(\lam{x}{M})N$
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Reduction}
+
+    \begin{itemize}[<+->]
+    \item Examples of contraction: $(\lam{x y}{x})z \to \lam{y}{z}$,
+      $(\lam{x y}{x(xy)})f \to \lam{y}{f(fy)}$, $(\lam{x}{xx})(\lam{x}{xx})\to\ldots$    
+    \item Reduction is contraction of a subterm (ind.\ def.):\\ if $M\to M'$, then $MN\to M'N$, $NM\to NM'$, $\lam{x}{M}\to \lam{x}{M'}$
+    \item Reductions may be iterated: $\rtr$ is the reflexive and transitive closure of $\to$ (zero steps, one-step or many-step reduction)
+    \item Convertibility: $=_\beta$ is the transitive, symmetric and reflexive closure of $\to$
+    \item Convertibility is a congruence wrt.\ application and abstraction
+    \item THEOREM (\emph{confluence}): if $M=_\beta N$, then $M$ and $N$ have a \emph{common reduct} $R$, that is, \ $M\rtr R\ltr N$
+    \item COR: lambda calculus is consistent, $\lam{x y}{x}\not=_\beta\lam{x y}{y}$
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Useful encodings}
+
+    \begin{itemize}[<+->]
+    \item Booleans: $\tru \equiv \lam{x y}{x},~\fal \equiv \lam{x y}{y}$
+        \begin{itemize}[<+->]
+        \item Negation:  $\neg \equiv \lam{b}{b(\fal)(\tru)}$
+        \item Conjunction:  $\wedge \equiv \lam{b}{b(\lam{x}{x})(\lam{x}{\fal})}$
+        \item Remarkable:  $\wedge\,\fal\,x =_\beta \fal$, but NOT $\wedge\,x\,\fal =_\beta \fal$
+        \end{itemize}
+    \item Natural numbers (Church): 
+    $\cnum{0}\equiv \lam{f x}{x}$, $\cnum{1}\equiv \lam{f x}{fx}$,
+    $\cnum{2}\equiv \lam{fx}{f(fx)}~\ldots~$, in general $\cnum{n}\equiv \lam{fx}{f^n x}$
+        \begin{itemize}[<+->]
+        \item Successor: ${{S}}\equiv \lam{nfx}{nf(fx)}$
+                 (indeed $S\cnum{0}=_\beta \cnum{1},~S\cnum{1}=_\beta \cnum{2},\ldots$)
+        \item Addition: ${{+}}\equiv \lam{nm}{nSm}$ ($+\cnum{0}x=_\beta x$, NOT $+x\cnum{0}=_\beta x$)
+        \item Multiplication: ${{*}}\equiv \lam{nm}{n({{+}}m)\cnum{0}}$
+        \item Exponentiation: ${{e}}\equiv \lam{nm}{m({{*}}n)\cnum{1}}$
+        \end{itemize}
+    \item Fixpoint operator: $Y \equiv \lam{f}{((\lam{x}{f(xx)})(\lam{x}{f(xx)}))}$
+    \item COR: lambda calculus is Turing complete
+    \item COR: lambda calculus is `inconsistent', $Y(\neg)=_\beta \neg(Y(\neg))$
+    \end{itemize}
+  }
+
+  \section{Foundations}
+  \subsection{Chapter 1}
+
+\frame
+  {
+  
+    \frametitle{Chapter 1 --- Type Theory}
+
+    \begin{itemize}[<+->]
+    \item Judgment: ~~$t:T$ (logical stuff inside $t,T$)
+    \item Assumption: judgment of the form $x:T$ ($x$ a variable)
+    \item Context: list of assumptions $\Gamma$ (with different variables)
+    \item Typing: a judgment in a context, notation $\Gamma\vdash t:T$
+    \item Example: $f:A\to A,~x:A\vdash f(fx):A$
+    \item Type theory: system of rules to derive typings
+    \item Two notions of equality:
+        \begin{itemize}[<+->]
+        \item definitional (or judgmental) equality:  $a \equiv b~(\beta,\eta,\iota,\delta,\ldots)$
+        \item propositional equality (logical operations): a \emph{type} $a =_A b$
+        \end{itemize}
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Function types}
+
+    \begin{itemize}[<+->]
+    \item If $A$ and $B$ are types, then so is their function type $A\to B$
+    \item Introduction rule: 
+\[\infer{\Gamma\vdash\lamt{x}{A}{t}:A\to B}{\Gamma,x:A \vdash t:B}\]
+    \item Elimination rule: 
+\[\infer{\Gamma\vdash fa:B}{\Gamma\vdash f:A\to B \quad \Gamma\vdash a:A}\]
+    \item No product types needed (but they will come nevertheless):
+\[\infer{\Gamma\vdash\lamt{x}{A}{\lamt{y}{B}{t}}:A\to(B\to C)}
+  {\infer{\Gamma,x:A\vdash \lamt{y}{B}{t} : B\to C}
+   {\Gamma,x:A,y:B\vdash t:C}
+  }
+\]
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Universes and families of types}
+
+    \begin{itemize}[<+->]
+    \item Universe of types: $\UU$, `$A$ is a type' becomes judgment $A:\UU$
+    \item Rather not $\UU:\UU$, but $\Uo:\Uu,\ldots$
+    \item Formation rule for $\to$: %($\Gamma$ for dependent types): 
+\[\infer{\Gamma\vdash A\to B : \UU}{\Gamma\vdash A:\UU \quad \Gamma\vdash B:\UU}\]
+    \item Introduction rule for functions: % may be restricted to $\UU$:
+\[\infer{\Gamma\vdash\lamt{x}{A}{t}:A\to B}
+        {\Gamma\vdash A:\UU\quad \Gamma\vdash B:\UU\quad\Gamma,x:A \vdash t:B}\]
+    \item This includes:
+\[  \infer{\Gamma\vdash (U\to U') : \Uu}{\Gamma\vdash U:\Uu \quad \Gamma\vdash U':\Uu}
+\quad\quad
+\infer{\vdash(\lamt{A}{\Uo}{A\to A}):\Uo\to \Uo}
+        {\vdash \Uo:\Uu\quad A:\Uo \vdash (A\to A):\Uo}
+\]
+\item Type family: $B : A\to \UU$ with $A:\UU$, example $B\equiv\lamt{n}{Nat}{\Rea^n}$
+    \end{itemize}
+  }
+
+\begin{frame}<presentation:0>
+  
+    \frametitle{Family types and type families}
+
+    \begin{itemize}[<+->]
+    \item Family type: $A\to X$ with $A:\Uo$, $X:\Uu$, examples:
+    %typically $(A\to \UU_i) : \UU_{i+1}$
+        \begin{itemize}[<+->]
+        \item (previous) $\Uo\to\Uo$
+        \item $A \to \Uo$, the type of unary predicates on $A$
+        \item $A \to (A\to \Uo)$, the type of binary predicates on $A$
+        \end{itemize}    
+    \item Type family, or family of types: $B : A\to \UU$ with $A:\UU$
+        \begin{itemize}[<+->]
+        \item (previous) $\lamt{A}{\Uo}{A\to A}: \Uo\to\Uo$
+        \item $A \to \Uo$, the type of unary predicates on $A$
+        \item $A \to (A\to \Uo)$, the type of binary predicates on $A$
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\frame
+  {
+  
+    \frametitle{Dependent product types, aka $\Pi$-types}
+
+    \begin{itemize}[<+->]
+    \item Given $A:\UU$, $B : A\to \UU$ and $a:A$, we have $Ba:\UU$
+    \item Dependent product type: $\depi{x}{A}{Bx}$ (or $\Pi\,{A}\,{B}$)
+    \item Formation rule for $\Pi$-type:
+\[\infer{\Gamma\vdash\depi{x}{A}{Bx}:\UU}{\Gamma\vdash A:\UU \quad \Gamma\vdash B : A\to \UU}\]
+    \item Introduction rule for $\Pi$-type:
+\[\infer{\Gamma\vdash\lamt{x}{A}{t}:\depi{x}{A}{Bx}}
+        {\Gamma\vdash A:\UU\quad \Gamma\vdash B:A\to\UU\quad\Gamma,x:A \vdash t:Bx}\]
+            \item $\Pi$-type is the type of dependent functions (co-domain varies), examples:
+element of infinite product, $\lamt{n}{Nat}{\vec 0 (n)}: \Pi\,Nat\,B$
+    \item Elimination rule for $\Pi$-types: 
+\[\infer{\Gamma\vdash fa:Ba}{\Gamma\vdash f: \depi{x}{A}{Bx}:\UU \quad \Gamma\vdash a:A}
+\quad \text{so, e.g., $\vec 0 (3) : \Rea^3$}
+\]
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Type constructors}
+
+    \begin{itemize}[<+->]
+    \item Type Zoo is ever extending (social process!) 
+    \item Type constructors, so far: $\to,~\Pi$
+    \item Actually, $A\to B$ is a special case: $\Pi\,A\,(\lamt{x}{A}{B})$
+    \item How to systematically manage the Type Zoo
+        \begin{itemize}[<+->]
+        \item Name a new type constructor
+        \item Formation: how to construct types with the new constructor
+        \item Introduction: how to construct elements of the new type
+        \item Elimination: how to destruct (work with) these elements
+        \item Computation: how to simplify desconstruction ($\beta,\iota$)
+        \item Optional: uniqueness principle for condestruction ($\eta$)
+        \end{itemize}
+    \item Example: $\to$, abstraction, application, $\beta$-, $\eta$-reduction
+             $(\lam{x}{t})a \to_{\beta} t[x:=a],~\lam{x}{fx} \to_{\eta} f$
+    \end{itemize}
+  }
+
+
+\frame
+  {
+  
+    \frametitle{Products (1)}
+
+    \begin{itemize}[<+->]
+    %\item (non-dependent) Product, type of pairs: $A\times B$
+    \item Type constructor: $\times$, idea: cartesian product
+    \item Formation rule for (non-dependent) product:
+\[\infer{{A}\times{B}:\UU}{A:\UU \quad B :\UU}\]
+    \item Introduction rule for product:
+\[\infer{(a,b):{A}\times{B}}{a:A:\UU \quad b:B:\UU}\]
+    \item Elimination rules for product: 
+\[\infer{pr_1 p:A}{p:A\times B}
+\quad\quad
+\infer{pr_2 p:B}{p:A\times B}\]
+    \item Computation rules for pairs and projections:
+       \begin{itemize}[<+->]
+       \item $pr_1(a,b)\to_\iota a,~pr_2(a,b)\to_\iota b$
+       \item Optional: $(pr_1 p,pr_2 p) \to_\eta p$
+       \end{itemize}    
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Products (2)}
+
+    \begin{itemize}[<+->]
+    \item We can infer the following jugment:
+$$\lamt{f}{A{\to}B{\to}C}{\lamt{p}{A{\times}B}{f(pr_1 p)(pr_2 p)}}: (A{\to}B{\to}C)\to(A{\times}B{\to}C)$$
+    \item As an alternative to the $pr_i$'s, we can postulate:
+$$rec_{A{\times}B}:\depi{C}{\UU}{(A{\to}B{\to}C)\to(A{\times}B{\to}C)}$$
+    \item ... and recover the projections:
+       \begin{itemize}[<+->]
+       \item $pr_1\equiv rec_{A{\times}B}\,A\,(\lamt{a}{A}{\lamt{b}{B}{a}}):A{\times}B{\to}A$
+       \item $pr_2\equiv rec_{A{\times}B}\,B\,(\lamt{a}{A}{\lamt{b}{B}{b}}):A{\times}B{\to}B$
+       \end{itemize}
+    \item Computation rule for the {\color{red}recursor}: 
+$$rec_{A{\times}B}\,C\,g\,(a,b)\to_\iota g\,a\,b$$
+    \item This works well in general, we like recursors 
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Products (3)}
+
+    \begin{itemize}[<+->]
+    \item Syntactic sugar can impair understanding: $pair := g$
+    $$rec_{A{\times}B}\,C\,g\,(pair\,a\,b) \to_\iota g\,a\,b$$ 
+    \item Keep in mind: recursor replaces constructor by other term  
+    \item Still possible:\\
+    $A=\set{a}$, $B=\set{b}$, $A{\times}B=\set{(a,b),p}$, $pr_1 p = a$, $pr_2 p = b$
+    \item Will be solved (propositionally) by an induction principle 
+          (dependent version of $rec_{A{\times}B})$
+    \item This also helps: $(pr_1 p,pr_2 p)\to_\eta p$
+    \item Q: how does this relate to cartesian products in category theory?
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Products (0)}
+
+    \begin{itemize}[<+->]
+    \item Formation: $\bfone:\UU$, idea: empty product
+    \item Introduction: $\star:\bfone$
+    \item Elimination: $rec_{\bfone}:\depi{C}{\UU}{C\to\bfone\to C}$
+    \item Computation: $(rec_{\bfone}\,{C}\,c\,\star) \to_\iota c$
+    \item Q: $\star \to_\eta ?$
+    \item Given $c:C:\UU$, the following functions $\bfone\to C$ are \emph{not} equal:
+      \begin{itemize}[<+->]
+      \item $\lamt{x}{\bfone}{c}$ (discards argument and returns $c$)
+      \item $rec_{\bfone}\,{C}\,c$ (pattern-matches argument with $\star$ and returns $c$)
+      \end{itemize}
+    \item However, $\lamt{x}{\bfone}{c}$ and $rec_{\bfone}\,{C}\,c$ are pointwise equal
+    \end{itemize}
+  }
+
+
+\frame
+  {
+  
+   \frametitle{Induction}
+
+    \begin{itemize}[<+->]
+    \item We can infer the following jugment (short):
+$$\!\!f:\depi{x}{A}{\depi{y}{B}{C(x,y)}}\vdash{\lam{p}{f(pr_1 p)(pr_2 p)}}: \depi{p}{A{\times}B}{C(pr_1 p,pr_2 p)}$$
+    \item ... but NOT the following jugment:
+$$f:\depi{x}{A}{\depi{y}{B}{C(x,y)}}\vdash{\lam{p}{f(pr_1 p)(pr_2 p)}}: \depi{p}{A{\times}B}{C\,p}$$
+    \item ... unless we have $(pr_1 p,pr_2 p)\to_\eta p$, or postulate:
+$$ind_{A{\times}B}:\depi{C}{A{\times}B{\to}\UU}
+  {((\depi{x}{A}{\depi{y}{B}{C(x,y)}})\to\depi{p}{A{\times}B}{C\,p})}$$
+    \item Computation rule for the {\color{red}dependent eliminator} (induction): 
+$$ind_{A{\times}B}\,C\,f\,(a,b)\to_\iota f\,a\,b$$
+    \item We like induction (but it does not give us $(pr_1 p,pr_2 p)\to_\eta p$) 
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Induction on $\star$ and more}
+
+    \begin{itemize}[<+->]
+    \item Formation: $\bfone:\UU$, idea as a set: $\set{\star}$
+    \item Introduction: $\star:\bfone$
+    \item Dependent elimination: $ind_{\bfone}:\depi{C}{\bfone\to\UU}{C\,\star \to\depi{x}{\bfone}{C\,x}}$
+    \item Computation: $(ind_{\bfone}\,{C}\,c\,\star) \to_\iota c$
+    \item Provable (short): $refl_\star : (\star{=}_\bfone\star) \vdash 
+          ind_\bfone\,(\lamt{x}{\bfone}{(x{=}_\bfone\star)})\,refl_\star : 
+          \depi{x}{\bfone}{(x{=}_\bfone\star)}$
+    \item Computation: $ind_\bfone\,(\lamt{x}{\bfone}{(x{=}_\bfone\star)})\,refl_\star\,\star \to_\iota refl_\star$
+    \item Define: $C\equiv \lamt{p}{A{\times}B}{(pr_1 p,pr_2 p) =_{A{\times}B} p}$
+    \item On the blackboard: inhabitant of $\depi{p}{A{\times}B}{C\,p}$
+    \item More on equality types and $refl$ later
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Dependent pairs  and $\Sigma$-types}
+
+    \begin{itemize}[<+->]
+    \item Dependent pair $(a,b)$: type of $b$ depends on $a$, $b: Ba$
+    \item $\Sigma$-type, type of dependent pairs: $\sigm{x}{A}{Bx}$ (or $\Sigma\,{A}\,{B}$)
+    \item $\sigm{x}{A}{Bx}$ where $B:A\to U$ can be seen as an indexed sum 
+    \item Formation rule for $\Sigma$-type:
+\[\infer{\sigm{x}{A}{Bx}:\UU}{A:\UU \quad B : A\to \UU}\]
+    \item Introduction rule for $\Sigma$-type:
+\[\infer{(a,b):\sigm{x}{A}{Bx}}{A:\UU\quad B:A\to\UU\quad a:A \quad b:Ba}\]
+    \item Elimination rules for $\Sigma$-types: 
+\[\infer{pr_1 d:A}{d: \sigm{x}{A}{Bx}:\UU} \quad\quad \infer{pr_2 d:B(pr_1 d)}{d: \sigm{x}{A}{Bx}:\UU}\]
+    \end{itemize}
+  }
+ 
+\frame
+  {
+  
+    \frametitle{Recursion and induction for $\Sigma$-types}
+
+    \begin{itemize}[<+->]
+    \item Define the recursor:
+$$rec_{\,\Sigma\,A\,B}:\depi{C}{\UU}{(\depi{x}{A}{(Bx{\to}C)})\to({\Sigma\,A\,B}{\to}C)}$$
+    \item ... and recover the first projection:
+       \begin{itemize}[<+->]
+       \item $pr_1\equiv rec_{\,\Sigma\,A\,B}\,A\,(\lam{ab}{a}):\,\Sigma\,A\,B{\to}A$
+%       \item $pr_2\equiv rec_{\,\Sigma\,A\,B}\,B\,(\lam{ab}{b}):\,\Sigma\,A\,B{\to}B$
+       \end{itemize}
+    \item Define the dependent eliminator:
+$$ind_{\Sigma A B}:\depi{C}{(\Sigma A B{\to}\UU)}{(\depi{x}{A}{\depi{y}{Bx}{C(x,y)}})\to(\depi{p}{\Sigma\,A\,B}{Cp})}$$
+    \item ... and recover also the second (dependent) projection:
+$$pr_2\equiv ind_{\,\Sigma\,A\,B}\,(\lamt{p}{\Sigma\,A\,B}{B(pr_1p)})\,(\lam{ab}{b}):\depi{p}{\Sigma\,A\,B}{B(pr_1p)}$$
+    \item Computation rules: $rec/ind_{\,\Sigma\,A\,B}\,C\,g\,(a,b) \to_\iota g\,a\,b$    
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{The Axiom of Choice}
+
+    \begin{itemize}[<+->]
+    \item For $A:\UU,~B:\UU,~R:A\to B\to\UU$, find $\mathsf{ac}$ with
+\[\mathsf{ac}:(\depi{x}{A}{\sigm{y}{B}{R\,x\,y}})\to\sigm{f}{A{\to}B}{\depi{x}{A}{R\,x\,(fx)}}\]
+    \item We elaborate this on the blackboard (see 1.6 of the book)
+    \item Conclusion: with $h:\depi{x}{A}{\sigm{y}{B}{R\,x\,y}}$,
+      \begin{itemize}[<+->]
+      \item $f = \lamt{x}{A}{pr_1 (hx)} : A \to B$
+      \item $p =\lamt{x}{A}{pr_2 (hx)} : \depi{x}{A}{R\,x\, (pr_1(hx))}$
+      \end{itemize}
+    \end{itemize}
+  }
+  
+\frame
+  {  
+
+    \frametitle{Use of $\Sigma$-types (and other types)}
+
+    \begin{itemize}[<+->]
+    \item A group is a set with \emph{operations} satisfying \emph{axioms}
+    \item First attempt: $\sigm{A}{\UU}{((A{\to}A{\to}A) \times ((A{\to}A) \times A))}$
+    \item This captures only the signature
+    \item Later: $A:\UU$ should rather be a set than a type
+    \item Taking one group axiom into account:
+    $$\sigm{A}{\UU}{\sigm{m}{A{\to}A{\to}A}{\sigm{i}{A{\to}A}{\sigm{u}{A}{(\depi{x}{A}{mux=_Ax})}}}}$$
+    \item More axioms:
+    $$\sigm{A}{\UU}{\sigm{m}{A{\to}A{\to}A}{\sigm{i}{A{\to}A}{\sigm{u}{A}{(Ax1 \times Ax2 \times \ldots)}}}}$$
+    \item This can be considered to be the type of groups
+    \end{itemize}
+  }
+  
+\frame
+  {
+  
+    \frametitle{Coproducts}
+
+    \begin{itemize}[<+->]
+    \item Type constructor: $+$, idea: disjoint union
+    \item Formation rule for coproduct:
+\[\infer{{A}+{B}:\UU}{A:\UU \quad B :\UU}\]
+    \item Introduction rules for coproduct:
+\[\infer{inl~a:{A}+{B}}{a:A:\UU} \quad\quad \infer{inr~b:{A}+{B}}{b:B:\UU}\]
+    \item Elimination rule for coproduct: 
+\[\infer{case~s~f~g :C}{s:A+B\quad f:A\to C \quad g:B\to C}\]
+    \item Computation rules for coproducts and injections:
+       \begin{itemize}[<+->]
+       \item $case~(inl~a)~f~g\to_\iota f a,~case~(inr~b)~f~g\to_\iota g b$
+       \item Optional: $(case~s~inl~inr) \to_\eta s$
+       \end{itemize}    
+    \end{itemize}
+  }
+  
+  
+
+\frame
+  {
+  
+    \frametitle{Recursion and induction for $+$}
+
+    \begin{itemize}[<+->]
+    \item We prefer a recursor:
+$$rec_{A{+}B}:\depi{C}{\UU}{(A{\to}C)\to(B{\to}C)\to A{+}B \to C}$$
+    \item ... and define: $case\,\_\,f~g \equiv rec_{A{+}B}~f~g$
+    \item We define a dependent eliminator $ind_{A{+}B}$ of type:
+$$\!\!\depi{C}{A{+}B{\to}\UU}
+  {(\depi{x}{A}{C(inl\,x)})\to(\depi{y}{B}{C(inr\,y)})\to\depi{s}{A{+}B}{C\,s}}$$
+    \item Computation rules: 
+      \begin{itemize}[<+->]
+      \item $rec/ind_{A{+}B}\,C\,f\,g\,(inl\,a) \to_\iota f a$ 
+      \item $rec/ind_{A{+}B}\,C\,f\,g\,(inr\,b) \to_\iota g b$
+      \end{itemize}  
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{The empty coproduct}
+
+    \begin{itemize}[<+->]
+    \item Formation:  $\bfnull:\UU$, set analogue: $\emptyset$
+    \item Introduction: nope
+    \item Elimination:
+      \begin{itemize}[<+->]
+      \item $rec_\bfnull : \depi{C}{\UU}{\bfnull \to C}$ 
+      \item $ind_\bfnull : \depi{C}{\bfnull{\to}\UU}{\depi{x}{\bfnull}{C\,x}}$
+      \end{itemize}  
+    \item Computation rules: none ($rec_\bfnull\,C\,s \to ~?$)
+    \item Induction principle known as \emph{ex falso [[sequitur] quodlibet] (C)}
+    \item $(rec_\bfnull\,\bfnull)$ and $(\lamt{x}{\bfnull}{x})$ are only extensionally equal
+    \item 
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Booleans}
+
+    \begin{itemize}[<+->]
+    \item $\bftwo = \bfone + \bfone$ (p.~45), beating Principia Mathematica (p.~362!)
+    \item Formation:  $\bftwo:\UU$
+    \item Introduction: $0_\bftwo : \bftwo$, $1_\bftwo : \bftwo$
+    \item Elimination:
+      \begin{itemize}[<+->]
+      \item $rec_\bftwo : \depi{C}{\UU}{C \to C \to \bftwo \to C}$ 
+      \item $ind_\bftwo : \depi{C}{\bftwo{\to}\UU}
+                          {C(0_\bftwo) \to C(1_\bftwo) \to\depi{x}{\bftwo}{C\,x}}$
+      \end{itemize}  
+    \item Computation:
+      \begin{itemize}[<+->]
+      \item $ind/rec_\bftwo\,C\,c_0\,c_1\,0_\bftwo \to c_0$, 
+            $ind/rec_\bftwo\,C\,c_0\,c_1\,1_\bftwo \to c_1$
+      \end{itemize}
+    \item Exercise:
+      \begin{itemize}[<+->]
+      \item $refl_{0}{:}(0_\bftwo{=}_\bftwo 0_\bftwo),
+             refl_{1}{:}(1_\bftwo{=}_\bftwo 1_\bftwo) 
+          \vdash  ? : \depi{x}{\bftwo}{(x{=}_\bftwo 0_\bftwo) + (x{=}_\bftwo 1_\bftwo)}$
+      \end{itemize} 
+    \item Discussion: 
+      \begin{itemize}[<+->]
+      \item $(\Pi~\bftwo~(Rec_\bftwo\,\UU\,A\,B))$, $(\Sigma~\bftwo~(Rec_\bftwo\,\UU\,A\,B))$
+      \item $A\to\bftwo$: `decidable subsets' of $A:\UU$
+      \end{itemize}
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Natural numbers}
+
+    \begin{itemize}[<+->]
+    \item Formation:  $\Nat:\UU$
+    \item Introduction: $0:\Nat$ and $S x:\Nat$ if $x:\Nat$
+    \item Elimination:
+      \begin{itemize}[<+->]
+      \item $it_\Nat : \depi{C}{\UU}{C \to (C\to C) \to \Nat \to C}$
+      \item $rec_\Nat : \depi{C}{\UU}{C \to (\Nat \to C\to C) \to \Nat \to C}$
+      \item $ind_\Nat : \depi{C}{\Nat{\to}\UU}{C0 \to (\depi{x}{\Nat}{Cx\to C(Sx)}) \to \depi{x}{\Nat}{Cx}}$
+      \end{itemize}  
+    \item Computation:
+      \begin{itemize}[<+->]
+      \item $it_\Nat C c f 0 \to_\iota c$, $it_\Nat C c f (Sx) \to_\iota f(it_\Nat C c f x)$
+      \item $rec_\Nat C c f 0 \to_\iota c$, $rec_\Nat C c f (Sx) \to_\iota fx(rec_\Nat C c f x)$
+      \item induction $ind_\Nat$ has the same rules as $rec_\Nat$
+      \end{itemize}  
+    \item Interdefinable: $it_\Nat$ (\emph{iterator}) and $rec_\Nat$ (\emph{primitive recursion})
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Useful encodings}
+
+    \begin{itemize}[<+->]
+    \item Example: $double \equiv it_\Nat\,\Nat\,0\,(\lamt{x}{\Nat}{S(Sx)})$
+    \begin{itemize}[<+->]
+      \item $double\,0 \to_\iota 0$
+      \item $double\,(Sn) \to_\iota (\lamt{x}{\Nat}{S(Sx)})(double\,n) \to_\beta S(S(double\,n))$
+      \end{itemize}
+     \item Right-recursive addition: 
+     $add \equiv \lamt{x}{\Nat}{it_\Nat\,\Nat\,x\,S}$
+    \item Left-recursive addition: 
+    $adl \equiv it_\Nat\,(\Nat{\to}\Nat)\,(\lamt{x}{\Nat}{x})\,(\lamt{f}{\Nat{\to}\Nat}{S\circ f})$
+      \begin{itemize}[<+->]
+      \item $adl\,0 \to_\iota \lamt{x}{\Nat}{x}$, so $adl\,0\,m \to_\iota m$
+      \item $adl\,(Sn) \to_\iota S\circ (adl\,n)$, so\\
+            $adl\,(Sn)\,m \to_\iota (S\circ (adl\,n))\,m \to_\beta S(adl\,n\,m)$
+      \end{itemize}
+     \item Right-recursive multiplication: 
+     \[mult \equiv \lamt{x,y}{\Nat}{it_\Nat\,\Nat\,0\,(add\,x)\,y}\]
+    \end{itemize}
+  }
+
+\frame
+  {
+   
+    \frametitle{Proofs by induction}
+
+    \begin{itemize}[<+->]
+    \item We prove in the context ...
+      \begin{itemize}[<+->]
+      \item $refl_\Nat:\depi{x}{\Nat}{(x =_\Nat x)}$ (later: axiom)
+      \item $funcS:\depi{x{,}y}{\Nat}{(x =_\Nat y) \to (Sx=_\Nat Sy)}$ (later: provable)
+      \end{itemize}
+    \item ... on the blackboard:
+      \begin{itemize}[<+->]
+%    \item $\vdash ?:\depi{x}{\Nat}{(add\,x\,0 =_\Nat x)})$
+    \item $\vdash ?:\depi{x}{\Nat}{(add\,0\,x =_\Nat x)})$
+    \item $\vdash ?:\depi{x}{\Nat}{(double\,(add\,x\,(S0)) =_\Nat S(S(double\,x)))}$
+    \item $\vdash ?:\depi{x}{\Nat}{(add\,x\,0 =_\Nat x)}$ (no induction needed!) 
+      \end{itemize}
+    \item Discussion
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Pattern Matching}
+
+    \begin{itemize}[<+->]
+    \item Instead of $f \equiv rec_{A{+}B}\,C\,g_0\,g_1$:
+          \[\left\{ \begin{array}{lcl}f\,(inl\,a)&=&g_0\,a\\f\,(inr\,b)&=&g_1\,b \end{array} \right. \]
+    \item Instead of $f \equiv rec_{A{\times}B}\,C\,\lamt{a}{A}{\lamt{b}{B}{\text{(a term of type $C$ in $a$ and $b$)}}}$:
+          \[ \begin{array}{lcl}f\,(a,b)&=&\text{(a term of type $C$ in $a$ and $b$)}\end{array}  \]
+    \item Instead of $double \equiv it_\Nat\Nat\,0\,(\lamt{x}{\Nat}{S(Sx)})$:
+          \[\left\{ \begin{array}{lcl}double\,0&=&0\\double\,(S\,x)&=&S(S(double\,x)) \end{array} \right.\]
+    \item ... and of course not
+          \[\left\{ \begin{array}{lcl}f\,0&=&0\\f\,(S\,x)&=&f\,(S(S(x))) \end{array} \right.\]
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Propositions as Types (non-truncated)}
+
+    \begin{itemize}[<+->]
+    \item Correspondence: \[\begin{array}{|c|c|c|c|c|c|c|c|} \hline
+     true& false & if\_\,then\_& not\,\_ & and &  or &for~all~\ldots&exists~\ldots\\\hline
+     \bfone&\bfnull &\_\to\_&{\_\to\bfnull}&\times&+&\depi{x}{A}{Px}&\sigm{x}{A}{Px}\\\hline \end{array}\]
+    \item Strong $+$ and $\Sigma$ will be moderated later
+    \item We prove some constructive tautologies on the blackboard
+    \item E.g., $(\depi{x}{A}{\depi{y}{A}{(Px\to Qxy)}})\to
+    \depi{x}{A}{(Px\to \depi{y}{A}{Qxy})}$
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Identity Types}
+
+    \begin{itemize}[<+->]
+    \item Formation: $Id_A a b:\UU$ if $A:\UU$ and $a,b:A$
+    \item Notation: $Id_A a b$ or $a=_A b$ or even just $a=b$
+    \item Introduction: $refl: \depi{x}{A}{Id_A\,x\,x}$, notation $refl_a$ for $(refl \,a)$
+    \item Elimination: $ind_{Id_A}$ has type 'for every unary predicate $C$ on the path space of $A$,
+and every function mapping points $x$ to a proof of $C(x,x,refl_x)$, there exists a function mapping paths
+$(x,y,p)$ with $p:x=_A y$ to a proof of $C(x,y,p)$' (book!) 
+    \item Computation: $ind_{Id_A}\,C\,c\,x\,x\,refl_x \to_\iota c\,x$
+    \item Example: with $C\equiv\lamt{x,y}{A}{\lamt{p}{(x{=_A}y)}{(y =_A x)}}$ we get
+$$ind_{Id_A}\,C\,refl: \depi{x,y}{A}{(x =_A y \to y =_A x)}$$ 
+     
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Path induction and based path induction}
+
+    \begin{itemize}[<+->]
+    \item Path induction (two lines): $\depi{C}{(\depi{x,y}{A}{(x =_A y \to \UU))}}{}$
+\[{(\depi{x}{A}{C\,x\,x\,refl_x}) \to (\depi{x,y}{A}{\depi{p}{(x{=_A}y)}{C\,x\,y\,p}})}
+\]
+    \item Based path induction: $\depi{a}{A}{\depi{C}{(\depi{y}{A}{(a =_A y \to \UU))}}{}}$
+\[{{C\,a\,refl_a} \to (\depi{y}{A}{\depi{p}{(a{=_A}y)}{C\,y\,p}})}
+\]
+    \item Equivalence on the blackboard (book!):
+      \begin{itemize}[<+->]
+      \item Path induction follows easily from based path induction
+      \item Based path induction follows from one `universal' instance of path induction,
+      `pulling out' $\depi{y}{A}{\depi{p}{(a{=_A}y)}{\_}}$
+      \end{itemize}     
+\[ D\,a\,y\,p \equiv \depi{E}{(\depi{y}{A}{(a=_A y \to \UU)})}{E\,a\,refl_a \to E\,y\,p}
+\]
+    \end{itemize}
+  }
+
+  \subsection{Chapter 2}
+
+\frame
+  {
+
+    \frametitle{Homotopy theory}
+
+    \begin{itemize}[<+->]
+    \item Path in a topological space $X$: continuous map $[0,1]\to X$
+    \item Problem for the foundations: $[0,1]$
+    \item HoTT = synthetic homotopy theory
+    \item Striking: induction for identity types fits very well
+    \item Pointwise equality of paths too fine (cf.\ different `velocities')
+    \item Homotopy between $p,q: [0,1]\to X$: a continuous 
+$$H: [0,1]\times[0,1]\to X \text{ such that } H(t,0)= p(t),~H(t,1) = q(t)$$
+    \item Picture: image of square `fills space between $p$ and $q$ in $X$'
+    \item Example: $h(t)=1-|1-2t|,~H(t,z)=z\cdot h(t)$, coarse
+               (2-way trip = staying home)
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{More homotopy theory}
+
+    \begin{itemize}[<+->]
+    \item Path $p: [0,1]\to X$, \emph{start} point $p(0)$, \emph{end} point $p(1)$
+    \item Loop: $p(0)=p(1)$, loop at $x_0$: $p(0)=x_0=p(1)$
+    \item Based homotopy: as above, with $H(0,y)=x_0=H(1,y)$
+    \item Q: homotopic loops at $x_0$ that are not \emph{based} homotopic?
+    \item Fundamental group: loops at $x_0$ modulo based homotopy
+    \item Homotopy between $f,g: X\to Y$: easy generalization 
+    \item Homotopy between $X,Y$ in TOP: $f:X\to Y,~g:Y\to X$,
+          $f\circ g$ and $id_Y$ homotopic, $g\circ f$ and $id_X$ homotopic
+    \item Invariant: homotopic spaces have isomorphic fundamental groups
+          (for every $x\in X$ we have $\pi_1(X,x) \cong \pi_1(Y,f(x))$)
+    %\item Q: are the algebraic invariants the rationale of homotopy?
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Higher dimensional paths}
+
+    \begin{itemize}[<+->]
+    \item Homotopies: "paths between paths", 2-dimensional paths
+    \item Homotopies form a topological space (Q: how?)
+    \item Paths between homotopies: 3-dimensional paths
+    \item ... and so on, an infinite tower called $\infty$-groupoid
+    \item Weak groupoid (only up to homotopy), not group
+    %\item Q: how to compose $p,q: [0,1]\to X$ if $p(1)\neq q(0)$?
+    \item Path in a type $A$: $p: x =_A y$
+    \item 2-Path in a type $A$: path in $x =_A y$, for $x,y:A$
+    \item More explicitly: $p2q: p =_{x =_A y} q$, for $p,q: x =_A y$
+    \item ... and so on
+    \item What about the groupoid structure?
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Homotopy type theory: path algebra}
+
+    \begin{itemize}[<+->]
+   
+    \item $\opp \_ \equiv ind_{Id_A}\,C\,refl\,x\,y: {(x =_A y \to y =_A x)}$,
+          with $C\equiv\lamt{x,y}{A}{\lamt{p}{(x{=_A}y)}{(y =_A x)}}$,
+          satisfies $\opp{refl_a} =_\iota refl_a$% for each $a:A$
+    \item Concatenation operator $\_\ct \_: (x=y)\to(y=z)\to(x=z)$,
+               several definitions on blackboard
+    \item LEM: for all $A:\UU,~x,y,z,w:A,~p:x{=}y,~q:y{=}z,~r:z{=}w$
+      \begin{enumerate}
+      \item $p=refl_x\ct p = p\ct refl_y$ (some even $=_\iota$)
+      \item $p\ct\opp p = refl_x,~\opp p\ct p = refl_y$
+      \item $\opp{(\opp p)} = p$
+      \item $p\ct(q\ct r) = (p\ct q)\ct r$
+      \end{enumerate}
+    \item Proofs on blackboard (some with type subscripts)
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Loop spaces}
+
+    \begin{itemize}[<+->]
+    \item Loop space: $\Omega(A,a)\equiv (a=_A a)$ (with $refl_a: a=_A a$)
+    \item NOT provable: $\depi{p}{(a=_A a)}{p=_{(a=_A a)}refl_a}$
+    \item Group type: $\Omega(A,a),~refl_a,~\_\ct\_,~\opp\_$ (modulo $=_{\Omega(A,a)}$)
+    \item This group is not necessarily commutative
+    \item The loop space of the loop space: $$\Omega^2(A,a)\equiv (refl_a =_{(a=_A a)} refl_a)$$
+    \item THM 2.1.6 (Eckmann-Hilton): $\Omega^2(A,a)$ is commutative
+    \item Book: picture good, proof improved in current version (09/13)
+    \item Fair attempt on the blackboard: by \emph{based} path induction
+$$\depi{a,b:A,~p,q:(a=b),~\alpha}{(p=q)}{\depi{c}{A}{\depi{r}{(b=c)}{p\ct r = q\ct r}}}$$
+    \item ... and a lot more (proof assistant dearly missed)
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Q  to the topologists}
+
+If we have full freedom of definition, then we can define the following predicate on the path space of some topological space $X$:
+
+$$Cxyp \equiv  (x=y \land  p=refl_x)$$
+
+By path induction: all continuous $p: [0,1] \to X$ are constant.
+
+This is obviously wrong ($C$ is not continuous).
+
+Restrict path induction to continuous $C$, that is, $C$ boolean valued and continuous wrt the discrete topology on the booleans.
+
+Q: what is the simplest (or: a simple) topological space $X$ validating path induction, but not all paths constant? (A: $[0,1]$)
+}
+
+\frame
+  {
+
+    \frametitle{Pointed types and loop spaces}
+
+    \begin{itemize}[<+->]
+    \item $\UU_\bullet \equiv \sigm{A}{\UU}{A}$    
+    \item Pointed type: $(A,a) \in \UU_\bullet$ for $A\in \UU$ and $a\in A$
+    \item Pointed loop space: $\Omega(A,a)\equiv ((a=_A a),refl_a)$ 
+    \item Iterated: $\Omega^0(A,a)\equiv (A,a)$,  $$\Omega^{n+1}(A,a)\equiv \Omega^n(\Omega(A,a))$$
+    \item $\Omega^2(A,a)\equiv \Omega((a=_A a),refl_a) \equiv (refl_a=_{(a=_A a)} refl_a, refl_{refl_a})$
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Functions as functors}
+
+    \begin{itemize}[<+->]
+    \item Type $A$ as a category:
+      \begin{itemize}
+      \item Objects $a:A$
+      \item Arrows $p: a =_A b$ for $a,b:A$
+      \end{itemize}
+    \item Function $f:A\to B$ as a functor (in TOP: $f$ continuous)
+      \begin{itemize}
+      \item LEM: For all $x,y:A$ there is $ap_f: (x=_A y)\to(f x =_B f y)$
+      \item Proof: easy path induction, also $ap_f\,refl_x =_\iota refl_{fx}$
+      \end{itemize}
+    \item Shorthand: $f(p)\equiv (ap_f\,p)$ (application, action on paths)
+    \item LEM: for all $f:A\to B,~g:B\to C,~p:x=_A y,~q:y =_A z$
+      \begin{enumerate}
+      \item $f(p\ct q) =_{fx =_B fz} f(p)\ct f(q)$
+      \item $f(\opp p) =_{fy =_A fx} \opp{f(p)}$
+      \item $g(f(p)) =_{g(f x)=_C g(fy)} (g\circ f)(p)$
+      \item $id_A x =_\beta x,~id_A(p) =_{x=_A y} p$
+      \end{enumerate}
+
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Transport}
+
+    \begin{itemize}[<+->]
+    \item Functor $f:A\to B$ maps paths in $A$ to paths in $B$
+    \item For $B:A\to\UU$ and $f:\depi{x}{A}{Bx}$ this is not so easy ...
+    \item ... because $Bx$ and $By$ are different types
+    \item Type family $B: A\to\UU$ is a non-dependent function (of types)
+    \item LEM: for all $x,y:A$ and $p:x=_A y$ there is $p_*: Bx\to By$
+    \item Proof: easy path induction, also $(refl_x)_* =_\iota id_{Bx}$
+    \item Longhand: $transport^B\,p \equiv p_*$, so $transport^B\,p: Bx \to By$
+    \item We can now lift paths in $A$ to the total space $\Sigma\,A\,B$ (picture)
+    \item COR: for all $x,y:A,p:x=_A y,\,u:Bx$ there is $$lift(u,p): (x,u) = (y,p_*u)$$
+    \item Type family $B$: fibration with base $A$
+    \item Q: actually, the fibration is $fst: (\Sigma\,A\,B) \to A$
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Heavy transport}
+
+    \begin{itemize}[<+->]
+    \item Picture of transport with dependent function $f:\depi{x}{A}{Bx}$
+    \item LEM: for all $x,y:A$ and $p:x=_A y$ there is 
+               $$apd_f: (x=_A y)\to(p_*(f x) =_{By} f y)\text{~~with~}apd_f\,refl_x =_\iota refl_{fx}$$
+
+    \item LEM: if $P:A\to\UU$ with $Px=B$ fixed, 
+    then for all $x,y:A$, $p:x=_A y$ and $b:B$ there is $tpc^B_p\, b : transport^P\,p\,b =_B b$
+    \item LEM: for $f:A\to B$ and $p:x=_A y$ we have $$apd_f(p) = (tpc^B_p(fx))\ct (ap_f p)$$
+    \item LEM: if $P:A\to\UU$, $p:x=_A y$, $q:y=_A z$, and $u:Px$, then
+               $$(q_*\circ p_*)\, u = (p\ct q)_*\, u$$
+    \item LEM: if $f:A\to B$, $P:B\to\UU$, $p:x=_A y$, and $u:P(fx)$,
+               $$transport^{P\circ f}\,p\,u =  transport^{P}\,f(p)\,u$$
+    \item LEM 2.3.11: book
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Homotopies}
+
+    \begin{itemize}[<+->]
+    \item DEF: Let $f,g:\depi{x}{A}{Px}$ for $P:A\to\UU$. 
+    A \emph{homotopy} from $f$ to $g$ is a dependent function of type $f\sim g$, where
+    $$(f\sim g) \equiv \depi{x}{A}{fx =_{Px} gx}$$
+    \item NB: $f\sim g$ is NOT the same as $f=_{\depi{x}{A}{Px}} g$
+    \item LEM: homotopy is an equivalence relation:
+      \begin{itemize}[<+->]
+      \item $?r: \depi{f}{(\depi{x}{A}{Px})}{(f\sim f)}$
+      \item $?s: \depi{f,g}{(\depi{x}{A}{Px})}{(f\sim g \to g\sim f)}$
+      \item $?t: \depi{f,g,h}{(\depi{x}{A}{Px})}{(f\sim g \to (g\sim h \to f\sim h))}$
+      \end{itemize}
+    \item LEM: if $H:f\sim g$ for $f,g:A\to B$, and $p:x=_A y$, 
+          then $Hx\ct g(p) = f(p)\ct Hy$ (naturality, picture, proof by induction)
+    \item COR: if $H:f\sim id_A$ for $f:A\to A$, and $x:A$, 
+          then $H(fx) = f(Hx)$ (picture, proof by cancelling $Hx$)
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Equivalences}
+
+    \begin{itemize}[<+->]
+    \item DEF: For $f:A\to B$, a \emph{quasi-inverse} is a triple $(g,\alpha,\beta)$ 
+    with $g:B\to A$ and $\alpha:g\circ f \sim id_A$, $\beta:f\circ g \sim id_B$.
+    \item DEF: the type $qinv(f)$ of quasi-inverses of $f$ is 
+          $$\sigm{g}{B\to A}{((f\circ g \sim id_B) \times (g\circ f \sim id_A))}$$
+   \item Examples:
+      \begin{itemize}[<+->]
+      \item $?:qinv(id_A)$ for $id_A: A\to A$
+      \item $?:qinv(p\ct\_)$ for $p\ct\_ : y=z \to x=z$
+      \item $?:qinv(transport^P_p)$ for $transport^P_p : Px \to Py$
+      \end{itemize}
+    \item $qinv$ not well-behaved: nonequal inhabitants
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Equivalences and Univalence}
+
+    \begin{itemize}[<+->]
+    \item DEF: For $f:A\to B$, the type $isequiv(f)$ is 
+          $$(\sigm{g}{B\to A}{(f\circ g \sim id_B)}) \times (\sigm{h}{B\to A}{(h\circ f \sim id_A)})$$
+    \item LEM: (i) $qinv(f)\to isequiv(f)$; (ii) $isequiv(f)\to qinv(f)$
+    \item Proof: (i) take $g=h$; (ii) use $g\sim h\circ f\circ g \sim h$
+    \item LEM: for all $e_1,e_2:isequiv(f)$ we have $e_1 =_{isequiv(f)} e_2$
+    \item Proof: postponed (interaction between $=$ and $\times,\Sigma$)
+    \item DEF: $(A\simeq B) \equiv \sigm{f}{A\to B}{isequiv(f)}$
+    \item LEM: For all $A,B:\UU$ there is $idtoeqv: (A=_\UU B) \to (A\simeq B)$
+    \item Proof: by induction, using $isequiv(id_A)$
+    \item Univalence Axiom: for all $A,B:\UU$, $isequiv(idtoeqv)$; hence:
+          $$(A=_\UU B) \simeq (A\simeq B)$$
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Type equivalence}
+
+    \begin{itemize}[<+->]
+   \item An \emph{equivalence} $e:A\simeq B$ is a \emph{pair}
+         $(f,p)$ with $f:A\to B$ and $p:isequiv(f)$; sometimes $p$ is left implicit
+   \item LEM: Type equivalence is an equivalence relation on $\UU$:
+      \begin{itemize}[<+->]
+      \item For any $A:\UU$, $id_A: A\to A$ is an equivalence
+      \item For any $f:A\simeq B$ we have an equivalence $\opp f:B\simeq A$
+      \item For any $f:A\simeq B$ and $g:B\simeq C$  we have $g\circ f:A\simeq C$
+      \end{itemize}
+    \item Proofs:
+        \begin{itemize}[<+->]
+        \item $id_A: A\to A$ is its own quasi-inverse; hence an equivalence
+        \item If $f:A\to B$ is an equivalence, it has a quasi-inverse $\opp f:B\to A$, which is also an equivalence
+        \item If $f:A\simeq B$ and $g:B\simeq C$, take their quasi-inverses ...% (on blackboard)
+        \end{itemize}
+    \end{itemize}
+  }
+
+
+  \frame
+  {
+
+    \frametitle{Structuralism}
+
+    \begin{itemize}[<+->]
+      \item Will turn out very different:
+      \begin{itemize}[<+->]
+         \item `Two pairs are equal if they are componentwise equal'
+         \item `Two functions are equal if they are pointwise equal'
+       \end{itemize}
+    \item Type formers: $\times,+,\Sigma,\Pi,\UU,\bfnull,\bfone,\bftwo,\Nat,Id$
+   \item A lot of structural properties to investigate:
+      \begin{itemize}[<+->]
+      \item equality (example: lemma below)
+      \item transport
+      \item action on path
+      \end{itemize}
+    \item LEM: $(x =_{A\times B} y) \simeq ((pr_1 x =_A pr_1 y) \times (pr_2 x =_B pr_2 y))$
+    \item Proof on the blackboard
+    \end{itemize}
+  }
+
+  \frame
+  {
+
+    \frametitle{Equality in cartesian products}
+
+    \begin{itemize}[<+->]
+    \item LEM: $(x =_{A\times B} y) \simeq ((pr_1 x =_A pr_1 y) \times (pr_2 x =_B pr_2 y))$
+    \item Proof: $isequiv(\lamt{p}{(x =_{A\times B}y)}{(pr_1(p),pr_2(p))})$, by:
+      \begin{enumerate}[<+->]
+         \item define the function in the `other' direction (notation: $pair^=$)
+         \item prove that $pair^=$ is a \emph{quasi}-inverse
+       \end{enumerate}
+      \item $pair^=$: introduction rule for $x =_{A\times B} y$, elimination:   
+      \begin{enumerate}[<+->]
+         \item $ap_{pr_1}: (x =_{A\times B} y) \to (pr_1 x =_A pr_1 y)$
+         \item $ap_{pr_2}: (x =_{A\times B} y) \to (pr_2 x =_B pr_2 y)$
+       \end{enumerate}
+    \item yielding \emph{propositional} computation rules:
+      \begin{enumerate}[<+->]
+      \item $(ap_{pr_1}(pair^=(p,q))) = p\quad$ for $p: (pr_1 x =_A pr_1 y)$
+      \item $(ap_{pr_2}(pair^=(p,q))) = q\quad$ for $q: (pr_2 x =_B pr_2 y)$
+      \end{enumerate}
+    \item and a \emph{propositional} uniqueness principle: 
+    $r = pair^=(ap_{pr_1} r, ap_{pr_ 2} r)\quad$ for $r:(x =_{A\times B}y)$
+    \item plus a lot of  other componentwise \emph{propositional} equalities
+    \end{itemize}
+  }
+
+  \frame
+  {
+
+    \frametitle{Transport and action in cartesian products}
+
+    \begin{itemize}[<+->]
+    \item THM: If $A,B:Z\to\UU$,  $p:z=_Z w$ and $x:((A z)\times(B z))$, 
+    then $p_* x =_{(A w)\times (B w)}(p_* (pr_1 x), p_* (pr_2 x))$
+    \item Proof:  path induction plus propositional uniqueness
+    \item Functoriality of $ap$ under cartesian products: 
+    let $g:A\to A'$, $h:B\to B'$  and define $f: (A{\times}B) \to (A'{\times} B')$
+    by $f\equiv\lamt{x}{A{\times}B}{(g(pr_1 x),h(pr_2 x))}$. Then:
+    \item THM: if also $x,y:A{\times}B$, $p: (pr_1 x) =_A (pr_1 y)$ and $q: (pr_2 x) =_B (pr_2 y)$, 
+    we have (picture) $$f(pair^=(p,q))=_{fx = fy} pair^=(g(p),h(q))$$
+    \item Proof: by induction on pairs and paths
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Equality and transport in $\Sigma$-types}
+
+    \begin{itemize}[<+->]
+    \item THM: let $P:A\to\UU$ and $w,w':\sigm{x}{A}{Px}$. Then:
+    $$(w=_{\sigm{x}{A}{Px}} w') \quad\simeq\quad\sum_{p:pr_1 w = pr_1 w'}(p_*(pr_2 w) = pr_2 w')$$
+    \item  THM: let $P:A\to\UU$ and $Q:(\sigm{x}{A}{Px})\to\UU$. 
+    Then $\lamt{x}{A}{(\sigm{u}{Px}{Q(x,u)})}$ is a type family such that for
+    $p:x=y$ and $(u,z):(\sigm{u}{Px}{Q(x,u)})$ we have:
+    $$p_*(u,z)\quad=_{\sigm{u}{Py}{Q(y,u)}}\quad(p_*u,lift(u,p)_* z)$$
+    \item Generalizes: $p_* x \quad =_{(A w)\times (B w)}\quad (p_* (pr_1 x), p_* (pr_2 x))$
+    \item Time for a picture!
+    \end{itemize}
+  }
+
+
+\frame
+  {
+
+    \frametitle{The unit type}
+
+    \begin{itemize}[<+->]
+    \item THM: for all $x,y:\bfone$ we have $(x=y)\simeq\bfone$.
+    \item Proof: exercise
+    \item Pitfall: don't start proving $(\star=\star)\simeq\bfone$
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Equality in $\Pi$-types}
+
+    \begin{itemize}[<+->]
+    \item Wanted, for $A:\UU,~B:A\to\UU$ and $f,g:\depi{x}{A}{Bx}$: 
+    $$(f=g) \simeq (\depi{x}{A}{fx = _{Bx} gx})$$
+    \item  By an easy path induction (to be viewed as elimination):
+    $$happly: (f=g) \to (\depi{x}{A}{fx = _{Bx} gx})$$
+    \item Axiom (function extensionality): $isequiv(happly)$
+    \item Quasi-inverse of $happly$ (to be viewed as introduction):
+    $$funext: (\depi{x}{A}{fx = _{Bx} gx}) \to (f=g)$$
+    \item Propositional equalities (use functional extensionality):
+      \begin{itemize}[<+->]
+      \item $happly\,(funext\,h) = h$
+      \item $\alpha = funext\,(happly\,\alpha)$
+      \item $refl_f = funext\,(\lamt{x}{A}{refl_{fx}})$
+      \item $\opp \alpha = funext\,(\lamt{x}{A}{\opp{(happly\,\alpha\,x)}})$
+      \item $\alpha\ct\beta = funext\,(\lamt{x}{A}{(happly\,\alpha\,x)\ct(happly\,\beta\,x)})$
+      \end{itemize}
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Transport in $\Pi$-types}
+
+    \begin{itemize}[<+->]
+    \item Let $A,B:X\to\UU$ and define $A2B\equiv\lamt{x}{X}{(Ax\to Bx)}$.
+          Given a path $p:x_1 =_X x_2$, there are two natural ways to transport
+          $f: Ax_1 \to Bx_1$ to $Ax_2 \to Bx_2$ (picture):
+      \begin{enumerate}[<+->]
+      \item by applying $transport^{A2B}\,p : (Ax_1 \to Bx_1)\to(Ax_2 \to Bx_2)$
+      \item by transporting any given $a:Ax_2$ first back to $Ax_1$, applying $f$, 
+            and then transporting the result in $Bx_1$ to $Bx_2$
+      \end{enumerate}
+          These two ways turn out to be propositionally equal.
+    \item LEM: under conditions as above:
+    $$transport^{A2B}\,p\,f = \lamt{a}{Ax_2}{transport^B\,p\,(f(transport^A\,\opp p\,a))}$$
+    \item Proof: by path induction
+    \item This was only the non-dependent case ... (see the book) 
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Univalence}
+
+    \begin{itemize}[<+->]
+    \item $idtoeqv: (A=_\UU B) \to (A\simeq B)$ defined by path induction
+    \item Univalence Axiom: for all $A,B:\UU$, $isequiv(idtoeqv)$; hence:
+          $$(A=_\UU B) \simeq (A\simeq B)$$
+    \item Abuse of notation: $(f,p):A\simeq B$ identified with $f:A\to B$
+    \item A different view on univalence:
+      \begin{itemize}
+      \item Introduction (postulated): $ua:(A\simeq B) \to (A=_\UU B)$  
+      \item Elimination (transport): $[pr_1\circ] idtoeqv: (A=_\UU B) \to (A\to B)$ 
+      \item Propositional computation rule: $idtoequiv\,(ua\,f) = f$
+      \item Propositional uniqueness: $p=ua\,(istoeqv\,p)$, so $refl_A = ua\,id_A$
+      \end{itemize}
+    \item LEM: $(ua\,f)\ct(ua\,g) = ua\,(g\circ f);~\opp{(ua\,f)}= ua\,(\opp f)$
+    \item LEM: for $B:A\to\UU,~p:x=_A y$ we have (no UA!):
+          $$p_* \equiv transport^B\,p =_{Bx\to By} idtoequiv\,(ap_B p)$$ 
+   \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Identity types}
+
+    \begin{itemize}[<+->]
+    \item THM: if $f:A\to B$ is an equivalence, then for all $a,a':A$ we have the equivalence
+          $ap_f : (a =_A a') \to (fa =_B fa')$
+    \item Transport in families of identity types, with $p: x_1 =_A x_2$.\\
+      LEM:  for $p: x_1 =_A x_2$ and $q: Px_1$ for superscript $P:A\to\UU$
+      \begin{enumerate}[<+->]
+      \item $transport^{\lamt{x}{A}{(a=_A x)}}\,p\,q = q\ct p$
+      \item $transport^{\lamt{x}{A}{(x=_A a)}}\,p\,q = \opp p \ct q$
+      \item $transport^{\lamt{x}{A}{(x=_A x)}}\,p\,q = \opp p \ct q \ct p$
+      \item $transport^{\lamt{x}{A}{(fx=_B gx)}}\,p\,q = \opp{(ap_f p)} \ct q \ct (ap_g p)$\\
+for $f,g: A\to B$
+      \item $transport^{\lamt{x}{A}{(fx=_B gx)}}\,p\,q = \opp{(apd_f p)} \ct p_*(q) \ct (apd_g p)$\\
+for $f,g: \depi{x}{A}{Bx}$
+      \end{enumerate}
+       Proofs by pictures
+    \item THM: for $p:a=_A a'$, $q:a=_A a$, and $r:a'=_A a'$ we have:
+    $$((transport^{\lamt{x}{A}{(x=_A x)}}\,p\,q) = r)\simeq(q\ct p = p\ct r)$$
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Coproducts}
+
+    \begin{itemize}[<+->]
+    \item Coproducts are interesting: try defining $f: A+B \to A$ ...
+    \item Hopefully (proof not obvious, too special):
+      \begin{enumerate}[<+->]
+      \item $~(inl\,a_1 = inl\,a_2)\simeq(a_1 = a_2)$
+      \item $(inr\,b_1 = inr\,b_2)\simeq(b_1 = b_2)$
+      \item $\quad(inl\,a = inr\,b)\simeq \quad\bfnull$
+      \end{enumerate}
+      Idea: combine 1,3 (2,3) and generalize! (Q: 1,2,3,4?)
+    \item Fix $a_0:A$; then $P\equiv\lamt{x}{A{+}B}{(inl\,a_0 = x)}: A{+}B \to\UU$. 
+    \item Wanted: $P(inl\,a)\simeq(a_0 = a)$ and $P(inr\,b)\simeq\bfnull$
+    \item Define $code: A{+}B \to\UU$ recursively by 
+          $$code\,(inl\,a) \equiv (a_0 = a)\quad\quad code\,(inr\,b) \equiv\bfnull$$
+    \item Define $encode: \depi{x}{A{+}B}{\depi{p}{(inl\,a_0=x)}{(code\,x)}}$\\ 
+             and $\,\quad decode: \depi{x}{A{+}B}{\depi{c}{(code\,x)}{(inl\,a_0=x)}}$
+    \item Prove that $encode(x,\_)$ and $decode(x,\_)$ are quasi-inverses
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Coproducts (ctnd)}
+
+    \begin{itemize}[<+->]
+    \item THM: for all $x:A+B$ we have $((inl\,a_0)=x)\simeq(code\,x)$
+    \item Details on the blackboard
+    \item COR (of the proof):
+      \begin{itemize}[<+->]
+      \item $encode(inl\,a): ((inl\,a_0) = (inl\, a)) \to(a_0 = a)$
+      \item $encode(inr\,b): ((inl\,a_0) = (inr\, b)) \to\bfnull$
+      \end{itemize}
+    \item Transport: for $A,B:X\to\UU$ and $p:x_1 =_X x_2$:
+      \begin{itemize}[<+->]
+      \item $transport^{\lamt{x}{X}{(Ax{+}Bx)}}\,p\,(inl\,a) = inl\,(transport^A\,p\,a)$
+      \item $transport^{\lamt{x}{X}{(Ax{+}Bx)}}\,p\,(inr\,b) = inr\,(transport^B\,p\,b)$
+      \end{itemize}
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Natural numbers}
+
+    \begin{itemize}[<+->]
+    \item We define $code: \Nat \to\Nat \to\UU$ such that:\\    
+    THM: for all $m,n:\Nat$ we have $(m=n)\simeq(code\,m\,n)$
+    \item Details on the blackboard (or in book)
+    \item COR: we have (inhabited)
+      \begin{itemize}[<+->]
+      \item $\depi{m}{\Nat}{((Sm)=0) \to \bfnull}$, as $code((Sm),0) \equiv \bfnull$
+      \item $\depi{n,m}{\Nat}{((Sm)=(Sn))\to(m=n)}$, as $code(Sm,Sn) \equiv code(m,n)$
+      \end{itemize}
+    \item COR: $\Nat$ is a \emph{set} (type in which paths are unique)
+    \end{itemize}
+  }
+
+
+ \frame
+  {
+
+    \frametitle{Transporting structure}
+
+    \begin{itemize}[<+->]
+    \item $SGS(A) \equiv \sigm{m}{A{\to}A{\to}A}{\depi{x,y,z}{A}{(mx(myz)= m(mxy)z)}}$
+    \item $SG \equiv \sigm{A}{\UU}{SGS(A)}$
+    \item If $e: A\simeq B$, then $transport^{SGS} ua(e): SGS(A) \to SGS(B)$
+    \item For $(m,a):SGS(A)$, $transport^{SGS} ua(e)(m,a)\equiv(m',a')$ with
+      \begin{itemize}[<+->]
+      \item $m'=ua(e)_* m \equiv transport^{\lam{X}{X{\to}X{\to}X}} ua(e) m$
+      \item $a'=transport^{\lam{(X,m)}{Assoc(X,m)}}(pair^=(ua(e),refl_{m'}))\,a$
+      \end{itemize}
+      where $Assoc(X,m)\equiv\depi{x,y,z}{X}{(mx(myz)= m(mxy)z)}$
+    \item NB: $pair^=(ua(e),refl_{m'}) : (A,m) = (B,m')$ (Thm. 2.7.2/4)
+    \item Indeed $(m',a'):SGS(B)$ (no need to reprove)
+      \begin{itemize}[<+->]
+      \item $m': B\to B \to B$
+      \item $a': Assoc(B,m')\equiv\depi{x,y,z}{B}{(m'x(m'yz)= m'(m'xy)z)}$
+      \end{itemize}
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Some calculations}
+
+    \begin{itemize}[<+->]
+    \item If $p: A=_{\UU} B$, then $transport^{\lamt{X}{\UU}{X}}p : A\to B$
+    \item Also: $[pr_1\circ] idtoeqv: (A=_\UU B) \to (A\to B)$
+    \item Verbatim the same: $transport^{\lamt{X}{\UU}{X}}\equiv idtoeqv$
+    \item Hence: $transport^{\lamt{X}{\UU}{X}}$ and $ua$ are each other's quasi-inverse
+    \item So: $transport^{\lamt{X}{\UU}{X}}\,\opp{ua(e)}= \opp{e}$
+    \item Recall back-and-forth technique for $transport^{\lam{X}{AX \to BX}}$
+    \item Then: $m' b_1 b_2 \equiv (transport^{\lam{X}{X{\to}X{\to}X}} ua(e) m)b_1 b_2 = {}$\\
+  $tspt^{\lam{X}{X}} ua(e) (m\,(tspt^{\lam{X}{X}}\opp{ua(e)}b_1)(tspt^{\lam{X}{X}}\opp{ua(e)}b_2))$\\
+  ${}= e(m\,(\opp e b_1)\,(\opp e b_2))$ (recall $e:A\to B$ equivalence)
+    \item Algebraic proof of $Assoc(B,m')$ not needed (equal to $a'$)
+
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Equality of semigroups}
+
+    \begin{itemize}[<+->]
+    \item By Thm. 2.7.2: the type $(A,m,a) =_{SG} (B,m',a')$ is equal to type of pairs
+\[\begin{array}{lcl}p_1&:&A=_{\UU}B\\p_2&:&transport^{SGS}p_1\,(m,a) = (m'a') \end{array}\]
+where by univalence $p_1=ua(e)$ for some equivalence $e$ and $p_2=(p_3,p_4)$ is a pair of proofs
+with $p_3$ of type
+\[\depi{y_1,y_2}{B}{(e\,(m\,(\opp e y_1)\,(\opp e y_2))=m'\,y_1\,y_2}\]
+which is equivalent to
+\[\depi{x_1,x_2}{A}{(e\,(m\,x_1\,x_2)=m'\,(e\,x_1)\,(e\,x_2)}\]
+
+    \item ... recovering the notion of \emph{semigroup isomorphism}
+
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Universal properties}
+
+    \begin{itemize}[<+->]
+    \item LEM: $\lam{f}{(pr_1\circ f, pr_2\circ f )}$ is an equivalence
+\[(X\to(A\times B))\to ((X\to A)\times (X\to B))\]
+    \item ... and also for type families (see book) 
+    \item EXC: define an equivalence
+\[((A+ B)\to X)\to ((A\to X)\times (B\to X))\]
+    \item For $A:\UU,~B:\UU,R:A\to B\to\UU$, $\mathsf{ac}$ is an equivalence
+\[\mathsf{ac}:(\depi{x}{A}{\sigm{y}{B}{R\,x\,y}})\to\sigm{f}{A{\to}B}{\depi{x}{A}{R\,x\,(fx)}}\]
+    \item Cartesian closure: $((A\times B)\to C) \simeq (A\to (B\to C))$
+    \item ... and also for type families (see book) 
+    \end{itemize}
+  }
+
+  \subsection{Chapter 3}
+
+ \frame
+  {
+
+    \frametitle{Sets}
+
+    \begin{itemize}[<+->]
+    \item A set is a type in which paths are unique:
+\[isSet(A) \equiv \depi{x,y}{A}{\depi{p,q}{(x=_Ay)}{p=_{x=_Ay}q}}\]
+    \item Examples: $\bfnull,\bfone,\Nat$
+    \item Proofs: trivial,  $\depi{x,y}{\bfone}{(x=_{\bfone}y)\simeq\bfone}$ (picture),
+          and $\depi{x,y}{\Nat}{(x=_{\Nat}y)\simeq code(x,y)}$
+    \item Most type forming operations preserve sets:
+      \begin{itemize}[<+->]
+      \item if $A$ and $B$ are sets, then so are $A\times B$ and $A+B$ 
+      \item if $A$ is a set and $B:A\to\UU$ such that $Bx$ is a set for every $x:A$, 
+            then $\Sigma\,A\,B$ is a set (by `structuralism')
+      \item if $A$ is any type and $B:A\to\UU$ such that $Bx$ is a set for every $x:A$, 
+            then $\Pi\,A\,B$ is a set (using function extensionality twice!)
+      \end{itemize}
+    \item Proof of last: if $f,g: \Pi\,A\,B$,
+          $p,q: f=g$, then by fun.ext.\ $p = funext(happly\,p)$
+          and $q = funext(happly\,q)$. By assumption on $Bx$, 
+          $happly\,p\,x = happly\,q\,x$ for all $x:A$. 
+          Hence, again by fun.ext.\ $happly\,p = happly\,q$, so $p=q$. 
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Sets (ctnd)}
+
+    \begin{itemize}[<+->]
+    \item The universe is not a set: $isSet(\UU)\to\bfnull$
+    \item Proof: we construct by univalence $p:\bftwo=\bftwo$ 
+          with $(p  =_{\bftwo=\bftwo} refl_{\bftwo})\to\bfnull$.
+          Define the equivalence $e: \bftwo\to\bftwo$ 
+          by $e(0)=1$, $e(1)=0$ ($e$ is its own quasi-inverse).
+          If $ua(e)=_{\bftwo=\bftwo} refl_{\bftwo}$, then
+          $\bfnull$ gets inhabited by
+          $e=idtoeqv(ua(e))=idtoeqv\,refl_{\bftwo}=id_{\bftwo}$,          
+    \item Definition of $h$-levels (later also levels $-2,-1$):
+      \begin{itemize}[<+->]   
+      \item $0type(A)\equiv isSet(A) \equiv \depi{x,y}{A}{\depi{p,q}{(x=_Ay)}{p=_{x=_Ay}q}}$
+      \item $1type(A)\equiv \depi{x,y}{A}{isSet(x=_Ay)} \equiv \ldots$
+      \end{itemize}   
+    \item LEM: inhabited $isSet(A)\to 1type(A)$
+    \item Proof on blackboard (uses Lemmas 2.3.4 and 2.11.2)
+    %\item Generally: $(n{+}1)type(A)\simeq \depi{x,y}{A}{(n)type(x=_A y)}$
+    %$isSet(A)\simeq \depi{x,y}{A}{(x=_A y\to Contr(x=_A y))}$
+    %\item Contractible type: $Contr(A)\equiv \sigm{c}{A}{\depi{x}{A}{(c=_A x)}}$
+    \end{itemize}
+  }
+
+ \frame
+  {
+
+    \frametitle{Types vs.\ propositions}
+
+    \begin{itemize}[<+->]
+    \item THM: UA conflicts with for all $A:\UU$, $(\neg \neg A) \to A$
+    \item More precisely:
+      \begin{itemize}[<+->]   
+      \item without UA, $\depi{A}{\UU}{((\neg \neg A) \to A)}$ consistent
+      \item with UA, $\neg\depi{A}{\UU}{((\neg \neg A) \to A)}$ is inhabited
+      \end{itemize}   
+    \item Intuition: under UA, there cannot be a \emph{natural} choice
+          operator selecting an element from every non-empty type
+    \item Proof: assume $f:\depi{A}{\UU}{(((A\to\bfnull)\to\bfnull)\to A)}$.
+          We construct an inhabitant of $\bfnull$. 
+          Take $e: \bftwo\simeq\bftwo$ as above.
+          Use that $f$ acts on $ua(e)$ by 
+          \[apd_f ua(e): (transport^{\lam{A}{(\neg \neg A) \to A}}ua(e)\,(f\bftwo)) = f\bftwo\]
+          Rest on blackboard (use back-and-forth and $(\neg\neg\bftwo)\simeq\bfone$)
+    \item COR: UA conflicts with for all $A:\UU$, $A + (\neg A)$
+    \item Conclusion: we cannot use all types as propositions
+    \end{itemize}
+  }
+
+
+ \frame
+  {
+
+    \frametitle{Mere propositions}
+
+    \begin{itemize}[<+->]
+    \item Wanted: $\VV$, UA consistent with
+          $\depi{A}{\VV}{((\neg \neg A) \to A)}$
+    \item Examples: $\bfnull,\bfone:\VV$, but not $\bftwo:\VV$ (UA: $\simeq$-naturality)
+    \item Mere proposition: $isProp(P)\equiv \depi{x,y}{P}{(x=_P y)}$
+    %\item `Mere': no more than
+    \item Level $0$: $isSet(A)\simeq \depi{x,y}{A}{isProp(x=_A y)}$
+    \item LEM: inhabited $isProp(P)\to P\to(P\simeq\bfone)$
+    \item LEM: $isProp$ is closed under $\times$ (UA not needed)
+    \item LEM: $isProp(P)$ and $P\simeq Q$, then $isProp(Q)$ (UA not needed)
+    \item LEM: with funext, if $A:\UU$ and $B:A\to\UU$ such that 
+          $isProp(Bx)$ for every $x:A$, then $isProp(\depi{x}{A}{Bx})$.
+    \item COR: $P\to Q$ is a mere proposition whenever $Q$ is
+    \item NB: $isProp$ is not closed under $+$, nor $\Sigma$
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{More on Mere propositions}
+
+    \begin{itemize}[<+->]
+    \item LEM: if $P,Q$ are mere propositions with $P\to Q,~Q\to P$, 
+          then $P\simeq Q$.
+    \item LEM: Every mere proposition is a set (cf. Lemma 3.1.8)
+    \item LEM: for every type $A$, $isProp(A)$ and $isSet(A)$ are mere propositions
+    \item Proof: use funext. If $f,g:isProp(A)$, then $fxy,gxy: x=_A y$, hence
+          $fxy=gxy$ since $A$ is a set. Analogously for $isSet(A)$ (use Lemma 3.1.8).
+    \item The HoTT laws of excluded middle and double negation:
+      \begin{itemize}[<+->]   
+      \item $LEM_{-1}\equiv\depi{A}{\UU}{isProp(A)\to(A+ \neg A)}$
+      \item $DNL_{-1}\equiv\depi{A}{\UU}{isProp(A)\to((\neg \neg A) \to A)}$
+      \end{itemize}
+      Both are equivalent, independent, consistent with UA
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Decidability, subtypes and subsets}
+
+    \begin{itemize}[<+->]
+    \item Under $LEM_{-1}$, no need for $+$, nor $\Sigma$, for doing logic
+    \item For $A:\UU$ and $B:A\to\UU$, localized forms of $LEM_{-1}$:
+      \begin{itemize}[<+->]   
+      \item $A$ is \emph{decidable} if $A+ \neg A$
+      \item $B$ is \emph{decidable} if $\depi{x}{A}{(Bx + \neg Bx)}$
+      \item $A$ has \emph{decidable equality} if $\depi{x,y}{A}{((x=_A y) + \neg (x=_A y))}$
+      \end{itemize}
+    \item Example: $LEM_{-1}$ implies that sets have decidable equality
+    \item For $A:\UU$ and $P:A\to\UU$ such that $isProp(Px)$ for all $x:A$,
+          if $(x,p),(x,q):\sigm{x}{A}{Px}$, then $p=q$, and we write:
+          \[\subs{x}{A}{Px} \equiv \sigm{x}{A}{Px}\]
+    \item EXC 3.3: $\sigm{x}{A}{Px}$ is a set if $A$ is a set and $P:A\to\UU$ such that 
+           $isSet(Px)$ for all $x:A$
+    \end{itemize}
+  }
+
+\newcommand{\brck}[1]{\trunc{}{#1}}
+\newcommand{\trunc}[2]{\mathopen{}\left\Vert #2\right\Vert_{#1}\mathclose{}}
+\newcommand{\bproj}[1]{\tproj{}{#1}}
+\newcommand{\tproj}[2]{\mathopen{}\left|#2\right|_{#1}\mathclose{}}
+
+
+\frame
+  {
+
+    \frametitle{Propositional truncation}
+
+    \begin{itemize}[<+->]
+    \item Propositional truncation (or `squash') hides all info about inhabitants beyond their
+          mere existence. 
+    \item NEW: this is a \emph{higher} inductive type (Chapter 6)!
+    \item Formation: $\brck A:\UU$ if $A:\UU$
+    \item Introduction, both for objects and paths: 
+      \begin{itemize}[<+->]   
+      \item $\bproj a  : \brck A$ if $a:A$
+      \item (unnamed path constructor:) $x=_{\brck A} y$ if $x,y  : \brck A$
+      \end{itemize}
+    \item Elimination: defining $f:\brck A \to B$ means
+      \begin{itemize}[<+->]   
+      \item specifing $f \bproj a : B$ for all $a:A$
+      \item making sure $f \bproj a =_{\brck A} f \bproj b$ for all $a,b:A$
+      \end{itemize}
+    \item Only `constant' functions, or better: if $isProp(B)$, any $g:A\to B$
+    defines $f:\brck A \to B$ with $f\bproj a = ga$
+    \item EXC: $isProp(\brck P)$, $isProp(P) \simeq (P\simeq \brck P)$, for all $P:U$
+    \end{itemize}
+  }
+
+\frame
+  {
+
+    \frametitle{Traditional logic, unique choice}
+
+    \begin{itemize}[<+->]
+    \item Under UA: like propositions as types, but with mere propositions
+\[
+\begin{array}{|c|c|c|c|c|c|c|c|} \hline
+     P\iff Q& P\vee Q & \exists (x:A). Px\\\hline
+     P =_{\UU} Q&\brck{P+Q} &\brck{\sigm{x}{A}{Px}}\\\hline 
+\end{array}\]
+    \item $LEM_{-1}$, decidability: mathematical axioms
+    \item LEM (unique choice): if $P:A\to\UU$ such that 
+      \begin{enumerate}[<+->]   
+      \item $Px$ is a mere proposition for all $x:A$
+      \item for each $x:A$ we have $\brck{Px}$ (so, $\depi{x}{A}{\brck{Px}}$ inhabited)
+      \end{enumerate}    
+      Then $\depi{x}{A}{{Px}}$ (proof: $isProp(Px)\to{\brck{Px}}\to Px$)
+    \item Choice can sometimes be refined to unique choice
+    \item Homework: read 3.9 and 3.10
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{The Axiom of Choice (AC)}
+
+    \begin{itemize}[<+->]
+    \item Let $isSet(X)$, and $A:X\to\UU,~P:\depi{x}{X}{(Ax\to\UU)}$ such that
+      \begin{enumerate}[<+->]   
+      \item $Ax$ is a set for all $x:X$
+      \item $Pxa$ is a mere proposition for all $x:X,~a:Ax$
+      \end{enumerate}    
+     Then AC asserts
+\[(\depi{x}{X}{\brck{\sigm{a}{Ax}{Pxa}}})\to\brck{\sigm{f}{(\depi{x}{X}{Ax})}{\depi{x}{X}{Px(fx)}}}\]
+    \item LEM: AC is equivalent to, with $Y:X\to\UU$ such that $Yx$ sets,
+\[(\depi{x}{X}{\brck{Yx}})\to\brck{\depi{x}{X}{Yx}}\]
+    \item Proof: use that $\mathsf{ac}$ is an equivalence (2.15.7) and that $Yx$
+          is equally expressive as $\sigm{a}{Ax}{Pxa}$ (subset!)
+    \item Discussion
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Contractible types}
+
+    \begin{itemize}[<+->]
+    \item Contractible type: inhabited mere proposition
+    \item DEF: $isContr(A) \equiv \sigm{a}{A}{\depi{x}{A}{a=x}}$
+    \item LEM: logical equivalences (Q: why not $\simeq$?)
+          $isContr(A) \iff (A\times isProp(A)) \iff (A\simeq\bfone)$
+    \item LEM: $isProp(isContr(A))$, for all $A$
+    \item Proof: first para in book $+~isProp(\depi{x}{A}{a'=x})$
+    \item $isContr(A)\to isContr(isContr(A))~+$ other closure properties
+    \item $isContr$ not closed under $+$
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Retraction}
+
+    \begin{itemize}[<+->]
+    \item Retraction: $\pm$ half of an equivalence (Q: OK?)
+    \item DEF: $r:A\to B$ \emph{retraction} if there is $s:B\to A$ 
+          (the \emph{section} of $r$) such that $r\circ s \sim id_B$.
+          Then we call $B$ a \emph{retract} of $A$.
+    \item LEM: if $B$ a retract of $A$, then $isContr(A)\to isContr(B)$
+    \item LEM: for all $A:\UU$ and $a:A$, $isContr(\sigm{x}{A}{a=x})$
+    \item LEM: let $P:A\to\UU$ be a type family
+      \begin{enumerate}[<+->]   
+      \item if each $Px$ is contractible, then $A\simeq \sigm{x}{A}{{Px}}$
+      \item if $A$ is contractible with center $a:A$, then $Pa\simeq \sigm{x}{A}{{Px}}$
+      \end{enumerate}   
+    \item LEM: $isProp(A) \simeq \depi{x,y}{A}{isContr(x=_A y})$ 
+    \end{itemize}
+  }
+
+
+  \subsection{Chapter 4}
+
+\frame
+  {
+    \frametitle{Equivalences}
+
+    \begin{itemize}[<+->]
+    \item Wanted: $XYZequiv(f) \lra qinv(f)$ and $isProp(XYZequiv(f))$
+    \item Q: desirable or \emph{really needed} that $isProp(XYZequiv(f))$?
+    \item LEM: $qinv(f) \to (qinv(f) \simeq \depi{x}{A}{x=_A x}))$ for all $f:A\to B$
+    \item Book: for some $A:\UU$, $ \depi{x}{A}{x=_A x}$ not contractible
+    \item Some information is missing from $qinv(f)$ ...
+    \item Three alternative (equivalent) definitions:
+      \begin{enumerate}[<+->]
+      \item $ishae(f)$, adds coherence info to  $qinv(f)$ 
+      \item $biinv(f)$ (${}\equiv isequiv(f)$, splits quasi-inverse in two
+      \item $isContr(f)$, imposes contractibility of fibers
+      \end{enumerate}    
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{Half Adjoint Equivalences}
+
+    \begin{itemize}[<+->]
+    \item DEF: for $f:A\to B$, the type $ishae(f)$ is 
+          $$\!\!\!\!\!\!\sigm{g}{B\to A}
+             {\sigm{\alpha}{(g\circ f \sim id_A)}
+              {\sigm{\beta}{(f\circ g \sim id_B)}
+               {\depi{x}{A}{f(\alpha x) = \beta(fx)}}}}$$
+    \item Diff with $qinv(f)$:    $\bfone$ vs.\ last $\Pi$-type 
+    \item Logically equivalent:  last $\Pi$-type $\depi{x}{A}{g(\beta x) = \alpha(gx)}$
+    \item LEM: for any $f:A\to B$, $qinv(f) \to ishae(f)$
+    \item Proof: take `the' $g$ and $\alpha$ from $qinv(f)$. Define
+    \[\beta' b \equiv \beta\opp {(f (g b))}\ct f(\alpha (g b)) \ct (\beta b)\]
+    Find $(\tau a) : (f(\alpha a) = \beta'(fa))$ (see book)
+    \item DEF: The \emph{fiber} of $f:A\to B$ over $b:B$ is 
+    \[fib_f (b) \equiv \sigm{x}{A}{(f x = b)}\]
+    \item LEM: if $ishae(f)$, then any $fib_f (b)$ is contractible
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{Bi-invertible maps}
+
+    \begin{itemize}[<+->]
+    \item DEF: for $f:A\to B$, define:
+      \begin{enumerate}[<+->]
+      \item $linv(f) \equiv \sigm{g}{B\to A}{(g\circ f \sim id_A)}$ 
+      \item $rinv(f) \equiv \sigm{g}{B\to A}{(f\circ g \sim id_B)}$
+      \item $biinv(f) \equiv (linv(f) \times rinv(f))$  (that is, $isequiv(f)$) 
+      \end{enumerate}    
+    \item LEM: if $qinv(f)$, then $linv(f)$ and $rinv(f)$ are contractible
+    \item Proof: $\sigm{g}{B\to A}{(g\circ f = id_A)}$ is a fiber and $qinv(\_\circ f)$
+    \item DEF: for $f:A\to B$,  $(g,\alpha):linv(f)$,  $(g,\beta):rinv(f)$ define:
+      \begin{enumerate}[<+->]
+      \item $lcoh(f,g,\alpha) \equiv \sigm{\beta}{(f\circ g \sim id_B)}{\depi{y}{B}{(g(\beta y) = \alpha(gy))}}$ 
+      \item $rcoh(f,g,\beta) \equiv \sigm{\alpha}{(g\circ f \sim id_A)}{\depi{x}{A}{(f(\alpha x) = \beta(fx))}}$     
+      \end{enumerate}    
+    \item Intuition: $lcoh(f,g,\alpha)$ expresses that `$g$ is also right inverse, plus coherence'
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{A Mere Proposition}
+
+    \begin{itemize}[<+->]
+    \item LEM: for all $f:A\to B$,  $(g,\alpha):linv(f)$,  $(g,\beta):rinv(f)$
+      \begin{enumerate}[<+->]
+      \item $lcoh(f,g,\alpha) \equiv {\depi{y}{B}{(f(g y),\alpha(gy)) =_{fib_g(gy)} (y,refl_{gy}))}}$ 
+      \item $rcoh(f,g,\beta) \equiv {\depi{x}{A}{(g(fx), \beta(fx)) =_{fib_f(fx)} (x,refl_{fx}))}}$     
+      \end{enumerate}    
+    \item LEM: if $ishae(f)$, then $lcoh(f,g,\alpha)$ and $rcoh(f,g,\beta)$ are contractible
+    for any $(g,\alpha):linv(f)$,  $(g,\beta):rinv(f)$
+    \item LEM: $ishae(f)$ is a mere proposition, for any $f:A\to B$
+    \item Proof: $\sigm{(g,\beta)}{rinv(f)}{rcoh(f,g,\beta)}$ .... is contractible
+    \item LEM: $biinv(f)$ is a mere proposition for any $f:A\to B$, and $biinv(f)\simeq ishae(f)$
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{Contractible fibers}
+
+    \begin{itemize}[<+->]
+    \item DEF: for $f:A\to B$,  we define:
+    \[isContr(f) \equiv \depi{y}{B}{isContr(fib_f(y))}\]    
+    \item LEM: $isContr(f) \to ishae(f)$, for any $f:A\to B$
+    \item Proof: blackboard, or \emph{latest pdf} of book
+    \item REM: converse has been shown already
+    \item LEM: $isContr(f)$ is a mere proposition for any $f:A\to B$, and $isContr(f)\simeq ishae(f)$
+    \item LEM: if $f:A\to B$ such that $B\to isequiv(f)$, then $isequiv(f)$
+    \item THM (summing up): $biinv(f)\simeq ishae(f)\simeq isContr(f)$
+    \end{itemize}
+  }
+  
+  \frame
+  {
+    \frametitle{Bijections, surjections and embeddings}
+
+    \begin{itemize}[<+->]
+    \item DEF: for \emph{sets} $A,B:\UU$,  we call an equivalence a \emph{bijection}
+    \item DEF: for  \emph{types} $A,B:\UU$, $f:A\to B$,  we define:
+      \begin{enumerate}[<+->]
+      \item $f$ is a \emph{surjection} if for all $b:B$ we have $\brck {fib_f(b)}$ (inhabited)
+      \item $f$ is a \emph{split surjection} if $\depi{b}{B}{\sigm{a}{A}{(f(a)=b)}}$
+      \item $f$ is an \emph{embedding} if for all $x,y:A$ we have $isequiv(ap_f)$     
+      \item $f$ is an \emph{injection} if  $f$ an embedding and $A,B$ sets
+      \end{enumerate}  
+    \item REM: last clause iff $\depi{x,y}{A}{(fx=_B fy) \to (x=_A y)}$
+    \item THM: $isequiv(f)$ iff $(isEmbedding(f)$ and $isSurjection(f))$
+    \item COR: $isequiv(f) \simeq (isEmbedding(f) \times isSurjection(f))$
+
+    \end{itemize}
+  }
+  
+  \frame
+  {
+    \frametitle{Fiberwise equivalences}
+
+    \begin{itemize}[<+->]
+    \item DEF: for $P,Q: A\to\UU$, we call $f:\depi{x}{A}{(Px \to Qx)}$  
+    a \emph{fiberwise equivalence} if $fx: (Px \simeq Qx)$ for all $x:A$
+    \item DEF: for $P,Q: A\to\UU$, $f:\depi{x}{A}{(Px \to Qx)}$, we define:
+\[\!\!\!\!\!\!\!total(f) \equiv \lam{w}{(pr_1 w, f(pr_1 w, pr_2 w))}:(\sigm{x}{A}{Px})\to(\sigm{x}{A}{Qx})\]
+    \item THM: for $f:\depi{x}{A}{(Px \to Qx)}$, $x:A$ and $v:Qx$
+    \[fib_{total(f)}(x,v) \simeq fib_{fx}(v)\]    
+    \item THM: $f$ is a fiberwise equivalence iff  $total(f)$ is an equivalence
+    \end{itemize}
+  } 
+
+    \frame
+  {
+    \frametitle{Univalence implies weak extensionality}
+
+    \begin{itemize}[<+->]
+    \item DEF: the \emph{weak extensionality principle} is: for all $P: A\to\UU$
+\[(\depi{x}{A}{isContr(Px)})\to isContr(\depi{x}{A}{Px})\]
+    \item Intuition: if co-domain singleton, there is only one function    
+    \item LEM: if $pr_1:(\sigm{x}{A}{Px}) \to A$ and $a:A$ , then $fib_{pr_1}(a)\simeq Pa$ 
+    \item LEM: if UA and $A,B,X:\UU$, $e:A\simeq B$, then $([pr_1{\circ}] e\circ\_)$
+    defines an equivalence $(X\to A) \to (X\to B)$    
+    \item THM: if UA and $P:A\to\UU$ is a family of contractible types, then 
+    $\depi{x}{A}{Px}$ is (a retract of $fib_{\alpha}(id_A)$ and so) contractible
+    \item Proof: assume UA and a family of contractible types $P:A\to\UU$. 
+             Then $pr_1:(\sigm{x}{A}{Px}) \to A$ is an equivalence,
+             defining an equivalence $\alpha: (A\to\sigm{x}{A}{Px}) \to (A\to A)$.
+             $fib_{\alpha}(id_A)=\sigm{f}{(A{\to}\sigm{x}{A}{Px})}{(pr_1{\circ} f = id_A)}$, retract ...  
+\end{itemize}
+  } 
+ 
+     \frame
+  {
+    \frametitle{Weak extensionality implies extensionality}
+
+    \begin{itemize}[<+->]
+    \item Recall: $happly\,f\,g: (f=g) \to (\depi{x}{A}{fx = _{Px} gx})$ 
+    %(abbr. )
+    \item Recall:  $funext\,f\,g: (\depi{x}{A}{fx = _{Px} gx}) \to (f=g)$   
+    \item To prove (where $\Pi\,A\,P$ abbreviates $\depi{x}{A}{Px}$):
+\[\depi{A}{U}{\depi{P}{(A{\to}\UU)}{\depi{f,g}{(\Pi\,A\,P)}{isequiv(happly\,f\,g)}}})\]
+    \item Proof:  we show that $total(happly\,f)$ is an equivalence
+\[(\sigm{g}{(\Pi\,A\,P)}{(f=g)}) \to (\sigm{g}{(\Pi\,A\,P)}{\depi{x}{A}{fx = _{Px} gx})})\]
+Lhs contractible, it suffices that rhs is contractible too. Rhs is retract of 
+$\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionality.
+(Retraction uses $=_{\eta}$, not extensionality.)
+    \end{itemize}
+
+
+  } 
+  
+  \subsection{Chapter 5}
+
+\frame
+  {
+    \frametitle{Inductive Types}
+
+    \begin{itemize}[<+->]
+    \item Inductive type: type of objects that are freely generated by \emph{constructors} 
+    (roughly, functions with the inductive type as co-domain), plus an elimination principle (induction)
+    \item Examples:
+      \begin{enumerate}[<+->]
+      \item $\bfnull$ without constructors; $ind_{\bfnull}\,C : \depi{x}{\bfnull}{Cx}$
+      \item $\bfone$ with constructor $\star: \bfone$; $ind_{\bfone}\,C : C(\star) \to \depi{x}{\bfone}{Cx}$
+      \item $\bftwo$ with constructors $0_\bfnull,1_\bfone : \bftwo$; 
+                $ind_{\bftwo}\,C : C(0){\to}C(1){\to}\depi{x}{\bftwo}{Cx}$ 
+      \item $\Nat$ with constructors $0:\Nat$ and $S : \Nat\to\Nat$; usual induction
+      \end{enumerate}
+      \item Recursion: non-dependent elimination ($C=\lamt{x}{{i}\!\!T}{A}$)    
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{Inductive Types (ctnd)}
+
+    \begin{itemize}[<+->]
+      \item More examples:
+      \begin{enumerate}[<+->]
+        \item $A\times B$ with constructor $(\_,\_):A\to B\to {A}\times{B}$; induction
+        $ind_{A\times B}\,C : (\depi{a}{A}{\depi{b}{B}{C(a,b)}}) \to \depi{p}{A{\times}B}{Cp}$ 
+        \item ${A}+{B}$ with constructors $inl: A \to {A}+{B}$,$inr: B\to {A}+{B}$;\\
+        $ind_{A+B}\,C : (\depi{a}{A}{C(inl\,a)}){\to}(\depi{b}{B}{C(inr\,b)}){\to}\depi{s}{A{+}B}{Cs} $
+        \item $List\,A$ with constructors $nil{:}List\,A$, $cons{:}A{\to}(List\,A){\to}(List\,A)$;
+        $ind_{List A}\,C{:}C\,nil \to \depi{a}{A}{\depi{\ell}{List\,A}{C(cons\,a\,\ell)}}{\to}\depi{\ell}{List\,A}{C\,\ell}$ 
+      \end{enumerate}
+      \item Uniqueness principle: under $funext$, induction and recursion yield
+      unique functions in $\depi{x}{{i}\!\!T}{Cx}$
+      \item Example of uniqueness in case of $N$ on blackboard (recall
+        $ind_N C e_0 e_S 0 =_\iota e_0, ~ind_N C e_0 e_S (S n) =_\iota e_S n (ind_N C e_0 e_S n)$)   
+    \end{itemize}
+  }
+
+
+\frame
+  {
+    \frametitle{Uniqueness of Inductive Types}
+
+    \begin{itemize}[<+->]
+    \item Y.a.\ inductive type: $\Nat'$ with constructors $0':\Nat'$, $S' : \Nat'\to\Nat'$
+    \item Looks familiar ..., but this is not $\Nat$
+    \item Induction very similar, with computation rules
+      $ind\, C\, e_0\, e_S\, 0' =_\iota e_0, ~ind\,C\,e_0\,e_S\,(S' n) =_\iota e_S\,n\,(ind\,C\,e_0\,e_S\,n)$
+      where  $n:\Nat',~e_0 : C\,0', ~e_S : \depi{n}{\Nat'}{({Cn}\to{C(S'n)})}$
+    \item Define $f \equiv rec_{\Nat}\,\Nat'\,0'\,(\lamt{n}{\Nat}{S'}): \Nat\to\Nat'$, 
+     $g \equiv rec_{\Nat'}\,\Nat\,0\,(\lamt{n}{\Nat'}{S}): \Nat'\to\Nat$; prove $\Nat\simeq\Nat'$.
+    \item Discuss options to define $d'\equiv double':\Nat'\to\Nat'$ and prove 
+    \[\depi{n}{\Nat'}{(double'(S' n) = S'(S' (double' n)))}\]
+    \item HoTT: transport along $\Nat=\Nat'$, $(\Nat,S,d)=(\Nat',S',d')$
+%$dbl' \equiv rec \Nat' 0' \lam{n,m}{\Nat'}{S'(S'm)}$,
+    \end{itemize}
+  }
+
+
+\frame
+  {
+    \frametitle{W-Types}
+
+    \begin{itemize}[<+->]
+    \item Purpose: encoding inductive types \emph{uniformly}
+    \item Formation: if $A:\UU$ and $B:A\to\UU$, then $W\,A\,B :\UU$
+    \item Intuition: the type of $A$-labelled, $B(a)$-branching wf trees
+    \item One constructor: $sup:\depi{a}{A}{(Ba\to W\,A\,B)\to W\,A\,B}$
+    \item Examples:
+      \begin{itemize}[<+->]
+      \item $N^W \equiv W\,\bftwo\,(rec_{\bftwo}\,\UU\,\bfnull\,\bfone)$ (why?)      
+      ̈́\item $0^W \equiv sup\,0_{\bftwo}\,(rec_{\bfnull}\,N^W)$, 
+               $S^W \equiv \lamt{n}{N^W}{sup\,1_{\bftwo}\,(\lamt{y}{\bfone}{n})}$ (!)
+      \item $List\,A \equiv W\,(\bfone+A)\,(rec_{(\bfone+A)}\,\UU\,\bfnull\,\lam{a}{\bfone})$ (why?)
+      \item $nil \equiv sup\,(inl\star)\,(rec_{\bfnull}\,(List\,A))$, $cons$ on blackboard
+      \end{itemize}    
+    \item Exercise: find the $W$-type for labeled binary trees
+    \item Exercise 5.7: $(C\to\bfnull)\to C$ is not a valid constructor type
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{Induction in W-Types}
+
+    \begin{itemize}[<+->]
+    \item Recall: $sup:\depi{a}{A}{((Ba\to W\,A\,B)\to W\,A\,B)}$
+    \item Intuition for induction: to prove $Px$ for all $x:W\,A\,B$ it suffices
+             to show that $P$ is closed under $sup$. 
+             That is, for all $a:A$ and $f:Ba\to W\,A\,B$, 
+             if (IH) for all $b:Ba$ we have $P(f\,b)$, 
+             then $P(sup\,a\,f)$.
+    \item Intuition for recursion: to define $h: W\,A\,B \to C$ 
+             it suffices to define $h\,(sup\,a\,f)$, 
+             for all $a:A$ and $f:Ba \to W\,A\,B$,
+             using function values $h\,(f\,b)$ for $b:Ba$
+             (and possibly $a$, and $f$ as predecesor).
+    \item Examples: $dbl^W \equiv rec_{N^W}\,N^W\,e$, with
+             $e\,0 \equiv \lamt{{f,g}}{\bfnull{\to} N^W}{0^W}$   
+             and $e\,1 \equiv \lamt{{f,g}}{\bfone{\to} N^W}{(S^W(S^W (g\star) ))}$
+    \item Exercise: define a predecessor $N^W \to N^W$         
+    \end{itemize}
+  }      
+ 
+ 
+ \frame
+  {
+    \frametitle{Homotopy-initial algebras}
+
+    \begin{itemize}[<+->]
+    \item $\Nat$-algebra: a type $C$ with objects $c_0:C$ and $c_S: C\to C$
+    \item Formal definition: a $\Sigma$-type $\Nat Alg$ (on blackboard)
+    \item $\Nat$-homomorphism between $\Nat$-algebras $(C,c_0,c_S),(D,d_0,d_S)$
+    \item Formal definition: an even bigger $\Sigma$-type $\Nat Hom(\_,\_)$
+    \item $\Nat$-algebras thus form a category
+    \item H-initial $\Nat$-algebra $I$: 
+    \[isHinit_{\Nat}(I) \equiv \depi{C}{\Nat Alg}{isContr(\Nat Hom(I,C))}\]
+    \item THM: any two h-initial $\Nat$-algebras are equal
+    \item THM: the $\Nat$-algebra $(\Nat,0,S)$ is h-initial
+    \item THM: any W-algebra $(W\,A\,B,sup)$ is h-initial
+    \item We skip 5.5--8
+    \end{itemize}
+  }      
+
+    \subsection{Chapter 6}
+
+%%% Circles and spheres
+\newcommand{\Sn}{\mathbb{S}}
+\newcommand{\base}{\mathsf{base}}
+\newcommand{\lloop}{\mathsf{loop}}
+\newcommand{\surf}{\mathsf{surf}}
+
+\frame
+  {
+    \frametitle{Higher Inductive Types}
+
+    \begin{itemize}[<+->]
+    \item Inductive type: constructors freely generate the objects
+    \item Higher inductive type: some constructors generate objects of this type, 
+             called \emph{points}, but others may generate \emph{paths},
+             or even \emph{higher paths}.
+    \item Key Q: what is the equivalent of `freely'? Induction?
+    \item Example: the circle $\Sn^1$ (cf. $\Nat,\bftwo$):
+\begin{itemize}
+\item a point constructor $\mathsf{base}:\Sn^1$
+\item a path constructor $\lloop : {\base =_{\Sn^1} \base}$.
+\end{itemize}
+      \item Generation: takes the relevant operations into account
+ \begin{itemize}
+\item On the point level: none (the type has no apriori structure)
+\item On the path level: groupoid structure ($\ct, refl, {}^{-1}$)
+\item Not: $\lloop = refl_ {\base}$, $\lloop\ct\lloop = refl_ {\base}$
+\end{itemize}
+    \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{Higher Inductive Types}
+
+    \begin{itemize}[<+->]
+    \item Example: the circle $\Sn^1$:
+\begin{itemize}
+\item a point constructor $\base :\Sn^1$
+\item a path constructor $\lloop : {\base =_{\Sn^1} \base}$.
+\end{itemize}
+    \item What is  $\base =_{\Sn^1} \base$? (should be $\Int$)
+    \item Later: a path constructor $merid: A\to (N =_{Susp(A)} S)$ generates higher paths
+             in $Susp(A)$ from paths in $A$   
+    \item Example: the 2-dimensional sphere $\Sn^2$:
+\begin{itemize}
+\item a point constructor $\base :\Sn^2$
+\item a 2-path constructor $\surf : refl_\base =_{\base=\base} refl_\base$.
+\end{itemize}
+    \item We have $\surf\neq refl_{refl_\base}$. What is  $\base =_{\Sn^2} \base$?
+             Book:  there is an unexpected 3-path, cf.\ the 
+             \href{http://en.wikipedia.org/wiki/Hopf_fibration}{\color{red}Hopf fibration}
+    \end{itemize}
+  }
+
+ \frame
+  {
+    \frametitle{Induction in HITs}
+
+    \begin{itemize}[<+->]
+    \item Induction in $\Nat$:  to prove $\depi{x}{\Nat}{Px}$, it suffices
+    to have $base$ in the fiber above $0$, and $step$ `acting on the fibers above $S$'.
+    \item By analogy, in $\Sn^1$:  to prove $\depi{x}{\Sn^1}{Px}$, it suffices
+    to have $b$ in the fiber above $\base$, and $\ell$ `acting on the fiber(s) above $\lloop$'.   
+    \item Want means `fiber(s) above $\lloop: \base = \base$'?
+    \item {\bf Not}: a path $b=b$ in the fiber above $P(\base)$  (cf.\ $refl_\base$)
+    \item {\bf But}: transport of $b$ along $\lloop$ plus a path $\lloop_*(b)=b$
+    \item Recall transport $Px \to Py$, $P(\base)\to P(\base)$
+    \item Example: torus as fibration $P\to\Sn^1$, Fig.\ 6.1,2
+    \item Induction: $b: P(\base)$ and $\ell: b =^P_\lloop b$ define $f:\depi{x}{\Sn^1}{Px}$
+             with $f(base) =_\iota b$ and $apd_f(\lloop) = \ell$ (propositionally!)
+    \item The last equality: a pragmatic choice (!)
+    \end{itemize}
+  }
+   
+  \frame
+  {
+    \frametitle{Recursion in HITs}
+
+    \begin{itemize}[<+->]
+%    \item Induction: $b: P(\base)$ and $\ell: b =^P_\lloop b$ define $f:\depi{x}{\Sn^1}{Px}$
+%             with $f(base) =_\iota b$ and $apd_f(\lloop) = \ell$
+    \item Recursion: if ${B}:\UU$, % ($P$ constant) 
+    then $b:B$ and $\ell: (b =^P_\lloop b)$ define $f:{\Sn^1}\to{B}$
+             with $f(base) =_\iota b$ and $apd_f(\lloop) = \ell$
+    \item Recall the following transport lemmas, with 
+    $P:A\to\UU,~f:A\to B,~x,y:A,~p : x=_A y$:
+    \begin{itemize}
+\item $f(p)\equiv ap_f p : fx =_B fy$  (Lem.\ 2.2.1)
+\item $p_* \equiv transport^P p : Px \to Py$  (Lem.\ 2.3.1)
+\item if $g:\depi{x}{A}{Px}$, then $apd_g p : p_*(gx) =_{Py} gy$  (Lem.\ 2.3.4)
+\item if $P\equiv\lamt{x}{A}{B},~{b:B}$, then $tpc^B_p b : {(p_* b = b)}$ (Lem.\ 2.3.5)
+\item if $P\equiv\lamt{x}{A}{B}$, then $tpc^B_p (fx) \ct ap_f p = apd_f p$ (Lem.\ 2.3.8)
+\end{itemize}
+    \item LEM: $a:A$ and $p: a =_A a$ define a \emph{unique} (!) $f: \Sn^1 \to A$ 
+             with $f(\base) =_\iota a$ and $ap_f(\lloop)= p$ %(use Lemma 2.3.8)
+    \item COR: $(\Sn^1 \to A) \simeq \sigm{x}{A}{(x =_A x)}$ (univ.\ prop.\ of the circle)
+    \end{itemize}
+  }
+   
+ \frame
+  {
+    \frametitle{The Interval}
+    
+\begin{itemize}    
+    \item The \emph{interval} $I$ is the HIT generated by:
+\begin{itemize}
+\item a point constructor $0_I :I$
+\item a point constructor $1_I :I$
+\item a path constructor $seg : 0_I =_{I} 1_I$.
+\end{itemize}
+    \item Recursion: the following data defines a unique $f:I\to B$
+\begin{itemize}
+\item points $b_0 :B$, $b_1 :B$, a path $s : b_0 =_{B} b_1$
+\end{itemize}
+    \item Induction: the following data defines a unique $f:\depi{x}{I}{Px}$
+\begin{itemize}
+\item points $b_0 : P0_I$, $b_1 : P1_I$, a path $s : b_0 =^P_{seg} b_1$
+\end{itemize}
+    \item $I$ is contractible; $I$ gives function extensionality by magic (!) 
+    \end{itemize}
+  }
+  
+ \frame
+  {
+    \frametitle{Properties of the Interval}
+    
+\begin{itemize}    
+    \item LEM: the interval $I$ is contractible.
+    \item Proof. Take $1_I$ as the center. By induction we prove $\depi{x}{I}{Px}$
+    for $Px \equiv (x =_I 1_I)$. Take $seg : P\,0_I$ and $refl_{1_I} : P\,1_I$.
+    We also need an inhabitant of $seg =^P_{seg} refl_{1_I}$. 
+    The latter type is $seg_*(seg) = refl_{1_I} $.
+    By Lemma~2.11.2 we have  $seg_*(seg) = seg^{-1}\ct seg$ (picture) and 
+    by Lemma~2.1.4 $refl_{1_I}  = seg^{-1}\ct seg$.    
+    \item LEM: the interval $I$ gives function extensionality (!)
+    \item Proof. Let $f,g: A\to B$ and $p:\depi{x}{A}{fx =_B gx}$. For every $x:A$,
+    define $\tilde{p}_x : I \to B$ by $\tilde{p}_x\,0_I \equiv fx$, 
+    $\tilde{p}_x\,1_I \equiv gx$, $\tilde{p}_x(seg) = p$. 
+    Define $q: I \to (A\to B)$ by $q\,i=\lamt{x}{A}{(\tilde{p}_x\,i)}$.
+    Then $q\,0_I =_\eta f$ and  $q\,1_I =_\eta g$ and so $q(seg): f=_{A\to B}g$.
+ \end{itemize}
+  }
+  
+                     
+  \frame
+  {
+    \frametitle{More on the Circle}
+    
+\begin{itemize}    
+    \item LEM: the circle $\Sn^1$ is non-trivial: $\lloop \neq refl_\base$.
+    \item Proof. If $\lloop = refl_\base$, then define for any $x:A$ and $p: x=x$
+    a function $f:\Sn^1\to A$ by $f(\base)\equiv x$ and $f(\lloop) = p$.
+    By functoriality of $ap_f$ we get $p=refl_x$. 
+    So $\depi{x}{A}{\depi{p}{(x=x)}{(p=refl_x)}}$,
+    which implies that $A$ is a set (by path induction).
+    Contradiction for $A=\UU$, Example~3.1.9.
+    \item LEM: the type $\depi{x}{\Sn^1}{(x=x)}$ has an element 
+    that is not equal to $\lamt{x}{\Sn^1}{refl_x}$.
+    \item Proof. Define $f:\depi{x}{\Sn^1}{(x=x)}$ by induction
+    taking $f(\base)\equiv \lloop$ and $f(\lloop): \lloop_*(\lloop) = \lloop$.
+    By Lemma~2.11.2, with type family $\lamt{x}{\Sn^1}{(x=x)}$,
+    $\lloop_*(\lloop)= \lloop^{-1}\ct \lloop\ct \lloop$,
+    so $f(\lloop) = refl_\lloop$ is OK.
+    By  $happly$, the previous lemma implies $f\neq\lamt{x}{\Sn^1}{refl_x}$.
+    \item COR: if $\Sn^1= \UU_n$, then $\UU_n$ is not a 1-type (?)
+    
+ \end{itemize}
+  }
+
+\frame
+  {
+    \frametitle{The 2-Sphere}
+    
+\begin{itemize}    
+    \item Recall: the 2-dimensional sphere $\Sn^2$:
+\begin{itemize}
+\item a point constructor $\base :\Sn^2$
+\item a 2-path constructor $\surf : refl_\base =_{\base=\base} refl_\base$.
+\end{itemize}
+    \item Recursion: the following data defines a unique $f:\Sn^2 \to B$
+\begin{itemize}
+\item a point $b :B$, a path $s : refl_b=_{b=_B b} refl_b$
+\item we get $f(\base) \equiv b$, and $apap_f(\surf) = s$ (!)
+\end{itemize}
+    \item Induction: the following data defines a unique $f:\depi{x}{\Sn^2}{Px}$
+\begin{itemize}
+\item a point $b :P\,\base$, a path $s : refl_b=^P_\surf refl_b$ ...
+\item ... and this gets complicated with $trtr$ along a 2-path ...
+\end{itemize}
+   
+ \end{itemize}
+  }
+ 
+ 
+   \frame
+  {
+    \frametitle{Suspensions}
+    
+\begin{itemize}    
+    \item  For any $A:\UU$  we define a HIT $Susp(A)$ by :
+\begin{itemize}
+\item two point constructors $N,S: Susp(A)$
+\item a path constructor $merid: A\to (N =_{Susp(A)} S)$
+\end{itemize}
+    \item NB: the path constructor generates higher paths in $Susp(A)$
+    \item Recursion: the following data defines a unique $f:Susp(A) \to B$
+\begin{itemize}
+\item points $n,s :B$, a path function $m:  A\to n =_B s$
+\end{itemize}
+    \item Induction: the following data defines a unique $f:\depi{x}{Susp(A)}{Px}$
+\begin{itemize}
+\item points $n :P(N)$, $s :P(S)$, and $m: \depi{a}{A}{(n =^P_{merid(a)} s)}$
+\end{itemize}
+    \item LEM: $Susp(\bfnull) \simeq \bftwo$, $Susp(\bftwo) \simeq \Sn^1$ , $\Sn^{n+1}\simeq Susp(\Sn^n)$
+    \item Proofs: easy, medium (uses 2.11.3), difficult
+    \item LEM 2.11.3 implies: $tr^{\lam{x}{(hx = x)}}pq = h(p^{-1})\ct q \ct p$ 
+ \end{itemize}
+  }
+  
+   \frame
+  {
+    \frametitle{The torus}
+    
+    \begin{itemize}    
+    \item  The \emph{torus} is the HIT $T^2$ defined by :
+\begin{itemize}
+\item a point $b:T^2$
+\item two paths $p,q: b=b$
+\item a 2-path $t: p \ct q = q \ct p$
+\end{itemize}
+    \item Intuition:  put $r=q$ and $s=r$ in
+\newarrow{Double} =====    
+    \begin{diagram}
+a& \rDouble^p & b    \\
+\dDouble^r    &   \Downarrow t   & \dDouble_ q \\
+c & \rDouble_s &  d
+\end{diagram}
+
+    \item Very tricky induction principle (because of the 2-path)
+    \item LEM: $T^2 \simeq \Sn^1 \times \Sn^1$
+     \end{itemize}
+  }
+
+
+ \frame
+  {
+    \frametitle{Truncation}
+    
+\begin{itemize}    
+    \item For every $A:\UU$ we define the HIT $\brck A:\UU$ by:
+      \begin{itemize}[<+->]   
+      \item a function $\bproj \_  :  A \to \brck A$
+      \item a path function $path: \depi{x,y}{\brck A}{(x=_{\brck A} y)}$
+      \end{itemize}
+    \item Recursion: the following data defines a function $f:\brck A \to B$
+    satisfying $f \bproj a \equiv g a$ and $ap_f(path(\bproj a,\bproj a')) = p(a,a')$:
+      \begin{itemize}[<+->]   
+      \item a function  $g:A{\to}B$ and a path function  $p: \depi{x,y}{B}{(x=_B y)}$
+      \end{itemize}
+ \item LEM: $\brck \bftwo$ gives function extensionality
+ \item Proof: let $f,g:A{\to}B$ and $p: f \sim g$. Define $p_x: \bftwo\to\sigm{y}{B}{fx =_B y}$.
+ Note that $\sigm{y}{B}{fx =_B y}$ is contractible. etc.
+ \end{itemize}
+  }
+
+    \subsection{Chapter 7}
+
+ \frame
+  {
+    \frametitle{Homotopy $n$-levels}
+    
+\begin{itemize} 
+    \item Intuition: no interesting homotopy above dimension $n$
+    \item Definition of homotopy $n$-levels:
+      \begin{itemize}[<+->] 
+      \item $is(-2)type(A)\equiv isContr(A)$\quad(equivalent $A \simeq \bfone$)
+      \item $is(-1)type(A)\equiv \depi{x,y}{A}{is(-2)type(x=_Ay)}$\quad  ($isProp(A)$)        
+      \item $is(0)type(A)\equiv \depi{x,y}{A}{is(-1)type(x=_Ay)}$\quad   ($isSet(A)$)
+      \item $is(n+1)type(A)\equiv \depi{x,y}{A}{is(n)type(x=_Ay)}$ ($n\geq-2$)
+      \end{itemize}
+    \item Idea: understanding a space through its (higher) path spaces  
+    \item Later: $n$-truncation, trivializing homotopy above dimension $n$
+    \item Later: $n$-connected, that is, $n$-truncation is contractible, means
+             no interesting homotopy in or below dimension $n$
+    \item $\Sn^1$ is not an $0$-type, $\Sn^{n+1}$ is not an $n$-type
+    \item CONJ: $\UU$ is not an $n$-type for any $n$
+\end{itemize}
+  }
+  
+ \frame
+  {
+    \frametitle{Closure properties of homotopy $n$-levels}
+    
+\begin{itemize} 
+    \item LEM: if $p:X\to Y$ a retraction and $X$ is an $n$-type, then $Y$ is  an $n$-type ($n\geq-2$)
+    \item Proof: induction on $n\geq-2$. Base case easy. Assume OK for $n$ and let $s:Y\to X$
+              with homotopy $\epsilon: p\circ s \sim 1$. Assume $\depi{x,x'}{X}{is(n)type(x=_X x')}$,
+              to prove ${is(n)type(y=_Y y')}$ for all ${y,y'}:{Y}$. Let $y,y':Y$, then $sy =_X sy'$ is an $n$-type.
+              By IH it suffices that $y=_Y y'$ is a retract of $sy =_X sy'$. Take $ap_s$ and
+              $t(q)\equiv \epsilon_y^{-1}\ct p(q)\ct \epsilon_{y'}$ and use naturality of $\epsilon$ (picture).
+    \item COR: if $X\simeq Y$ and $X$ is an $n$-type, then so is $Y$ ($n\geq-2$)   
+    \item LEM:  if $X$ is an $n$-type, then $X$ is also an $(n+1)$-type ($n\geq-2$).
+              So, the levels are cumulative. 
+    \item Proof: by induction on $n\geq-2$
+\end{itemize}
+  }
+  
+   \frame
+  {
+    \frametitle{More closure properties of homotopy $n$-levels}
+    
+\begin{itemize} 
+    \item LEM: if $f:X\to Y$ an embedding and $Y$ is an $n$-type, then so is $X$ ($n\geq-1$)
+    \item Proof: $x=_X x' \simeq fx=_Y fx'$ for embedding $f$. NB $f:\bfnull\to\bfone$
+    \item LEM:  for $A:\UU$, $B:A\to\UU$, if $Ba$ is an $n$-type for every $a:A$, then $\Pi\,A\,B$ is an $n$-type ($n\geq-2$)
+    \item LEM:  for $A:\UU$, $B:A\to\UU$, if $A$ is an  $n$-type and $Ba$ is an $n$-type for every $a:A$, then $\Sigma\,A\,B$ is an $n$-type, for all $n\geq-2$
+    \item LEM:  for $A:\UU$, $is(n)type(A)$ is a mere proposition ($n\geq-2$)
+    \item DEF: $n\mbox{-}type_\UU = \sigm{X}{\UU}{is(n)type(X)}$, for all $n\geq-2$
+    \item LEM: $n\mbox{-}type_\UU$ is an $(n+1)$-type, for all $n\geq-2$
+    \item Proofs: by induction on $n\geq-2$
+\end{itemize}
+  }
+
+   
+         \frame
+  {
+    \frametitle{Uniqueness of Identity Proofs}
+    
+\begin{itemize}
+    \item Axiom UIP(X): for all $x,y:X$ and $p,q: x =_X y$ we postulate $p=q$ (NB $UIP(X) \equiv isSet(X)$)
+    \item Axiom K(X): for all $x:X$ and $p: x =_X x$ we postulate $p=refl_x$
+    \item LEM:  $K(X) \simeq UIP(X)$
+    \item LEM: if $R:X\to X\to\UU$ a reflexive mere relation implying $=_X$, 
+             then (1) $isSet(X)$ and (2) $\depi{x,y}{X}{(Rxy \simeq (x=_X y))}$
+    \item Proof: note that (1) and (2) are equivalent; prove, e.g., $K(X)$
+    \item COR: if $\neg\neg(x=_X y) \to (x=_X y)$, then $X$ is a set
+    \item COR: if $(x=_X y) \lor \neg(x=_X y)$, then $X$ is a set
+    \item COR: $\Nat$ is a set (prove by induction that $=_\Nat$ is decidable)
+\end{itemize}
+  }
+  
+   \frame
+  {
+    \frametitle{$n$-Truncations}
+    
+\begin{itemize}
+    \item Idea: $n$-truncation removes all interesting homotopy above dimension $n$
+    \item DEF: for every $A:\UU$, define:
+      \begin{itemize}[<+->]    
+      \item $(-2)$-truncation: ${\brck A}_{-2} \equiv \bfone$  (`contractible' truncation)
+      \item $(-1)$-truncation: ${\brck A}_{-1} \equiv {\brck A}$ (propositional truncation)
+      \item $(0)$-truncation: ${\brck A}_{0}$ is defined as a HIT with two constructors:       
+                a function ${\bproj \_}_0  :  A \to {\brck A}_{0}$, and 
+                a path function 
+                $2path: \depi{x,y}{{\brck A}_{0}}{\depi{p,q}{(x=_{{\brck A}_{0}} y)}{(p=_{x=_{{\brck A}_{0}} y} q)}}$
+
+       \end{itemize}
+    \item The general definition in the book uses $\Sn^{n+1}$ (complicated)
+    \item LEM: for all $n\geq-2$ we have that ${\brck A}_{\!n}$ is an $n$-type
+    \item Induction, recursion, properties ...
+ \end{itemize}
+  }
+  
+     \frame
+  {
+    \frametitle{$n$-Connectedness}
+    
+\begin{itemize}
+    \item Idea: $n$-connectness expresses that there is no interesting homotopy in and below dimension $n$
+    \item DEF: for types $A:\UU$, $conn_n(A) \equiv isContr({\brck A}_{n})$ %(NB: $f:A\to \bfone$
+    \item DEF: function $f: A\to B$ is $n$-connected, if for any $b:B$, 
+             the fiber of $f$ in $b$ is connected, $conn_n(fib_f(b))$
+    \item DEF: function $f: A\to B$ is $n$-truncated, if for any $b:B$, 
+    the fiber of $f$ in $b$ is $n$-truncated, $is(n)type(fib_f(b))$
+    \item LEM: any function factors as an $n$-connected function followed by an $n$-truncated function
+    (generalized epi-mono-decomposition)
+ \end{itemize}
+  }
+  
+  
+\end{document}
+
+\frame
+  {
+
+    \frametitle{Reduction}
+
+    \begin{itemize}[<+->]
+    \item<1-> 27.08: The big picture 
+    \item<2-> 30.08: Untyped Lambda Calculus
+    \item<3-> 03.09: Type Theory
+    \item<4-> 06.09 -- $\infty$ The Book
+    \item<5-> Set of feasible solutions $S$ 
+    \item<6-> Objective function: $_1$ and $P_2$
+    \item<7-> Optimal solution: $s\in S$ with $f(s)$ minimal
+    \item<7-> Formally:  $f(s)=\min\set{f(s')\mid s'\in S}$ 
+    \end{itemize}
+  }  $ $
+
+
+  \frame
+  {
+    \frametitle{PNG Graphics}
+
+    A graphics file is included by using the {\bf figure} environment,
+    and inside of that the {\bf includegraphics} command.
+    \begin{figure}
+      \scalebox{0.50}
+      {
+        \includegraphics{pengbrew.png}
+      }
+    \end{figure}
+  }
+
+  \frame
+  {
+    \frametitle{PNG Graphics}
+
+    The previous graphic had a background that almost matched the
+    slide.  A more typical case is shown here.
+    The graphics figure simply shows up as a rectangle imposed on
+    the slide.
+    
+    \begin{figure}
+      \scalebox{0.35}
+      {
+        \includegraphics{bell_206.png}
+      }
+    \end{figure}
+  }
+
+  \section{Hyperlinks}
+
+  \frame
+  {
+    \frametitle{Want More Information?}
+
+    For more information on the Beamer Class, click on
+    \href{latex-beamer.sourceforge.net/index.html}{{\bf the Beamer web site}}.
+
+  }
+
+$($a =_A bf(\pair{P_1}{P_2})=$ number of 
+              edges between $P
+  {
+
+    \frametitle{Identity}
+
+    \begin{itemize}[<+->]
+    \item Let $A,B:X\to\UU$ and define $A2B\equiv\lamt{x}{X}{(Ax\to Bx)}$.
+          Given a path $p:x_1 =_X x_2$, there are two natural ways to transport

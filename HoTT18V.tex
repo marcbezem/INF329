@@ -1,0 +1,731 @@
+%\documentclass[slides]{beamer}
+\documentclass[handout]{beamer}
+% Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!20!black}
+%\beamertemplateshadingbackground{yellow!20}{white}
+%\usepackage{beamerthemeshadow}
+\usepackage[utf8]{inputenc} %CONFLICT!
+%\usepackage[english,norsk,nynorsk]{babel}
+
+%Marc's macros
+\newcommand{\depi}[3]{\Pi{#1{:}#2.\,#3}}
+\newcommand{\sigm}[3]{\Sigma{#1{:}#2.\,#3}}
+\newcommand{\subs}[3]{\{#1{:}#2\mid#3\}}
+\newcommand{\lam}[2]{\lambda{#1.\,#2}}
+\newcommand{\lamt}[3]{\lambda{#1{:}#2.\,#3}}
+%\newcommand{\allLF}{{{\forall}}}
+%\newcommand{\omgLF}{{{\Omega}}}
+\newcommand{\sbr}[1]{[\![#1]\!]}
+\newcommand{\pbr}[1]{(\!(#1)\!)}
+\newcommand{\semr}[1]{[\![#1]\!]_{\rho}}
+\newcommand{\semrO}[1]{[\![#1]\!]^{\Omega}_{\rho}}
+\newcommand{\sems}[1]{[\![#1]\!]_{\sigma}}
+\newcommand{\vsbr}[1]{{[\![#1]\!]}_0}
+\newcommand{\psbr}[1]{{[\![#1]\!]}_1}
+\newcommand{\red}{~~{\to}~~}
+\newcommand{\unphsi}{{\univ_{\varphi\psi}}}
+\newcommand{\unphis}{{\univ_{\varphi_0\varphi_1}}}
+\newcommand{\unpsis}{{\univ_{\psi_0\psi_1}}}
+\newcommand{\extfs}{{\ext_{f_0 f_1}}}
+\newcommand{\extas}{{\ext_{a_0 a_1}}}
+\newcommand{\apO}{{ap_\Omega}}
+\newcommand{\eqA}{{eq_A}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\rtr}{\stackrel{*}{\to}}
+\newcommand{\ltr}{\stackrel{*}{\leftarrow}}
+\newcommand{\semO}[1]{[\![#1]\!]^{\Omega}}
+\newcommand{\foo}{\mathit{foo}}
+\newcommand{\SN}{\mathit{SN}}
+\newcommand{\GamU}{\Gamma_{\!U}}
+\newcommand{\Ex}{\mathsf{Ex}}
+\newcommand{\Tr}{\mathrm{T}}
+\newcommand{\Fa}{\mathrm{F}}
+\newcommand{\TEXT}{{\mathrm{TEXT}}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Rat}{\mathbb{Q}}
+\newcommand{\Rea}{\mathbb{R}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cnum}[1]{\underline{#1}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\seg}[2]{[#1.\,.#2]}
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\dom}{\mathit{dom}}
+\newcommand{\range}{\mathit{range}}
+\newcommand{\tru}{\mathsf{true}}
+\newcommand{\fal}{\mathsf{false}}
+\newcommand{\Id}{\mathsf{I}}
+\newcommand{\UU}{{\cal U}}
+\newcommand{\VV}{{\cal V}}
+\newcommand{\Uo}{\UU_0}
+\newcommand{\Uu}{\UU_1}
+\newcommand{\bfnull}{\mathbf{0}}
+\newcommand{\bfone}{\mathbf{1}}
+\newcommand{\elone}{\star}
+\newcommand{\bftwo}{\mathbf{2}}
+\newcommand{\Sn}{\mathbb{S}}
+\newcommand{\base}{\mathsf{base}}
+\newcommand{\lloop}{\mathsf{loop}}
+
+%end Marc's macros
+
+%%% Path concatenation (used infix, in diagrammatic order) %%%
+\newcommand{\ct}{%
+  \mathchoice{\mathbin{\raisebox{0.5ex}{$\displaystyle\centerdot$}}}%
+             {\mathbin{\raisebox{0.5ex}{$\centerdot$}}}%
+             {\mathbin{\raisebox{0.25ex}{$\scriptstyle\,\centerdot\,$}}}%
+             {\mathbin{\raisebox{0.1ex}{$\scriptscriptstyle\,\centerdot\,$}}}
+}
+
+%%% Path reversal %%%
+\newcommand{\opp}[1]{\mathord{{#1}^{-1}}}
+
+
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Montpellier}
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{latexsym}
+\usepackage{proof}
+%\usepackage{diagrams}
+
+\title[HoTT]%
+{The Univalence Axiom in Dependent Type Theory}
+\author[Marc Bezem]{%
+  Marc~Bezem, lectures based on \inst{1} and \inst{2} %\and
+  }
+\institute{
+ \inst{1}%
+ The Univalent Foundations Program, 
+  \emph{Homotopy Type Theory},
+  \url{https://homotopytypetheory.org/book/}
+  \and
+  \inst{2}%
+ Thierry Coquand, 
+  \emph{Th\'eorie des Types D\'ependants et Axiome d'Univalence},
+  S\'eminaire Bourbaki, 66\`eme ann\'ee, 2013-2014, n$^o$ 1085
+  %\and
+  }
+\date[INF329]{Spring 2018}
+\subject{}
+
+%\pgfdeclaremask{fsu}{fsu_logo_ybkgrd}
+%\pgfdeclareimage[mask=fsu,width=1cm]{fsu-logo}{fsu_logo_ybkgrd}
+
+%\logo{\vbox{\vskip0.1cm\hbox{\pgfuseimage{fsu-logo}}}}
+
+\begin{document}
+
+  \frame
+  {
+    \titlepage
+  }
+
+%  \section*{Outline}
+
+%  \frame
+%  {
+%    \frametitle{Chapters}
+
+%    \tableofcontents
+%  }
+
+  \section{Introduction}
+
+\frame
+  {
+  
+    \frametitle{Overview of Logics}
+
+    \begin{tabular}{|l|p{3,7cm}|l|l|}
+\hline
+Logic & Types & $\forall\exists$-domains\\ %& Rem.\\
+\hline
+1-sorted FOL & $I^n \to B$ (opt.\ $I^n \to I$)& $I$ \\% & 1\\
+\hline
+$k$-sorted FOL& $[I_1 |\cdots| I_k]^n \to B$ $(\ldots)$  & $I_1,\ldots,I_k$ \\ %& 1\\
+\hline
+HOL {\color{red}(later)}& $T ::= B \mid I \mid (T{\to}T)$ & any $T$ \\ % & 1,3\\
+\hline
+DTT {\color{red}(later)}& $\Pi$-types, $\UU$ (universes), inductive types& any $A:\UU$ \\%  & 2,4,5\\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item First-order logic: predicate logic (e.g., set theory ZFC)
+\item $I$ is the type of individuals, $B$ of propositions
+\item 1-sorted FOL is usually presented untyped
+\item In 1-sorted FOL types are left implicit, apart from \emph{arity}
+\item E.g., in $\exists x.\,\forall y.\, \neg E(y,x)$ quantification is over $I$, 
+and $E(y,x)$, $\neg E(y,x)$, $\forall y.\, \neg E(y,x)$, $\exists x.\,\forall y.\, \neg E(y,x)$
+are all of type $B$
+\item In k-sorted FOL types are explicitly given in the \emph{signature}
+\end{itemize}
+ }
+ 
+
+\frame
+  {
+  
+    \frametitle{Higher-order Logic (Church 1940)}
+
+    \begin{itemize}[<+->]
+          \item Types: $I$ (individuals), $bool$ (propositions), and if $A,B$ are
+          types, then also $A\to B$ (these types are called \emph{simple} types)
+          \item Terms are classified by their types, e.g.,  
+            \begin{itemize}[<+->]
+            \item $c\,{\color{red}:}\,I$
+            \item $f:I\to I$
+            \item $f(c) : I$
+            \item $P: bool$
+            \item $Q:I\to bool$ (`propositional function')
+            \item ${\color{red}\to}:bool\to (bool\to bool)$
+            \item ${\neg}: bool\to bool $
+           % \item $P\lor\neg P:bool$
+            \item $P \to \neg Q(f(c)) : bool$
+            \item $\forall_I :(I\to bool)\to bool$ (universal quantifier over $I$)
+            \item $(\forall_I\,Q):bool$, also denoted $\forall x{:}I.~Q(x)$
+            \end{itemize}
+          \item We also have, e.g., $\exists_{I},~\forall_{I\to bool},~\exists_{I\to I}$ for quantification
+          over $I$, over unary predicates, and over unary functions, respectively
+          \item In fact, we have $\forall_A,\exists_A$ for any type $A$: {\color{red}HO}L
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Higher-order Logic (Cntd)}
+
+    \begin{itemize}[<+->]
+         \item Inference system defines the `theorems' of type $bool$
+        \item Natural semantics in set theory: $bool=\set{0,1}$, $I$ a set      
+        \item Example: we can express equality $Eq_A(t,u): bool$ as 
+          \[(\forall P:A\to bool.~P(t){\color{red}\to} P(u)) : bool\]
+        \item Exercise: prove that $Eq_A$ is an equivalence relation for any $A$
+        \item Refinement: prove symmetry of $Eq_A$ without using the law of the excluded middle
+        \item Moral of the exercise: higher-order quantification is powerful
+    \end{itemize}
+
+  }
+
+
+\frame
+  {
+  
+    \frametitle{Extensionality Axioms in HOL, anticipating UA}
+
+    \begin{itemize}[<+->]
+    \item Pointwise equal functions are equal:
+    \[(\forall x:A.~Eq_B(f(x),g(x))) \to Eq_{A\to B}(f,g)\]
+    \item Equivalent propositions are equal:
+    \[((P\to Q)\land(Q\to P)) \to Eq_{bool}(P,Q)\]
+    \item Neither of these axioms is provable in HOL (but they are true in the set-theoretic semantics)
+    \item Univalence Axiom (UA): `equivalent things are equal'\\
+    (the meaning of 'equivalent' depends on the 'thing')
+    \item UA is not true set-theoretically, since sets can be `equivalent'
+    without being equal. This is vague, but can be made precise by
+    taking sets to be `equivalent' when they are in bijective correspondence (same cardinality).
+    Another example will come later.
+    \end{itemize}
+  }
+
+
+
+
+\frame
+  {
+  
+    \frametitle{Dependent Type Theory, $\Pi$-types}
+
+    \begin{itemize}[<+->]
+    \item Limitation of HOL: not natural to define, e.g., 
+               algebraic structure on an arbitrary type; DTT can express this.
+    \item Every mathematical object has a type, even types have a type:
+    $a:A$, $A:U_0$, $U_0:U_1,\ldots$, the $U_i$ are called universes ($\UU$)
+    \item Fundamental in DTT: family of types $B(x),~x:A$; that is,\\
+    for every $a:A$ we have $B(a):\UU$  (so, $B$ has type $A\to U_0$)
+    %(`$a$ has property $B$')
+    \item Context: $x_1:A_1,\,x_2:A_2(x_1), \ldots , x_n : A_n(x_1,...,x_{n-1})$
+    \item Example: $n:N,\,x: R(n), \,y: R(n)$ in $n$-dim LinAlg
+    \item If $B(x),~x:A$ a type family, then $\depi{x}{A}{B(x)}$ 
+    is the type of \emph{dependent} functions %(later: \emph{sections}):
+    $f(x)=b$ in context $x:A$, that is, 
+    $b$ {\color{red} and its type} may depend on $x$, $f(a)=(a/x)b : B(a)$ if $a:A$
+   \item Example: $0:\depi{n}{N}{R(n)}$, $0(n)$ is $n$-dimensional zero vector
+    \item Actually, $A\to B$ is $\depi{x}{A}{B(x)}$ with $B(x)=B$
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{$\Sigma$-types and algebraic structure}
+
+    \begin{itemize}[<+->]
+    \item If $B(x),~x:A$ type family, then $\sigm{x}{A}{B(x)}$ is the type of dependent
+    pairs $(a,b)$  with $a:A$ and $b:B(a)$
+    \item Actually, $A\times B$ is $\sigm{x}{A}{B(x)}$ with $B(x)=B$
+    \item A type of semigroups can be defined in DTT as ($=_G$,
+    equality on $G$, will be explained later):
+    \end{itemize}
+\[\sigm{G}{\UU}{\sigm{m}{G\to G\to G}{\depi{x,y,z}{G}{m(x,m(y,z)) =_G m(m(x,y),z)}}}\]
+  }
+
+  
+ 
+ \frame
+  {
+  
+    \frametitle{Representation of Logic in DTT}
+
+    \begin{itemize}[<+->]
+    \item Curry-Howard-de Bruijn: formulas as types, (constructive) proofs as programs 
+(see Sørensen\&Urzyczyn, Elsevier, 2006)
+    \item Example: $f(x,y)=x$ for $x:A,~y:B$, then $f: A \to (B\to A)$ 
+    \item Curry, 1958: $f$ is a proof of the tautology $A \to (B\to A)$
+    \item Modus ponens: if $f:A\to B$, $a:A$, then $f(a):B$
+    \item Similarly, $g(x,y,z)=x(y(z))$ (composition) is a proof of
+     \[(B\to C) \to ((A\to B) \to (A\to C)) \]
+    \item Breakthrough in FOM: proofs as first-class citizens (!!!)
+ Constructive proofs can be executed as functional programs.
+   \item Profound influence on computer science, constructive mathematics, computational
+   linguistics
+    \end{itemize}
+  }
+
+ \frame
+  {
+  
+    \frametitle{Representation of Logic in DTT (ctnd)}
+
+    \begin{itemize}[<+->]
+    \item A family of types $B(x),~x:A$ represents a unary predicate
+    \item Truth (or rather: provability) is represented by inhabitation
+    \item Universal quantification $\forall x{:}A.~B(x)$ by $\depi{x}{A}{B(x)}$
+    \item Implication $A\to B$ by, indeed, $A\to B$ (${}=\depi{x}{A}{B}$!)  
+    \item Existential quantification $\exists x{:}A.~B(x)$ by $\sigm{x}{A}{B(x)}$
+    \item $A\land B$ by $A\times B = \sigm{x}{A}{B(x)}$ with constant $B(x)=B$
+    \item $A\lor B$ is represented by disjoint sum $A+B$ (next slide)
+    \item $\bot$ is represented by the empty type $N_0$ (next slide)
+    \item Negation $\neg A$ is represented by $A\to N_0$
+    \item NB: $\Sigma$ and $+$ are stronger than in ordinary logic (explain ...)
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Inductive Types}
+
+    \begin{itemize}[<+->]
+    \item $A+B$ is inductively defined by 
+    two \emph{constructors} $inl:  A \to (A+B)$,  $inr:  B \to (A+B)$
+    \item How to destruct objects $inl(a), inr(b)$? Definition by cases!
+    \item Destruction: $h: \depi{z}{A+B}{C(z)}$ can be defined
+    given $f: \depi{x}{A}{C(inl(x))}$ and $g: \depi{y}{B}{C(inr(y))}$:
+     \[h(inl(x)) = f(x) \quad\quad  h(inr(y)) = g(y)\]
+    \item Moral: $inl(a), inr(b)$ are the only objects of type $A+B$
+    \item For constant $C(z)=C$ this is Gentzen's $\lor$-elimination:
+    $f: A \to C,~g: B \to C$ define $h: A+B \to C$
+   \item In words: if we can prove $C$ from $A$,
+   and from $B$, then we can prove $C$ from $A+B$
+   \item Extra in DTT: $p: A+B$ can be used in $C(p)$    
+    \end{itemize}
+  }
+
+
+\frame
+  {
+  
+    \frametitle{Inductive Types (ctnd)}
+
+    \begin{itemize}[<+->]
+    \item Also inductively: $0:N$ and if $n:N$, then $S(n): N$
+    \item How to destruct numerals $S^k (0)$? Recursion and induction!
+    \item Destruction: $f: \depi{n}{N}{C(n)}$ can be defined
+    given $z: C(0)$ and $s: \depi{n}{N}{(C(n)\to C(S(n)))}$:
+     \[f(0)=z \quad\quad  f(S(n)) = s(n,f(n))\]
+    \item Moral: numerals $S^k (0)$ are the only objects in $N$
+     \item For constant $C(n)=C$ this is primitive recursion
+     \item For non-constant $C(n)$: inductive proof of $\forall n{:}N.~C(n)$
+     \item Moral: primitive recursion is the non-dependent version of induction
+    % (both iterate $s'(m,x)=(Sm,s(m,x))$ on $(0,z)$ and project)
+    \end{itemize}
+  }
+ 
+
+\frame
+  {
+  
+    \frametitle{Inductive Absurdity}
+
+    \begin{itemize}[<+->]
+    \item $N_0$, the empty type or empty sum, representing \emph{false}
+    or absurdity, is inductively defined by {\color{red}no} constructors
+    \item Destruction: $h: \depi{z}{N_0}{C(z)}$ can be defined by {\color{red}zero} cases,
+    presuming nothing, $h$ is `for free' (induction principle for $N_0$)
+    \item For constant $C(z)=C$ this is the Ex Falso rule $N_0\to C$
+    \item For non-constant $C(z)$: refinement of Ex Falso, used elegantly by
+    VV to prove $\depi{x,y}{N_0}{~Eq_{N_0}(x,y)}$ (for $Eq_{N_0}$: next slide)
+    \item Negation: $\neg A = (A\to N_0)$
+    \item $N_1$ (aka Unit) is the inductive type with one constructor, 
+              $N_2$ (aka Bool) with two constructors, and so on
+    \end{itemize}
+  }
+
+
+ \frame
+  {
+  
+    \frametitle{Inductive Equality}
+
+    \begin{itemize}[<+->]
+    \item $Eq_A(x,y)$ (equality, Martin-L\"of), in context $A:\UU,~x,y:A$, 
+    inductively defined by $1_a : Eq_A(a,a)$ for all $a:A$ (diagonal!)
+    \item Since $Eq_A(x,y)$ is itself a type in $\UU$, we can iterate:
+    $Eq_{Eq_A(x,y)}(p,q)$ is equality of equality proofs of $x$ and $y$
+    \item Homotopy interpretation: $Eq_A(x,y)$ as path space, 
+$Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
+   \item Beautiful structure arises: an $\infty$-groupoid
+   \item Footnote (opinion): a miracle, unintended by Martin-L\"of
+   \item Discussion: a discovery comparable to the  countable model of ZF, 
+   or to non-Euclidean geometries (without changing the the theory)
+    \end{itemize}
+  }
+
+ \frame
+  {
+  
+    \frametitle{Laws of Equality}
+
+    \begin{itemize}[<+->]
+    \item ($1_a : Eq_A(a,a)$ for all $a:A$) + induction + computation
+    \item We actually want \emph{transport}, for all type families $B$:
+    \[ transp_B : B(a) \to (Eq_A(a,x) \to B(x))  \]
+    and \emph{based path induction}, for all type families $C$:
+    \[ bpi_C : C(a,1_a) \to \depi{p}{Eq_A(a,x)}{ C(x,p)}  \]
+    plus natural equalities like $transp_B(b,1_a) = b$
+   % \item Alternatively, $Eq_{\sigm{x}{A}{Eq_A(a,x)}}((a,1_a),(x,p))$
+    \item $bpi_C$ is provable by induction, $transp_B$ special case of $bpi_C$
+    \item Also provable: Peano's 4-th axiom $\neg Eq_N(0,S(0))$
+    \item Proof: define recursively $B(0)=N$, $B(S(n))=N_0$ and assume
+    $p:Eq_N(0,S(0))$. We have $0:B(0)$  and hence $transp_B(0,p) : N_0$.
+    \end{itemize}
+  }
+
+\frame
+  {
+  
+    \frametitle{Groupoid}
+
+    \begin{itemize}[<+->]
+    \item THM [H+S]: every type $A$ is a groupoid with objects of type $A$
+    and morphisms $p: Eq_A(a,a')$ for $a:A,~a':A$
+    \item In more relaxed notation (only here with $=$ for $Eq$):
+      \begin{enumerate}
+      \item ${.}\ct{.} : x=y \to y=z \to x=z$
+      \item $\opp{.} : x=y \to y=x$
+      \item $p=1_x\ct p = p\ct 1_y$
+      \item $p\ct\opp p = 1_x,~\opp p\ct p = 1_y$
+      \item $\opp{(\opp p)} = p$
+      \item $p\ct(q\ct r) = (p\ct q)\ct r$
+      \end{enumerate}
+   \item Proofs by induction: $\ct$ is $transp_{x=\_}$,  $~\opp{}$ is $transp_{\_=x}\,1_x$\quad(!)
+   \item Also: $x,y:A,~p,q: Eq_A(x,y),~ pq: Eq_{Eq_A(x,y)}(p,q)$ ...
+    \end{itemize} 
+  }
+
+\frame
+  {
+  
+    \frametitle{The Homotopy Interpretation [A+W+V]}
+
+    \begin{itemize}[<+->]
+%    \item Roughly:
+ %     \begin{enumerate}
+      \item Type $A$: topological space
+      \item Object $a:A$: point in topological space
+      \item Object $f:A\to B$: continuous function
+      \item Universe $\UU$: space of spaces
+      \item Type family $B: A\to\UU$: a specific fibration $E\to A$, where
+      the fiber of $a:A$ is $B(a)$, and
+      \item $E$ is the interpretation of $\Sigma\,A\,B$: the total space
+      \item $\Pi\,A\,B$: the space of sections of the fibration interpreting $B$
+      \item $Eq_A(a,a')$: the space of paths from $a$ to $a'$ in $A$
+  %    \end{enumerate}
+    \item Correct interpretation of $Eq_A$ (in particular, transport) 
+    is ensured by taking Kan fibrations (yielding homotopy equivalent
+    fibers of connected points)
+    
+    \end{itemize}
+  }
+  
+  
+ \frame
+  {
+  
+    \frametitle{Some Homotopy Levels [V]}
+
+    \begin{itemize}[<+->]
+    \item Level $-1$: $prop(P) = \depi{x,y}{P}{Eq_P(x,y)}$
+    \item Example: $N_0$ is a proposition, $prop(N_0)$ also (!)
+    \item Level $0$: $set(A) = \depi{x,y}{A}{prop(Eq_A(x,y))}$
+    \item Example: $N$ is a set, $set(N)$ is a proposition
+    \item Proved above: $N$ is not a proposition (Peano's 4-th axiom)
+    \item Level $1$: $groupoid(A) = \depi{x,y}{A}{set(Eq_A(x,y))}$
+    \item Examples: $N_0,~N$ (silly, the hierarchy is cumulative)
+    \item Without UA it is consistent to assume $\depi{A}{\UU}{set(A)}$
+    \item With UA, $\UU$ is not a set ($U_0$ not a set, $U_1$ not a groupoid, ...)
+    \end{itemize}
+  }
+
+ \frame
+  {
+  
+    \frametitle{The Univalence Axiom [V]}
+
+    \begin{itemize}[<+->]
+    \item Level $-2$: $Contr(A) = A \times prop(A)$, $A$ is \emph{contractible}
+    \item Examples: $N_1$, $\sigm{x}{B}{Eq_B(x,b)}$ for all $b:B$
+    \item \emph{Fiber} of $f:A\to B$ over $b:B$ is the type
+    \[Fib_f (b) = \sigm{x}{A}{Eq_B(f(x),b)}\]
+    \item \emph{Equivalence (function)}: $isEquiv(f) = \depi{b}{B}{contr(Fib_f (b))}$
+    \item \emph{Equivalence (types)}: 
+    $(A\simeq B) = \sigm{f}{A\to B}{isEquiv(f)}$
+    \item Examples:
+      \begin{itemize}[<+->]
+      \item Logical equivalence of propositions
+      \item Bijections of sets
+      \item The identity function $A\to A$ is an equivalence, $A\simeq A$
+      \end{itemize}
+    \item UA:  for the canonical $idtoEquiv: Eq_{\UU}(A,B) \to (A\simeq B)$,
+                                    \[ua : isEquiv(idtoEquiv)\] 
+    \end{itemize}
+  }
+
+\begin{frame}
+\frametitle{More on UA}
+  \begin{itemize}[<+->]
+    \item Consequence of UA: $Eq_{\UU}(A,B) \simeq (A\simeq B)$ inhabited
+    \item Weak UA, $wua : (A\simeq B) \to Eq_{\UU}(A,B)$
+    \item Informal: homotopy equivalent types in $U$ can be identified
+    \item Example: $\Nat$ and $\Int$ can be identified, don't forget transport
+    \item Is this good or bad, what means `can be identified' here?
+    \item Why not so in ZF? E.g., $0=\set{},~Sn = n \cup \set{n},~S'n=\set{n}$.
+    Two encodings of $\Nat$, they disagree on $0\in 2$.
+    \item Crucial: the language of type theory strikes a balance
+      \begin{itemize}[<+->]
+      \item it is expressive (not too much encoding)
+      \item is not too expressive (cannot express things it shouldn't)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+ \frame
+  {
+  
+    \frametitle{Consequences and Applications of UA/HoTT}
+
+    \begin{itemize}[<+->]
+    \item Function extensionality
+    \item Description operator (define functions by their graph)
+    \item The universe is not a set ($Eq_\UU(N,N)$ refutes UIP)
+     \item Practical: transport of structure and results between equivalent types,
+    without the need for `transportability criteria' [Bourbaki 4].
+    \href{https://en.wikipedia.org/wiki/Equivalent_definitions_of_mathematical_structures}%
+    {\color{red}{wiki/Equivalent\_definitions\_of\_mathematical\_structures}}
+   \item Practical: formalizing homotopy theory \color{red}{synthetically}
+    \item Higher inductive types, example: the circle $\Sn^1$
+\begin{itemize}
+\item a point constructor $\base :\Sn^1$
+\item a path constructor $\lloop : {\base =_{\Sn^1} \base}$
+\item induction + computation
+\end{itemize}
+    \item What is  $\base =_{\Sn^1} \base$? (provably equivalent to $\Int$)     
+    \item ...
+    
+    \end{itemize}
+  }
+ 
+ 
+\frame
+  {
+  
+    \frametitle{Consumer Test of Logics}
+
+    \begin{tabular}{|l|p{3,7cm}|l|l|}
+\hline
+Logic & Types & $\forall\exists$-domains & Rem.\\
+\hline
+1-sorted FOL & $I^n \to B$ (opt.\ $I^n \to I$)& $I$  & 1\\
+\hline
+$k$-sorted FOL& $[I_1 |\cdots| I_k]^n \to B$ $(\ldots)$  & $I_1,\ldots,I_k$ & 1\\
+\hline
+HOL & $T ::= B \mid I \mid (T{\to}T)$ & any $T$ & 1,3\\
+\hline
+DTT & $\Pi$-types, $\UU$ (universes), inductive types& any $A:\UU$   & 2,4,5\\
+\hline
+\end{tabular}
+
+\begin{enumerate}
+\item Proofs are not first-class citizens.
+\item Proofs are first-class citizens (part of object language).
+\item Strength depends on comprehension axioms and similar devices,
+e.g., $\exists P.~\forall x.~ (Px \leftrightarrow \phi)$ or Hilbert's $\epsilon$.
+\item Strength depends on inductive types and im/predicativity, e.g.,
+type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
+\item In DTT we often reason logically with `inhabited types' 
+\end{enumerate}
+ }
+
+
+\end{document}
+
+ 
+  \frame
+  {
+  
+    \frametitle{Description operator in HOL}
+
+    \begin{itemize}[<+->]
+    \item Two notions of function:
+\begin{itemize}
+          \item Explicitly defined $f(x) = t$
+          \item Implicitly defined by the graph $F: A\to(B\to bool)$ by a new operator $\iota: (A\to bool)\to A$,
+          which is axiomatized by
+          \[(\exists! y{:}B.~Q(y)) \to Q(\iota_y(Q)) \text{, where} \]
+          \[\exists! y{:}B.~Q(y) \text{~means~} (\exists y{:}B.~Q(y))\,\land\, \forall y'{:}B.~(Q(y')\to Eq_B(y,y')). \]
+          \[\text{Now define~}f(x) = \iota_ y (F(x,y)), \text{~if~} \forall x:A.~\exists! y:B.~F(x,y)\]
+          \end{itemize}    
+    \item Hilbert's $\varepsilon:(A\to bool)\to A$, axiom: 
+    \[(\exists y{:}B.~Q(y)) \to Q(\varepsilon_y(Q))\]
+    \item With UA in Voevodsky's system:
+\begin{itemize}
+\item $\iota$ is definable and the description axiom provable;
+ \item $\epsilon$ is inconsistent (non-unique choice not invariant under $\simeq$)
+
+\end{itemize}
+    \end{itemize}
+  }
+
+
+\section{From other talk}
+
+\begin{frame}
+\frametitle{Simply typed lambda calculus}
+ \begin{itemize}[<+->]
+   \item Two syntactic categories: types and terms
+   \item Types, double role: sets and propositions
+   \item Terms, double role: elements and proofs
+   \item Proofs as first class citizens
+   \item Typing relation: $(\mathit{term} : \mathit{type} )$ %(decidable)
+   \item Examples (third one in simplified notation): 
+   \begin{itemize}
+     \item $(\lambda x{:}T.\,x) : (T \to T)$
+     \item $(\lambda x{:}T.\,\lambda y{:}T'.\,x) : (T \to (T' \to T))$
+     \item $(\lambda f.\,\lambda g.\,\lambda a.\,g\,(f\,a)) : ((A \to B) \to ((B\to C) \to (A\to C)))$
+   \end{itemize}
+   \item Discuss double roles: $(\mathit{term} : \mathit{type} )$
+   \item Pioneers: Russell, Church, Curry, Howard
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Universes, Pi-types, inductive types}
+ \begin{itemize}[<+->]
+   \item Universe $U$ of types (and hence of propositions)
+   \item Terms and types may depend on types in $U$
+   \item Polymorphy, f.e., $(\lambda T{:}U.\,\lambda x{:}T.\,x) : (\Pi T{:}U.\,(T \to T))$
+   \item Inductive types, f.e., $\Nat$ with rules $\quad\infer{0:\Nat}{}\quad\infer{S\,n : \Nat}{n:\Nat}$
+   \item Types may depend on terms, f.e., $P\,x : U$ on $x: \Nat$,\\
+   more Pi-types, f.e., $(\Pi x{:}\Nat.\, P\,x) : U$ with $P:\Nat\to U$
+      \begin{itemize}
+     \item with $(P\,x)$ a proposition: the proposition $\forall x{:}\Nat.\, P\,x$
+     \item with $(P\,x)$ a set: a type of dependent functions
+   \end{itemize}
+   \item Inductively defined identity types $Id_T(t,t')$
+   \item Expressive power: $\geq$ higher-order predicate logic
+   \item Pioneers: De Bruijn, Martin-L\"of, Girard 
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Essential Problems}
+ \begin{itemize}[<+->]
+   \item With left-recursive $+$:  $(\lambda n:\Nat.\,n)\not\equiv(\lambda n:\Nat.\,n+0)$
+   \item With right-recursive $+$:  $(\lambda n:\Nat.\,n)\not\equiv(\lambda n:\Nat.\,0+n)$
+   \item Either way:  $(\lambda n:\Nat.\,0+n)\not\equiv(\lambda n:\Nat.\,n+0)$
+   \item Not provable: $Id_{\Nat\to\Nat}(\lambda n:\Nat.\,0+n\,,\,\lambda n:\Nat.\,n+0)$
+   \item Distinct terms may denote the `same' function, extensionally
+   \item Undecidable: $f=g$ defined by $fn = gn$ for all $n:\Nat$
+   \item Distinct types may denote the `same' set, proposition
+   \item Even more `loose' identifications are highly desirable: 
+     the natural numbers, the non-negative integers, lists over a singleton, etc.
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Homotopy type theory}
+  \begin{itemize}[<+->]
+    \item Topological spaces modulo \emph{homotopy} equivalence?
+    \begin{itemize}
+      \item Geometry: shape
+      \item Topology: the essence of shape
+      \item Homotopy: continuous deformation (`the essence of the essence of shape'),
+      continuous map with continuous \emph{quasi}-inverse (weaker than \emph{homeomorphy})
+    \end{itemize}
+    \item Types, third role: topological spaces (homotopy types)
+    \item Terms, third role: points in a topological space
+    \item Identity types (equality): path spaces
+    \item Book: \href{http://homotopytypetheory.org/book/}{\color{red}{Homotopy Type Theory}}
+(Special Year, IAS, 2012/13)
+  \end{itemize}
+\end{frame}
+
+\section{Miscellaneous}
+
+
+\begin{frame}\label{finitenessnotFOL}
+\frametitle{Finiteness not first-order definable}
+  \begin{itemize}[<+->]
+    \item Assume first-order theory $T$ satisfies for all $M$:
+    $M \models T  \Longleftrightarrow |M| \text{~is finite}$
+   \item Define for each $n>0$: 
+    $\psi_n := \exists x_1,\ldots,x_n.\ \bigwedge_{1\leq i<j \leq n} x_i \neq x_j$
+expressing that there exist at least $n$ elements
+   \item $T$ is consistent with any finite number of $\psi_n$
+   \item $T$ is inconsistent with any infinite number of $\psi_n$
+   \item The latter two conflict with compactness (and with completeness)
+   \item NB: Infinity is defined by any infinite number of $\psi_n$, 
+    but cannot be defined by a finite first-order theory
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discussion on the circle}\label{discussionS1}
+  \begin{itemize}[<+->]
+    \item In \emph{synthetic} homotopy theory: $\mathbb{S}^1$ as a HIT 
+    \item In ordinary homotopy theory: $\set{z\in\mathbb{C} \mid |z|=1}$, $\mathbb{R}/\mathbb{Z}$, ...
+    \item  \href{https://en.wikipedia.org/wiki/Construction_of_the_real_numbers}%
+{\! \!\color{blue}{\url{en.wikipedia.org/wiki/Construction_of_the_real_numbers}}}
+(irony: Section \emph{Synthetic} approach)
+    \item All approaches allow many models (ZFC has a countable model
+if ZFC is consistent)
+    \item Is there an interesting property separating them?
+  \end{itemize}  
+\end{frame}
+
+
+\end{document}
+
+ 
