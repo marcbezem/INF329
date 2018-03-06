@@ -211,7 +211,7 @@
     \frametitle{Terminology and Notation}
 
     \begin{itemize}[<+->]
-    \item Avoid  by renaming bound variables
+    \item Avoid by renaming bound variables
     \item Technically better, but hard to read (De Bruijn): f.e. $\lambda\lambda1$
     \item Application left-associative : $M_1 M_2 \ldots M_n \equiv (\ldots(M_1 M_2) \ldots M_n)$
     \item Abstraction right-associative : $\lam{x_1 x_2 \ldots x_n}{M} \equiv \lam{x_1}{(\lam{x_2}{\ldots(\lam{x_n}{M})})}$
@@ -525,7 +525,7 @@ $$ind_{A{\times}B}\,C\,f\,(a,b)\to_\iota f\,a\,b$$
 \frame
   {
   
-    \frametitle{Dependent pairs  and $\Sigma$-types}
+    \frametitle{Dependent pairs and $\Sigma$-types}
 
     \begin{itemize}[<+->]
     \item Dependent pair $(a,b)$: type of $b$ depends on $a$, $b: Ba$
@@ -945,11 +945,11 @@ $$\depi{a,b:A,~p,q:(a=b),~\alpha}{(p=q)}{\depi{c}{A}{\depi{r}{(b=c)}{p\ct r = q\
 \frame
   {
 
-    \frametitle{Q  to the topologists}
+    \frametitle{Q to the topologists}
 
 If we have full freedom of definition, then we can define the following predicate on the path space of some topological space $X$:
 
-$$Cxyp \equiv  (x=y \land  p=refl_x)$$
+$$Cxyp \equiv  (x=y \land p=refl_x)$$
 
 By path induction: all continuous $p: [0,1] \to X$ are constant.
 
@@ -1177,7 +1177,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
       \end{enumerate}
     \item and a \emph{propositional} uniqueness principle: 
     $r = pair^=(ap_{pr_1} r, ap_{pr_ 2} r)\quad$ for $r:(x =_{A\times B}y)$
-    \item plus a lot of  other componentwise \emph{propositional} equalities
+    \item plus a lot of other componentwise \emph{propositional} equalities
     \end{itemize}
   }
 
@@ -1189,7 +1189,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     \begin{itemize}[<+->]
     \item THM: If $A,B:Z\to\UU$,  $p:z=_Z w$ and $x:((A z)\times(B z))$, 
     then $p_* x =_{(A w)\times (B w)}(p_* (pr_1 x), p_* (pr_2 x))$
-    \item Proof:  path induction plus propositional uniqueness
+    \item Proof: path induction plus propositional uniqueness
     \item Functoriality of $ap$ under cartesian products: 
     let $g:A\to A'$, $h:B\to B'$  and define $f: (A{\times}B) \to (A'{\times} B')$
     by $f\equiv\lamt{x}{A{\times}B}{(g(pr_1 x),h(pr_2 x))}$. Then:
@@ -1207,7 +1207,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     \begin{itemize}[<+->]
     \item THM: let $P:A\to\UU$ and $w,w':\sigm{x}{A}{Px}$. Then:
     $$(w=_{\sigm{x}{A}{Px}} w') \quad\simeq\quad\sum_{p:pr_1 w = pr_1 w'}(p_*(pr_2 w) = pr_2 w')$$
-    \item  THM: let $P:A\to\UU$ and $Q:(\sigm{x}{A}{Px})\to\UU$. 
+    \item THM: let $P:A\to\UU$ and $Q:(\sigm{x}{A}{Px})\to\UU$. 
     Then $\lamt{x}{A}{(\sigm{u}{Px}{Q(x,u)})}$ is a type family such that for
     $p:x=y$ and $(u,z):(\sigm{u}{Px}{Q(x,u)})$ we have:
     $$p_*(u,z)\quad=_{\sigm{u}{Py}{Q(y,u)}}\quad(p_*u,lift(u,p)_* z)$$
@@ -1237,7 +1237,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
     \begin{itemize}[<+->]
     \item Wanted, for $A:\UU,~B:A\to\UU$ and $f,g:\depi{x}{A}{Bx}$: 
     $$(f=g) \simeq (\depi{x}{A}{fx = _{Bx} gx})$$
-    \item  By an easy path induction (to be viewed as elimination):
+    \item By an easy path induction (to be viewed as elimination):
     $$happly: (f=g) \to (\depi{x}{A}{fx = _{Bx} gx})$$
     \item Axiom (function extensionality): $isequiv(happly)$
     \item Quasi-inverse of $happly$ (to be viewed as introduction):
@@ -2234,7 +2234,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     \frametitle{Suspensions}
     
 \begin{itemize}    
-    \item  For any $A:\UU$  we define a HIT $Susp(A)$ by :
+    \item For any $A:\UU$  we define a HIT $Susp(A)$ by :
 \begin{itemize}
 \item two point constructors $N,S: Susp(A)$
 \item a path constructor $merid: A\to (N =_{Susp(A)} S)$
@@ -2259,7 +2259,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     \frametitle{The torus}
     
     \begin{itemize}    
-    \item  The \emph{torus} is the HIT $T^2$ defined by :
+    \item The \emph{torus} is the HIT $T^2$ defined by :
 \begin{itemize}
 \item a point $b:T^2$
 \item two paths $p,q: b=b$
@@ -2329,7 +2329,7 @@ c & \rDouble_s &  d
     \frametitle{Closure properties of homotopy $n$-levels}
     
 \begin{itemize} 
-    \item LEM: if $p:X\to Y$ a retraction and $X$ is an $n$-type, then $Y$ is  an $n$-type ($n\geq-2$)
+    \item LEM: if $p:X\to Y$ a retraction and $X$ is an $n$-type, then $Y$ is an $n$-type ($n\geq-2$)
     \item Proof: induction on $n\geq-2$. Base case easy. Assume OK for $n$ and let $s:Y\to X$
               with homotopy $\epsilon: p\circ s \sim 1$. Assume $\depi{x,x'}{X}{is(n)type(x=_X x')}$,
               to prove ${is(n)type(y=_Y y')}$ for all ${y,y'}:{Y}$. Let $y,y':Y$, then $sy =_X sy'$ is an $n$-type.
@@ -2454,7 +2454,7 @@ c & \rDouble_s &  d
     \frametitle{PNG Graphics}
 
     The previous graphic had a background that almost matched the
-    slide.  A more typical case is shown here.
+    slide. A more typical case is shown here.
     The graphics figure simply shows up as a rectangle imposed on
     the slide.
     
