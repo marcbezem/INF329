@@ -429,7 +429,7 @@ element of infinite product, $\lamt{n}{Nat}{\vec 0 (n)}: \Pi\,Nat\,B$
     \frametitle{Products (2)}
 
     \begin{itemize}[<+->]
-    \item We can infer the following jugment:
+    \item We can infer the following judgment:
 $$\lamt{f}{A{\to}B{\to}C}{\lamt{p}{A{\times}B}{f(pr_1 p)(pr_2 p)}}: (A{\to}B{\to}C)\to(A{\times}B{\to}C)$$
     \item As an alternative to the $pr_i$'s, we can postulate:
 $$rec_{A{\times}B}:\depi{C}{\UU}{(A{\to}B{\to}C)\to(A{\times}B{\to}C)}$$
@@ -489,9 +489,9 @@ $$rec_{A{\times}B}\,C\,g\,(a,b)\to_\iota g\,a\,b$$
    \frametitle{Induction}
 
     \begin{itemize}[<+->]
-    \item We can infer the following jugment (short):
+    \item We can infer the following judgment (short):
 $$\!\!f:\depi{x}{A}{\depi{y}{B}{C(x,y)}}\vdash{\lam{p}{f(pr_1 p)(pr_2 p)}}: \depi{p}{A{\times}B}{C(pr_1 p,pr_2 p)}$$
-    \item ... but NOT the following jugment:
+    \item ... but NOT the following judgment:
 $$f:\depi{x}{A}{\depi{y}{B}{C(x,y)}}\vdash{\lam{p}{f(pr_1 p)(pr_2 p)}}: \depi{p}{A{\times}B}{C\,p}$$
     \item ... unless we have $(pr_1 p,pr_2 p)\to_\eta p$, or postulate:
 $$ind_{A{\times}B}:\depi{C}{A{\times}B{\to}\UU}
