@@ -104,12 +104,12 @@
   }
 \institute{
  \inst{1}%
- The Univalent Foundations Program, 
+ The Univalent Foundations Program,
   \emph{Homotopy Type Theory},
   \url{https://homotopytypetheory.org/book/}
   \and
   \inst{2}%
- Thierry Coquand, 
+ Thierry Coquand,
   \emph{Th\'eorie des Types D\'ependants et Axiome d'Univalence},
   S\'eminaire Bourbaki, 66\`eme ann\'ee, 2013-2014, n$^o$ 1085
   %\and
@@ -142,7 +142,7 @@
 
 \frame
   {
-  
+
     \frametitle{Overview of Logics}
 
     \begin{tabular}{|l|p{3,7cm}|l|l|}
@@ -164,23 +164,23 @@ DTT {\color{red}(later)}& $\Pi$-types, $\UU$ (universes), inductive types& any $
 \item $I$ is the type of individuals, $B$ of propositions
 \item 1-sorted FOL is usually presented untyped
 \item In 1-sorted FOL types are left implicit, apart from \emph{arity}
-\item E.g., in $\exists x.\,\forall y.\, \neg E(y,x)$ quantification is over $I$, 
+\item E.g., in $\exists x.\,\forall y.\, \neg E(y,x)$ quantification is over $I$,
 and $E(y,x)$, $\neg E(y,x)$, $\forall y.\, \neg E(y,x)$, $\exists x.\,\forall y.\, \neg E(y,x)$
 are all of type $B$
 \item In k-sorted FOL types are explicitly given in the \emph{signature}
 \end{itemize}
  }
- 
+
 
 \frame
   {
-  
+
     \frametitle{Higher-order Logic (Church 1940)}
 
     \begin{itemize}[<+->]
           \item Types: $I$ (individuals), $bool$ (propositions), and if $A,B$ are
           types, then also $A\to B$ (these types are called \emph{simple} types)
-          \item Terms are classified by their types, e.g.,  
+          \item Terms are classified by their types, e.g.,
             \begin{itemize}[<+->]
             \item $c\,{\color{red}:}\,I$
             \item $f:I\to I$
@@ -202,13 +202,13 @@ are all of type $B$
 
 \frame
   {
-  
+
     \frametitle{Higher-order Logic (Cntd)}
 
     \begin{itemize}[<+->]
          \item Inference system defines the `theorems' of type $bool$
-        \item Natural semantics in set theory: $bool=\set{0,1}$, $I$ a set      
-        \item Example: we can express equality $Eq_A(t,u): bool$ as 
+        \item Natural semantics in set theory: $bool=\set{0,1}$, $I$ a set
+        \item Example: we can express equality $Eq_A(t,u): bool$ as
           \[(\forall P:A\to bool.~P(t){\color{red}\to} P(u)) : bool\]
         \item Exercise: prove that $Eq_A$ is an equivalence relation for any $A$
         \item Refinement: prove symmetry of $Eq_A$ without using the law of the excluded middle
@@ -220,7 +220,7 @@ are all of type $B$
 
 \frame
   {
-  
+
     \frametitle{Extensionality Axioms in HOL, anticipating UA}
 
     \begin{itemize}[<+->]
@@ -243,11 +243,11 @@ are all of type $B$
 
 \frame
   {
-  
+
     \frametitle{Dependent Type Theory, $\Pi$-types}
 
     \begin{itemize}[<+->]
-    \item Limitation of HOL: not natural to define, e.g., 
+    \item Limitation of HOL: not natural to define, e.g.,
                algebraic structure on an arbitrary type; DTT can express this.
     \item Every mathematical object has a type, even types have a type:
     $a:A$, $A:U_0$, $U_0:U_1,\ldots$, the $U_i$ are called universes ($\UU$)
@@ -256,9 +256,9 @@ are all of type $B$
     %(`$a$ has property $B$')
     \item Context: $x_1:A_1,\,x_2:A_2(x_1), \ldots , x_n : A_n(x_1,...,x_{n-1})$
     \item Example: $n:N,\,x: R(n), \,y: R(n)$ in $n$-dim LinAlg
-    \item If $B(x),~x:A$ a type family, then $\depi{x}{A}{B(x)}$ 
+    \item If $B(x),~x:A$ a type family, then $\depi{x}{A}{B(x)}$
     is the type of \emph{dependent} functions %(later: \emph{sections}):
-    $f(x)=b$ in context $x:A$, that is, 
+    $f(x)=b$ in context $x:A$, that is,
     $b$ {\color{red} and its type} may depend on $x$, $f(a)=(a/x)b : B(a)$ if $a:A$
    \item Example: $0:\depi{n}{N}{R(n)}$, $0(n)$ is $n$-dimensional zero vector
     \item Actually, $A\to B$ is $\depi{x}{A}{B(x)}$ with $B(x)=B$
@@ -267,7 +267,7 @@ are all of type $B$
 
 \frame
   {
-  
+
     \frametitle{$\Sigma$-types and algebraic structure}
 
     \begin{itemize}[<+->]
@@ -280,17 +280,17 @@ are all of type $B$
 \[\sigm{G}{\UU}{\sigm{m}{G\to G\to G}{\depi{x,y,z}{G}{m(x,m(y,z)) =_G m(m(x,y),z)}}}\]
   }
 
-  
- 
+
+
  \frame
   {
-  
+
     \frametitle{Representation of Logic in DTT}
 
     \begin{itemize}[<+->]
-    \item Curry-Howard-de Bruijn: formulas as types, (constructive) proofs as programs 
+    \item Curry-Howard-de Bruijn: formulas as types, (constructive) proofs as programs
 (see Sørensen\&Urzyczyn, Elsevier, 2006)
-    \item Example: $f(x,y)=x$ for $x:A,~y:B$, then $f: A \to (B\to A)$ 
+    \item Example: $f(x,y)=x$ for $x:A,~y:B$, then $f: A \to (B\to A)$
     \item Curry, 1958: $f$ is a proof of the tautology $A \to (B\to A)$
     \item Modus ponens: if $f:A\to B$, $a:A$, then $f(a):B$
     \item Similarly, $g(x,y,z)=x(y(z))$ (composition) is a proof of
@@ -304,14 +304,14 @@ are all of type $B$
 
  \frame
   {
-  
+
     \frametitle{Representation of Logic in DTT (ctnd)}
 
     \begin{itemize}[<+->]
     \item A family of types $B(x),~x:A$ represents a unary predicate
     \item Truth (or rather: provability) is represented by inhabitation
     \item Universal quantification $\forall x{:}A.~B(x)$ by $\depi{x}{A}{B(x)}$
-    \item Implication $A\to B$ by, indeed, $A\to B$ (${}=\depi{x}{A}{B}$!)  
+    \item Implication $A\to B$ by, indeed, $A\to B$ (${}=\depi{x}{A}{B}$!)
     \item Existential quantification $\exists x{:}A.~B(x)$ by $\sigm{x}{A}{B(x)}$
     \item $A\land B$ by $A\times B = \sigm{x}{A}{B(x)}$ with constant $B(x)=B$
     \item $A\lor B$ is represented by disjoint sum $A+B$ (next slide)
@@ -323,11 +323,11 @@ are all of type $B$
 
 \frame
   {
-  
+
     \frametitle{Inductive Types}
 
     \begin{itemize}[<+->]
-    \item $A+B$ is inductively defined by 
+    \item $A+B$ is inductively defined by
     two \emph{constructors} $inl:  A \to (A+B)$,  $inr:  B \to (A+B)$
     \item How to destruct objects $inl(a), inr(b)$? Definition by cases!
     \item Destruction: $h: \depi{z}{A+B}{C(z)}$ can be defined
@@ -338,14 +338,14 @@ are all of type $B$
     $f: A \to C,~g: B \to C$ define $h: A+B \to C$
    \item In words: if we can prove $C$ from $A$,
    and from $B$, then we can prove $C$ from $A+B$
-   \item Extra in DTT: $p: A+B$ can be used in $C(p)$    
+   \item Extra in DTT: $p: A+B$ can be used in $C(p)$
     \end{itemize}
   }
 
 
 \frame
   {
-  
+
     \frametitle{Inductive Types (ctnd)}
 
     \begin{itemize}[<+->]
@@ -361,11 +361,11 @@ are all of type $B$
     % (both iterate $s'(m,x)=(Sm,s(m,x))$ on $(0,z)$ and project)
     \end{itemize}
   }
- 
+
 
 \frame
   {
-  
+
     \frametitle{Inductive Absurdity}
 
     \begin{itemize}[<+->]
@@ -377,7 +377,7 @@ are all of type $B$
     \item For non-constant $C(z)$: refinement of Ex Falso, used elegantly by
     VV to prove $\depi{x,y}{N_0}{~Eq_{N_0}(x,y)}$ (for $Eq_{N_0}$: next slide)
     \item Negation: $\neg A = (A\to N_0)$
-    \item $N_1$ (aka Unit) is the inductive type with one constructor, 
+    \item $N_1$ (aka Unit) is the inductive type with one constructor,
               $N_2$ (aka Bool) with two constructors, and so on
     \end{itemize}
   }
@@ -385,26 +385,26 @@ are all of type $B$
 
  \frame
   {
-  
+
     \frametitle{Inductive Equality}
 
     \begin{itemize}[<+->]
-    \item $Eq_A(x,y)$ (equality, Martin-L\"of), in context $A:\UU,~x,y:A$, 
+    \item $Eq_A(x,y)$ (equality, Martin-L\"of), in context $A:\UU,~x,y:A$,
     inductively defined by $1_a : Eq_A(a,a)$ for all $a:A$ (diagonal!)
     \item Since $Eq_A(x,y)$ is itself a type in $\UU$, we can iterate:
     $Eq_{Eq_A(x,y)}(p,q)$ is equality of equality proofs of $x$ and $y$
-    \item Homotopy interpretation: $Eq_A(x,y)$ as path space, 
+    \item Homotopy interpretation: $Eq_A(x,y)$ as path space,
 $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
    \item Beautiful structure arises: an $\infty$-groupoid
    \item Footnote (opinion): a miracle, unintended by Martin-L\"of
-   \item Discussion: a discovery comparable to the countable model of ZF, 
+   \item Discussion: a discovery comparable to the countable model of ZF,
    or to non-Euclidean geometries (without changing the theory)
     \end{itemize}
   }
 
  \frame
   {
-  
+
     \frametitle{Laws of Equality}
 
     \begin{itemize}[<+->]
@@ -424,7 +424,7 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
 
 \frame
   {
-  
+
     \frametitle{Groupoid}
 
     \begin{itemize}[<+->]
@@ -432,8 +432,8 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
     and morphisms $p: Eq_A(a,a')$ for $a:A,~a':A$
     \item In more relaxed notation (only here with $=$ for $Eq$):
       \begin{enumerate}
-      \item ${.}\ct{.} : x=y \to y=z \to x=z$
-      \item $\opp{.} : x=y \to y=x$
+      \item ${_}\ct{_} : x=y \to y=z \to x=z$
+      \item $\opp{_} : x=y \to y=x$
       \item $p=1_x\ct p = p\ct 1_y$
       \item $p\ct\opp p = 1_x,~\opp p\ct p = 1_y$
       \item $\opp{(\opp p)} = p$
@@ -441,12 +441,12 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
       \end{enumerate}
    \item Proofs by induction: $\ct$ is $transp_{x=\_}$,  $~\opp{}$ is $transp_{\_=x}\,1_x$\quad(!)
    \item Also: $x,y:A,~p,q: Eq_A(x,y),~ pq: Eq_{Eq_A(x,y)}(p,q)$ ...
-    \end{itemize} 
+    \end{itemize}
   }
 
 \frame
   {
-  
+
     \frametitle{The Homotopy Interpretation [A+W+V]}
 
     \begin{itemize}[<+->]
@@ -462,17 +462,17 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
       \item $\Pi\,A\,B$: the space of sections of the fibration interpreting $B$
       \item $Eq_A(a,a')$: the space of paths from $a$ to $a'$ in $A$
   %    \end{enumerate}
-    \item Correct interpretation of $Eq_A$ (in particular, transport) 
+    \item Correct interpretation of $Eq_A$ (in particular, transport)
     is ensured by taking Kan fibrations (yielding homotopy equivalent
     fibers of connected points)
-    
+
     \end{itemize}
   }
-  
-  
+
+
  \frame
   {
-  
+
     \frametitle{Some Homotopy Levels [V]}
 
     \begin{itemize}[<+->]
@@ -490,7 +490,7 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
 
  \frame
   {
-  
+
     \frametitle{The Univalence Axiom [V]}
 
     \begin{itemize}[<+->]
@@ -499,7 +499,7 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
     \item \emph{Fiber} of $f:A\to B$ over $b:B$ is the type
     \[Fib_f (b) = \sigm{x}{A}{Eq_B(f(x),b)}\]
     \item \emph{Equivalence (function)}: $isEquiv(f) = \depi{b}{B}{Contr(Fib_f (b))}$
-    \item \emph{Equivalence (types)}: 
+    \item \emph{Equivalence (types)}:
     $(A\simeq B) = \sigm{f}{A\to B}{isEquiv(f)}$
     \item Examples:
       \begin{itemize}[<+->]
@@ -508,7 +508,7 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
       \item The identity function $A\to A$ is an equivalence, $A\simeq A$
       \end{itemize}
     \item UA:  for the canonical $idtoEquiv: Eq_{\UU}(A,B) \to (A\simeq B)$,
-                                    \[ua : isEquiv(idtoEquiv)\] 
+                                    \[ua : isEquiv(idtoEquiv)\]
     \end{itemize}
   }
 
@@ -533,7 +533,7 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
 
  \frame
   {
-  
+
     \frametitle{Consequences and Applications of UA/HoTT}
 
     \begin{itemize}[<+->]
@@ -551,16 +551,16 @@ $Eq_{Eq_A(x,y)}(p,q)$ as higher path space, and so on
 \item a path constructor $\lloop : {\base =_{\Sn^1} \base}$
 \item induction + computation
 \end{itemize}
-    \item What is  $\base =_{\Sn^1} \base$? (provably equivalent to $\Int$)     
+    \item What is  $\base =_{\Sn^1} \base$? (provably equivalent to $\Int$)
     \item ...
-    
+
     \end{itemize}
   }
- 
- 
+
+
 \frame
   {
-  
+
     \frametitle{Consumer Test of Logics}
 
     \begin{tabular}{|l|p{3,7cm}|l|l|}
@@ -584,17 +584,17 @@ DTT & $\Pi$-types, $\UU$ (universes), inductive types& any $A:\UU$   & 2,4,5\\
 e.g., $\exists P.~\forall x.~ (Px \leftrightarrow \phi)$ or Hilbert's $\epsilon$.
 \item Strength depends on inductive types and im/predicativity, e.g.,
 type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
-\item In DTT we often reason logically with `inhabited types' 
+\item In DTT we often reason logically with `inhabited types'
 \end{enumerate}
  }
 
 
 \end{document}
 
- 
+
   \frame
   {
-  
+
     \frametitle{Description operator in HOL}
 
     \begin{itemize}[<+->]
@@ -606,8 +606,8 @@ type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
           \[(\exists! y{:}B.~Q(y)) \to Q(\iota_y(Q)) \text{, where} \]
           \[\exists! y{:}B.~Q(y) \text{~means~} (\exists y{:}B.~Q(y))\,\land\, \forall y'{:}B.~(Q(y')\to Eq_B(y,y')). \]
           \[\text{Now define~}f(x) = \iota_ y (F(x,y)), \text{~if~} \forall x:A.~\exists! y:B.~F(x,y)\]
-          \end{itemize}    
-    \item Hilbert's $\varepsilon:(A\to bool)\to A$, axiom: 
+          \end{itemize}
+    \item Hilbert's $\varepsilon:(A\to bool)\to A$, axiom:
     \[(\exists y{:}B.~Q(y)) \to Q(\varepsilon_y(Q))\]
     \item With UA in Voevodsky's system:
 \begin{itemize}
@@ -629,7 +629,7 @@ type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
    \item Terms, double role: elements and proofs
    \item Proofs as first class citizens
    \item Typing relation: $(\mathit{term} : \mathit{type} )$ %(decidable)
-   \item Examples (third one in simplified notation): 
+   \item Examples (third one in simplified notation):
    \begin{itemize}
      \item $(\lambda x{:}T.\,x) : (T \to T)$
      \item $(\lambda x{:}T.\,\lambda y{:}T'.\,x) : (T \to (T' \to T))$
@@ -655,7 +655,7 @@ type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
    \end{itemize}
    \item Inductively defined identity types $Id_T(t,t')$
    \item Expressive power: $\geq$ higher-order predicate logic
-   \item Pioneers: De Bruijn, Martin-L\"of, Girard 
+   \item Pioneers: De Bruijn, Martin-L\"of, Girard
  \end{itemize}
 \end{frame}
 
@@ -669,7 +669,7 @@ type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
    \item Distinct terms may denote the `same' function, extensionally
    \item Undecidable: $f=g$ defined by $fn = gn$ for all $n:\Nat$
    \item Distinct types may denote the `same' set, proposition
-   \item Even more `loose' identifications are highly desirable: 
+   \item Even more `loose' identifications are highly desirable:
      the natural numbers, the non-negative integers, lists over a singleton, etc.
  \end{itemize}
 \end{frame}
@@ -700,13 +700,13 @@ type $\depi{A}{\UU_0}{A}$ landing in universe $\UU_0 / \UU_1$.
   \begin{itemize}[<+->]
     \item Assume first-order theory $T$ satisfies for all $M$:
     $M \models T  \Longleftrightarrow |M| \text{~is finite}$
-   \item Define for each $n>0$: 
+   \item Define for each $n>0$:
     $\psi_n := \exists x_1,\ldots,x_n.\ \bigwedge_{1\leq i<j \leq n} x_i \neq x_j$
 expressing that there exist at least $n$ elements
    \item $T$ is consistent with any finite number of $\psi_n$
    \item $T$ is inconsistent with any infinite number of $\psi_n$
    \item The latter two conflict with compactness (and with completeness)
-   \item NB: Infinity is defined by any infinite number of $\psi_n$, 
+   \item NB: Infinity is defined by any infinite number of $\psi_n$,
     but cannot be defined by a finite first-order theory
   \end{itemize}
 \end{frame}
@@ -714,7 +714,7 @@ expressing that there exist at least $n$ elements
 \begin{frame}
 \frametitle{Discussion on the circle}\label{discussionS1}
   \begin{itemize}[<+->]
-    \item In \emph{synthetic} homotopy theory: $\mathbb{S}^1$ as a HIT 
+    \item In \emph{synthetic} homotopy theory: $\mathbb{S}^1$ as a HIT
     \item In ordinary homotopy theory: $\set{z\in\mathbb{C} \mid |z|=1}$, $\mathbb{R}/\mathbb{Z}$, ...
     \item  \href{https://en.wikipedia.org/wiki/Construction_of_the_real_numbers}%
 {\! \!\color{blue}{\url{en.wikipedia.org/wiki/Construction_of_the_real_numbers}}}
@@ -722,10 +722,8 @@ expressing that there exist at least $n$ elements
     \item All approaches allow many models (ZFC has a countable model
 if ZFC is consistent)
     \item Is there an interesting property separating them?
-  \end{itemize}  
+  \end{itemize}
 \end{frame}
 
 
 \end{document}
-
- 
