@@ -1287,7 +1287,7 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
             and then transporting the result in $Bx_1$ to $Bx_2$
       \end{enumerate}
           These two ways turn out to be propositionally equal.
-    \item LEMMA: under conditions as above:
+    \item LEMMA: under conditions as above,
     $$transport^{A2B}\,p\,f = \lamt{a}{Ax_2}{transport^B\,p\,(f(transport^A\,\opp p\,a))}$$
     \item Proof: by path induction
     \item This was only the non-dependent case ... (see the book) 
@@ -1309,11 +1309,13 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
       \item Introduction (postulated): $ua:(A\simeq B) \to (A=_\UU B)$  
       \item Elimination (transport): $[pr_1\circ] idtoeqv: (A=_\UU B) \to (A\to B)$ 
       \item Propositional computation rule: $idtoequiv\,(ua\,f) = f$
-      \item Propositional uniqueness: $p=ua\,(istoeqv\,p)$, so $refl_A = ua\,id_A$
+      \item Propositional uniqueness: $p=ua\,(idtoeqv\,p)$, so $refl_A = ua\,id_A$
       \end{itemize}
+    \item LEM: $(ua\,f)_* = f$, since $idtoequiv\,p = p_*$
     \item LEM: $(ua\,f)\ct(ua\,g) = ua\,(g\circ f);~\opp{(ua\,f)}= ua\,(\opp f)$
-    \item LEM: for $B:A\to\UU,~p:x=_A y$ we have (no UA!):
-          $$p_* \equiv transport^B\,p =_{Bx\to By} idtoequiv\,(ap_B p)$$ 
+% the following is true, but not diectly relevant
+%   \item LEM: for $B:A\to\UU,~p:x=_A y$ we have (no UA!):
+%     $$p_* \equiv transport^B\,p =_{Bx\to By} idtoequiv\,(ap_B p)$$ 
    \end{itemize}
   }
 
@@ -1331,9 +1333,9 @@ Q: what is the simplest (or: a simple) topological space $X$ validating path ind
       \item $transport^{\lamt{x}{A}{(a=_A x)}}\,p\,q = q\ct p$
       \item $transport^{\lamt{x}{A}{(x=_A a)}}\,p\,q = \opp p \ct q$
       \item $transport^{\lamt{x}{A}{(x=_A x)}}\,p\,q = \opp p \ct q \ct p$
-      \item $transport^{\lamt{x}{A}{(fx=_B gx)}}\,p\,q = \opp{(ap_f p)} \ct q \ct (ap_g p)$\\
+      \item $transport^{\lamt{x}{A}{(fx=_{Bx} gx)}}\,p\,q = \opp{(ap_f p)} \ct q \ct (ap_g p)$\\
 for $f,g: A\to B$
-      \item $transport^{\lamt{x}{A}{(fx=_B gx)}}\,p\,q = \opp{(apd_f p)} \ct p_*(q) \ct (apd_g p)$\\
+      \item $transport^{\lamt{x}{A}{(fx=_{Bx} gx)}}\,p\,q = \opp{(apd_f p)} \ct p_*(q) \ct (apd_g p)$\\
 for $f,g: \depi{x}{A}{Bx}$
       \end{enumerate}
        Proofs by pictures
@@ -1438,7 +1440,7 @@ for $f,g: \depi{x}{A}{Bx}$
     \begin{itemize}[<+->]
     \item If $p: A=_{\UU} B$, then $transport^{\lamt{X}{\UU}{X}}p : A\to B$
     \item Also: $[pr_1\circ] idtoeqv: (A=_\UU B) \to (A\to B)$
-    \item Verbatim the same: $transport^{\lamt{X}{\UU}{X}}\equiv idtoeqv$
+    \item As per definition: $idtoeqv\equiv transport^{\lamt{X}{\UU}{X}}$
     \item Hence: $transport^{\lamt{X}{\UU}{X}}$ and $ua$ are each other's quasi-inverse
     \item So: $transport^{\lamt{X}{\UU}{X}}\,\opp{ua(e)}= \opp{e}$
     \item Recall back-and-forth technique for $transport^{\lam{X}{AX \to BX}}$
@@ -1457,7 +1459,7 @@ for $f,g: \depi{x}{A}{Bx}$
 
     \begin{itemize}[<+->]
     \item By Thm. 2.7.2: the type $(A,m,a) =_{SG} (B,m',a')$ is equal to type of pairs
-\[\begin{array}{lcl}p_1&:&A=_{\UU}B\\p_2&:&transport^{SGS}p_1\,(m,a) = (m'a') \end{array}\]
+\[\begin{array}{lcl}p_1&:&A=_{\UU}B\\p_2&:&transport^{SGS}p_1\,(m,a) = (m',a') \end{array}\]
 where by univalence $p_1=ua(e)$ for some equivalence $e$ and $p_2=(p_3,p_4)$ is a pair of proofs
 with $p_3$ of type
 \[\depi{y_1,y_2}{B}{(e\,(m\,(\opp e y_1)\,(\opp e y_2))=m'\,y_1\,y_2}\]
@@ -1523,13 +1525,11 @@ which is equivalent to
 
     \begin{itemize}[<+->]
     \item The universe is not a set: $isSet(\UU)\to\bfnull$
-    \item Proof: we construct by univalence $p:\bftwo=\bftwo$ 
-          with $(p  =_{\bftwo=\bftwo} refl_{\bftwo})\to\bfnull$.
-          Define the equivalence $e: \bftwo\to\bftwo$ 
-          by $e(0)=1$, $e(1)=0$ ($e$ is its own quasi-inverse).
-          If $ua(e)=_{\bftwo=\bftwo} refl_{\bftwo}$, then
-          $\bfnull$ gets inhabited by
-          $e=idtoeqv(ua(e))=idtoeqv\,refl_{\bftwo}=id_{\bftwo}$,          
+    \item Proof: by UA, equivalences $id,neg:  \bftwo\to\bftwo$ give rise
+          to paths $ua(id),ua(neg):\bftwo=\bftwo$. If this paths
+         were equal, we would have 
+         $id=idtoeqv(ua(id))=idtoeqv(ua(neg))=neg$, so $0_ {\bftwo} =  1_ {\bftwo}$,
+         so $\bfnull$ gets inhabited       
     \item Definition of $h$-levels (later also levels $-2,-1$):
       \begin{itemize}[<+->]   
       \item $0type(A)\equiv isSet(A) \equiv \depi{x,y}{A}{\depi{p,q}{(x=_Ay)}{p=_{x=_Ay}q}}$
@@ -1587,7 +1587,7 @@ which is equivalent to
     \item LEM: with funext, if $A:\UU$ and $B:A\to\UU$ such that 
           $isProp(Bx)$ for every $x:A$, then $isProp(\depi{x}{A}{Bx})$.
     \item COR: $P\to Q$ is a mere proposition whenever $Q$ is
-    \item NB: $isProp$ is not closed under $+$, nor $\Sigma$
+    \item NB: $isProp$ is not closed under $+$; $\neg isProp(\sigm{x}{\Nat}{x=_\Nat x})$
     \end{itemize}
   }
 
@@ -1658,7 +1658,7 @@ which is equivalent to
     \item Elimination: defining $f:\brck A \to B$ means
       \begin{itemize}[<+->]   
       \item specifing $f \bproj a : B$ for all $a:A$
-      \item making sure $f \bproj a =_{\brck A} f \bproj b$ for all $a,b:A$
+      \item making sure $f \bproj a =_B f \bproj {a'}$ for all $a,a':A$
       \end{itemize}
     \item Only `constant' functions, or better: if $isProp(B)$, any $g:A\to B$
     defines $f:\brck A \to B$ with $f\bproj a = ga$
@@ -1719,7 +1719,7 @@ which is equivalent to
     \begin{itemize}[<+->]
     \item Contractible type: inhabited mere proposition
     \item DEF: $isContr(A) \equiv \sigm{a}{A}{\depi{x}{A}{a=x}}$
-    \item LEM: logical equivalences (Q: why not $\simeq$?)
+    \item LEM: logical equivalences (Q: why not $\simeq$ yet?)
           $isContr(A) \iff (A\times isProp(A)) \iff (A\simeq\bfone)$
     \item LEM: $isProp(isContr(A))$, for all $A$
     \item Proof: first para in book $+~isProp(\depi{x}{A}{a'=x})$
@@ -1734,7 +1734,7 @@ which is equivalent to
     \frametitle{Retraction}
 
     \begin{itemize}[<+->]
-    \item Retraction: $\pm$ half of an equivalence (Q: OK?)
+    \item Retraction, set-theoretically: surjection
     \item DEF: $r:A\to B$ \emph{retraction} if there is $s:B\to A$ 
           (the \emph{section} of $r$) such that $r\circ s \sim id_B$.
           Then we call $B$ a \emph{retract} of $A$.
