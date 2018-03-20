@@ -1781,8 +1781,8 @@ which is equivalent to
              {\sigm{\alpha}{(g\circ f \sim id_A)}
               {\sigm{\beta}{(f\circ g \sim id_B)}
                {\depi{x}{A}{f(\alpha x) = \beta(fx)}}}}$$
-    \item Diff with $qinv(f)$:    $\bfone$ vs.\ last $\Pi$-type 
-    \item Logically equivalent:  last $\Pi$-type $\depi{x}{A}{g(\beta x) = \alpha(gx)}$
+    \item Diff with $qinv(f)$:  last $\Pi$-type instead of $\bfone$
+    \item Alternatively:  last $\Pi$-type $\depi{y}{B}{g(\beta y) = \alpha(gy)}$
     \item LEM: for any $f:A\to B$, $qinv(f) \to ishae(f)$
     \item Proof: take `the' $g$ and $\alpha$ from $qinv(f)$. Define
     \[\beta' b \equiv \beta\opp {(f (g b))}\ct f(\alpha (g b)) \ct (\beta b)\]
@@ -2023,8 +2023,8 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     \item Intuition for recursion: to define $h: W\,A\,B \to C$ 
              it suffices to define $h\,(sup\,a\,f)$, 
              for all $a:A$ and $f:Ba \to W\,A\,B$,
-             using function values $h\,(f\,b)$ for $b:Ba$
-             (and possibly $a$, and $f$ as predecesor).
+             using $a$, predecessors $f\,b$ and function values $h\,(f\,b)$ for all $b:Ba$
+   \item Exercise: define a $W$-type for countable ordinals
     \item Examples: $dbl^W \equiv rec_{N^W}\,N^W\,e$, with
              $e\,0 \equiv \lamt{{f,g}}{\bfnull{\to} N^W}{0^W}$   
              and $e\,1 \equiv \lamt{{f,g}}{\bfone{\to} N^W}{(S^W(S^W (g\star) ))}$
