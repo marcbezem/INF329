@@ -1992,7 +1992,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     \frametitle{W-Types}
 
     \begin{itemize}[<+->]
-    \item Purpose: encoding inductive types \emph{uniformly}
+    \item Purpose: encoding (some) inductive types \emph{uniformly}
     \item Formation: if $A:\UU$ and $B:A\to\UU$, then $W\,A\,B :\UU$
     \item Intuition: the type of $A$-labelled, $B(a)$-branching wf trees
     \item One constructor: $sup:\depi{a}{A}{(Ba\to W\,A\,B)\to W\,A\,B}$
@@ -2001,7 +2001,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
       \item $N^W \equiv W\,\bftwo\,(rec_{\bftwo}\,\UU\,\bfnull\,\bfone)$ (why?)      
       ̈́\item $0^W \equiv sup\,0_{\bftwo}\,(rec_{\bfnull}\,N^W)$, 
                $S^W \equiv \lamt{n}{N^W}{sup\,1_{\bftwo}\,(\lamt{y}{\bfone}{n})}$ (!)
-      \item $List\,A \equiv W\,(\bfone+A)\,(rec_{(\bfone+A)}\,\UU\,\bfnull\,\lam{a}{\bfone})$ (why?)
+      \item $List\,A \equiv W\,(\bfone+A)\,(rec_{(\bfone+A)}\,\UU\,(rec_{\bfone}\UU\bfnull)\,(\lam{a}{\bfone}))$ (why?)
       \item $nil \equiv sup\,(inl\star)\,(rec_{\bfnull}\,(List\,A))$, $cons$ on blackboard
       \end{itemize}    
     \item Exercise: find the $W$-type for labeled binary trees
