@@ -2191,7 +2191,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     \item LEM: the interval $I$ gives function extensionality (!)
     \item Proof. Let $f,g: A\to B$ and $p:\depi{x}{A}{fx =_B gx}$. For every $x:A$,
     define $\tilde{p}_x : I \to B$ by $\tilde{p}_x\,0_I \equiv fx$, 
-    $\tilde{p}_x\,1_I \equiv gx$, $\tilde{p}_x(seg) = p$. 
+    $\tilde{p}_x\,1_I \equiv gx$, $\tilde{p}_x(seg) = px$. 
     Define $q: I \to (A\to B)$ by $q\,i=\lamt{x}{A}{(\tilde{p}_x\,i)}$.
     Then $q\,0_I =_\eta f$ and  $q\,1_I =_\eta g$ and so $q(seg): f=_{A\to B}g$.
  \end{itemize}
@@ -2200,7 +2200,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
                      
   \frame
   {
-    \frametitle{More on the Circle}
+    \frametitle{More on the Circle (using UA)}
     
 \begin{itemize}    
     \item LEM: the circle $\Sn^1$ is non-trivial: $\lloop \neq refl_\base$.
@@ -2214,11 +2214,10 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     that is not equal to $\lamt{x}{\Sn^1}{refl_x}$.
     \item Proof. Define $f:\depi{x}{\Sn^1}{(x=x)}$ by induction
     taking $f(\base)\equiv \lloop$ and $f(\lloop): \lloop_*(\lloop) = \lloop$.
-    By Lemma~2.11.2, with type family $\lamt{x}{\Sn^1}{(x=x)}$,
-    $\lloop_*(\lloop)= \lloop^{-1}\ct \lloop\ct \lloop$,
-    so $f(\lloop) = refl_\lloop$ is OK.
-    By  $happly$, the previous lemma implies $f\neq\lamt{x}{\Sn^1}{refl_x}$.
-    \item COR: if $\Sn^1= \UU_n$, then $\UU_n$ is not a 1-type (?)
+    Using Lemma~2.11.2 with type family $\lamt{x}{\Sn^1}{(x=x)}$ and some path
+    algebra gives $\lloop_*(\lloop)= \lloop^{-1}\ct \lloop\ct \lloop = \lloop$,
+    yielding $f(\lloop)$. Now  use $happly$ and $f\base = \lloop \neq {refl_\base}$.
+    \item COR: if $\Sn^1: \UU_n$, then $\UU_n$ is not a 1-type
     
  \end{itemize}
   }
@@ -2284,7 +2283,7 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
 \item two paths $p,q: b=b$
 \item a 2-path $t: p \ct q = q \ct p$
 \end{itemize}
-    \item Intuition:  put $r=q$ and $s=r$ in
+    \item Intuition:  put $r=q$ and $s=p$ in
 \newarrow{Double} =====    
     \begin{diagram}
 a& \rDouble^p & b    \\
