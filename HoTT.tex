@@ -2235,14 +2235,16 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
     \item Recursion: the following data defines a unique $f:\Sn^2 \to B$
 \begin{itemize}
 \item a point $b :B$, a path $s : refl_b=_{b=_B b} refl_b$
-\item we get $f(\base) \equiv b$, and $apap_f(\surf) = s$ (!)
+\item we get $f(\base) \equiv b$, and $apap_f(\surf) = s$ (!), where
+$apap_f : \depi{x,y}{\Sn^2}{\depi{p,q}{x=_{\Sn^2} y}{(p=_{x=_{\Sn^2} y}q) \to {(f(p) =_{fx=_B fy} f(q))}}}$
 \end{itemize}
+    \item NB: the term $apap_f(\surf) = s$ has six implicit variables.
     \item Induction: the following data defines a unique $f:\depi{x}{\Sn^2}{Px}$
 \begin{itemize}
 \item a point $b :P\,\base$, a path $s : refl_b=^P_\surf refl_b$ ...
 \item ... and this gets complicated with $trtr$ along a 2-path ...
 \end{itemize}
-   
+    \item Welcome: a simpler definition of n-spheres  
  \end{itemize}
   }
  
@@ -2258,11 +2260,11 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
 \item a path constructor $merid: A\to (N =_{Susp(A)} S)$
 \end{itemize}
     \item NB: the path constructor generates higher paths in $Susp(A)$
-    \item Recursion: the following data defines a unique $f:Susp(A) \to B$
+    \item Recursion: the following defines a unique $f:Susp(A) \to B$
 \begin{itemize}
 \item points $n,s :B$, a path function $m:  A\to n =_B s$
 \end{itemize}
-    \item Induction: the following data defines a unique $f:\depi{x}{Susp(A)}{Px}$
+    \item Induction: the following defines a unique $f:\depi{x}{Susp(A)}{Px}$
 \begin{itemize}
 \item points $n :P(N)$, $s :P(S)$, and $m: \depi{a}{A}{(n =^P_{merid(a)} s)}$
 \end{itemize}
