@@ -2341,7 +2341,7 @@ c & \rDouble_s &  d
       \end{itemize}
  \item LEM: $\brck \bftwo$ gives function extensionality
  \item Proof: let $f,g:A{\to}B$ and $p: f \sim g$. Define $p_x: \bftwo\to\sigm{y}{B}{fx =_B y}$.
- Note that $\sigm{y}{B}{fx =_B y}$ is contractible. etc.
+ Note that $\sigm{y}{B}{fx =_B y}$ is contractible. Rest like with interval.
  \end{itemize}
   }
 
@@ -2371,17 +2371,17 @@ c & \rDouble_s &  d
   
  \frame
   {
-    \frametitle{Closure properties of homotopy $n$-levels}
+    \frametitle{Closure properties of homotopy $n$-levels $(n\geq-2$)}
     
 \begin{itemize} 
-    \item LEM: if $p:X\to Y$ a retraction and $X$ is an $n$-type, then $Y$ is an $n$-type ($n\geq-2$)
+    \item LEM: if $p:X\to Y$ a retraction and $X$ is an $n$-type, then $Y$ is an $n$-type
     \item Proof: induction on $n\geq-2$. Base case easy. Assume OK for $n$ and let $s:Y\to X$
               with homotopy $\epsilon: p\circ s \sim 1$. Assume $\depi{x,x'}{X}{is(n)type(x=_X x')}$,
               to prove ${is(n)type(y=_Y y')}$ for all ${y,y'}:{Y}$. Let $y,y':Y$, then $sy =_X sy'$ is an $n$-type.
               By IH it suffices that $y=_Y y'$ is a retract of $sy =_X sy'$. Take $ap_s$ and
               $t(q)\equiv \epsilon_y^{-1}\ct p(q)\ct \epsilon_{y'}$ and use naturality of $\epsilon$ (picture).
-    \item COR: if $X\simeq Y$ and $X$ is an $n$-type, then so is $Y$ ($n\geq-2$)   
-    \item LEM:  if $X$ is an $n$-type, then $X$ is also an $(n+1)$-type ($n\geq-2$).
+    \item COR: if $X\simeq Y$ and $X$ is an $n$-type, then so is $Y$ (no UA!) % ($n\geq-2$)   
+    \item LEM:  if $X$ is an $n$-type, then $X$ is also an $(n+1)$-type  %($n\geq-2$).
               So, the levels are cumulative. 
     \item Proof: by induction on $n\geq-2$
 \end{itemize}
