@@ -2161,8 +2161,8 @@ $\depi{x}{A}{\sigm{u}{Px}{(fx=u)}}$, which is contractible by weak extensionalit
 %    \item Induction: $b: P(\base)$ and $\ell: b =^P_\lloop b$ define $f:\depi{x}{\Sn^1}{Px}$
 %             with $f(base) =_\iota b$ and $apd_f(\lloop) = \ell$
     \item Recursion: if ${B}:\UU$, % ($P$ constant) 
-    then $b:B$ and $\ell: (b =^P_\lloop b)$ define $f:{\Sn^1}\to{B}$
-             with $f(base) =_\iota b$ and $apd_f(\lloop) = \ell$
+    then $b:B$ and $\ell: b =_B b)$ define $f:{\Sn^1}\to{B}$
+             with $f(base) =_\iota b$ and $ap_f(\lloop) = \ell$
     \item Recall the following transport lemmas, with 
     $P:A\to\UU,~f:A\to B,~x,y:A,~p : x=_A y$:
     \begin{itemize}
@@ -2381,7 +2381,7 @@ c & \rDouble_s &  d
               By IH it suffices that $y=_Y y'$ is a retract of $sy =_X sy'$. Take $ap_s$ and
               $t(q)\equiv \epsilon_y^{-1}\ct p(q)\ct \epsilon_{y'}$ and use naturality of $\epsilon$ (picture).
     \item COR: if $X\simeq Y$ and $X$ is an $n$-type, then so is $Y$ (no UA!) % ($n\geq-2$)   
-    \item LEM:  if $X$ is an $n$-type, then $X$ is also an $(n+1)$-type  %($n\geq-2$).
+    \item LEM:  if $X$ is an $n$-type, then $X$ is also an $(n+1)$-type.  %($n\geq-2$)
               So, the levels are cumulative. 
     \item Proof: by induction on $n\geq-2$
 \end{itemize}
@@ -2392,13 +2392,14 @@ c & \rDouble_s &  d
     \frametitle{More closure properties of homotopy $n$-levels  $(n\geq-2$)}
     
 \begin{itemize} 
-    \item LEM: if $f:X\to Y$ an embedding and $Y$ is an $n$-type, then so is $X$ ($n\geq-1$, exception!)
-    \item Proof: $x=_X x' \simeq fx=_Y fx'$ for embedding $f$. NB $f:\bfnull\to\bfone$
+    \item LEM: if $f:X\to Y$ an embedding and $Y$ is an $n$-type, then so is $X$ ($n\geq-1$,
+    false for $n=-2$, $f:\bfnull\to\bfone$ is an embedding!)
+    \item Proof: use $(x=_X x') \simeq (fx=_Y fx')$
     \item LEM:  for $A:\UU$, $B:A\to\UU$, if $Ba$ is an $n$-type for every $a:A$, then $\Pi\,A\,B$ is an $n$-type %($n\geq-2$)
     \item LEM:  for $A:\UU$, $B:A\to\UU$, if $A$ is an  $n$-type and $Ba$ is an $n$-type for every $a:A$, then $\Sigma\,A\,B$ is an $n$-type %, for all $n\geq-2$
     \item LEM:  for $A:\UU$, $is(n)type(A)$ is a mere proposition %($n\geq-2$)
-    \item DEF: $n\mbox{-}Type_\UU = \sigm{X}{\UU}{is(n)Type(X)}$ %, for all $n\geq-2$
-    \item LEM: $n\mbox{-}Type_\UU$ is an $(n+1)$-type%, for all $n\geq-2$
+    \item DEF: $n\mbox{-}type_\UU = \sigm{X}{\UU}{is(n)type(X)}$, for all $n\geq-2$
+    \item LEM: $n\mbox{-}type_\UU$ is an $(n+1)$-type%, for all $n\geq-2$
     \item Proofs: by induction on $n\geq-2$
 \end{itemize}
   }
